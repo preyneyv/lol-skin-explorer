@@ -1,38 +1,500 @@
-.App {
+@keyframes preload {
+  50% {
+    transform: translateY(-10px);
+    opacity: 1;
+  }
+}
+.preloader {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.preloader > div {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 24px;
+}
+.preloader > div > div {
+  width: 18px;
+  height: 18px;
+  background: white;
+  opacity: 0.3;
+  transform: translateY(10px);
+  animation: preload 1s infinite;
+}
+.preloader > div > div:nth-child(1) {
+  animation-delay: -200ms;
+}
+.preloader > div > div:nth-child(2) {
+  animation-delay: -100ms;
+}
+
+.home {
+  padding: 32px;
+}
+
+.champions-index {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 80px);
+  gap: 18px;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.champions-index > a {
+  display: block;
+  text-decoration: none;
+  position: relative;
+}
+
+.champions-index > a::before {
+  content: "";
+  background: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: calc(100% + 12px);
+  height: calc(100% + 12px);
+  opacity: 0;
+  transition: opacity 150ms;
+  z-index: -1;
+}
+
+.champions-index > a:hover::before {
+  opacity: 1;
+}
+
+.champions-index > a > img {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.1);
+  display: block;
+}
+
+.champions-index > a > div {
+  font-size: 0.8em;
+  font-weight: 600;
+  margin-top: 4px;
+  opacity: 0.7;
+  transition: opacity 300ms;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 80px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.champions-index > a:hover > div {
+  opacity: 1;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.skinlines-index {
+  columns: 6;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+.skinlines-index > a {
+  display: block;
+  text-decoration: none;
+  line-height: 1.2;
+  padding: 8px 6px;
+  margin: 2px 0;
+  opacity: 0.7;
+  transition: background-color 150ms, opacity 300ms;
+}
+
+.skinlines-index > a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  opacity: 1;
+}
+
+.skin-list {
+  padding: 32px;
+}
+
+.skin-list header {
+  margin-bottom: 32px;
+}
+
+.skin-list header a {
+  text-decoration: none;
+  display: inline-flex;
   align-items: center;
+  opacity: 0.7;
+  transition: opacity 150ms;
+  position: relative;
+}
+
+.skin-list > header a:hover {
+  opacity: 1;
+}
+
+.skin-list > header a::before {
+  content: "";
+  background: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  top: -6px;
+  left: -8px;
+  width: calc(100% + 16px);
+  height: calc(100% + 12px);
+  opacity: 0;
+  transition: opacity 150ms;
+  z-index: -1;
+}
+
+.skin-list > header a:hover::before {
+  opacity: 1;
+}
+
+.skin-list > header a span {
+  display: block;
+  margin-left: 8px;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.skin-list > div {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 300px);
+  gap: 20px 32px;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: flex-start;
+  margin-bottom: 24px;
 }
 
-.App-link {
-  color: #61dafb;
+.skin-list > div > a {
+  display: block;
+  text-decoration: none;
+  position: relative;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.skin-list > div > a::before {
+  content: "";
+  background: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  top: -12px;
+  left: -12px;
+  width: calc(100% + 24px);
+  height: calc(100% + 24px);
+  opacity: 0;
+  transition: opacity 150ms;
+  z-index: -1;
+}
+
+.skin-list > div > a:hover::before {
+  opacity: 1;
+}
+
+.skin-list > div > a > img {
+  width: 300px;
+  height: 300px;
+  background: rgba(255, 255, 255, 0.1);
+  display: block;
+}
+
+.skin-list > div > a > div {
+  margin-top: 8px;
+  opacity: 0.7;
+  font-weight: 600;
+  transition: opacity 300ms;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.skin-list > div > a > div > img {
+  height: 20px;
+  margin-right: 12px;
+}
+
+.skin-list > div > a:hover > div {
+  opacity: 1;
+}
+
+.skin-carousel header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 24px;
+  z-index: 999;
+}
+
+.skin-carousel header a {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  opacity: 0.7;
+  position: relative;
+  transition: opacity 150ms;
+}
+
+.skin-carousel > header a:hover {
+  opacity: 1;
+}
+
+.skin-carousel > header a::before {
+  content: "";
+  background: rgba(255, 255, 255, 0.1);
+  position: absolute;
+  top: -6px;
+  left: -8px;
+  width: calc(100% + 16px);
+  height: calc(100% + 12px);
+  opacity: 0;
+  transition: opacity 150ms;
+  z-index: -1;
+}
+
+.skin-carousel > header a:hover::before {
+  opacity: 1;
+}
+
+.skin-carousel > header a span {
+  display: block;
+  margin-left: 8px;
+  font-size: 1.1em;
+  font-weight: 500;
+}
+
+.skin-carousel .current > * {
+  width: 100vw;
+  height: 100vh;
+  object-fit: contain;
+  top: 0;
+  left: 0;
+  position: fixed;
+  z-index: 1;
+  transition: left 300ms, width 300ms, opacity 300ms;
+}
+
+.skin-carousel .current > *.loading {
+  opacity: 0;
+  transition: none;
+}
+
+.skin-carousel .current.hover-prev > *,
+.skin-carousel .current.hover-next > * {
+  transition-delay: 100ms;
+  width: calc(100vw - 250px);
+  opacity: 0.4;
+}
+
+.skin-carousel .current.hover-prev > * {
+  left: 250px;
+}
+
+.skin-carousel .prev,
+.skin-carousel .next {
+  position: fixed;
+  width: 250px;
+  height: 100vw;
+  top: 0;
+  z-index: 2;
+}
+
+.skin-carousel .next {
+  left: unset;
+  right: 0;
+}
+
+.skin-carousel .prev img,
+.skin-carousel .next img {
+  height: 100vh;
+  width: 0;
+  transition: width 300ms;
+  object-position: center;
+  object-fit: cover;
+}
+
+.skin-carousel .next img {
+  float: right;
+}
+
+.skin-carousel .prev div,
+.skin-carousel .next div {
+  position: fixed;
+  z-index: 3;
+  font-weight: 500;
+  left: 24px;
+  bottom: 24px;
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: transform 300ms, opacity 300ms;
+}
+
+.skin-carousel .next div {
+  left: unset;
+  right: 24px;
+  transform: translateX(50px);
+}
+
+.skin-carousel .prev:hover img,
+.skin-carousel .next:hover img {
+  transition-delay: 100ms;
+  width: 250px;
+}
+
+.skin-carousel .prev:hover div,
+.skin-carousel .next:hover div {
+  transition-delay: 100ms;
+
+  opacity: 1;
+  transform: none;
+}
+
+.skin-carousel .mouse-event-block {
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  height: 76px;
+  left: 0;
+  z-index: 99;
+}
+
+.skin-carousel .overlay {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  height: 24px;
+  cursor: default;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+  transition: opacity 150ms;
+}
+
+.skin-carousel .overlay:hover {
+  opacity: 1;
+}
+
+.skin-carousel .overlay > span {
+  margin-right: 8px;
+  font-weight: 500;
+  font-size: 1.1em;
+}
+
+.skin-carousel .overlay::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -10px;
+  width: calc(100% + 16px);
+  height: calc(100% + 12px);
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transition: opacity 250ms;
+  z-index: -1;
+}
+.skin-carousel .overlay:hover::before {
+  opacity: 1;
+}
+
+.skin-carousel .overlay > div {
+  width: calc(100% + 16px);
+  min-width: 320px;
+  background: rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
+  padding: 12px;
+  position: absolute;
+  top: 30px;
+  right: -6px;
+  z-index: 100;
+  pointer-events: none;
+  font-size: 0.9em;
+  opacity: 0;
+  transition: opacity 250ms;
+}
+
+.skin-carousel .overlay:hover > div {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.skin-carousel .overlay > div > h2 {
+  margin-top: 0;
+  line-height: 1.2;
+  margin-bottom: 4px;
+  font-size: 20px;
+}
+
+.skin-carousel .overlay .header {
+  display: grid;
+  grid-template-columns: auto;
+  grid-auto-flow: column;
+  gap: 12px;
+  justify-content: flex-start;
+  align-items: center;
+  font-weight: 600;
+  line-height: 1.1;
+}
+
+.skin-carousel .overlay .header > * {
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.skin-carousel .overlay .header > a[href] {
+  text-decoration: none;
+}
+
+.skin-carousel .overlay .header > a[href]:hover {
+  text-decoration: underline;
+}
+
+.skin-carousel .overlay .header > *:not(:last-child)::after {
+  content: "\00B7";
+  pointer-events: none;
+  position: absolute;
+  right: -8px;
+}
+
+.skin-carousel .overlay > div .rarity {
+  display: flex;
+  align-items: center;
+}
+.skin-carousel .overlay > div .rarity img {
+  height: 20px;
+  margin-right: 8px;
+  transform: translateY(-2px);
+}
+
+.skin-carousel .overlay > div > p {
+  line-height: 1.4;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.skin-carousel .overlay > div > a {
+  display: block;
+  text-decoration: none;
+  margin-top: 6px;
+  text-decoration: none;
+}
+.skin-carousel .overlay > div > a:hover {
+  text-decoration: underline;
+}
+
+.footer-container {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+footer {
+  padding: 0 32px 32px;
+  font-size: 0.8em;
+  opacity: 0.5;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 128px;
+  align-items: flex-end;
+}
+
+footer :nth-child(2) {
+  text-align: right;
 }
