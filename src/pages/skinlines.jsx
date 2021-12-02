@@ -2,7 +2,7 @@ import { Link, generatePath, useParams } from "react-router-dom";
 import { SkinCarousel } from "../components/skin-carousel";
 import { SkinList } from "../components/skin-list";
 import { skinlines, skinlineSkins } from "../data";
-import { navigate, useEscapeHome, useEscapeTo } from "../hooks";
+import { navigate, useEscapeTo, useTitle } from "../hooks";
 
 export function SkinlineIndex() {
   return (
@@ -23,13 +23,11 @@ export function Skinline() {
   const { lineId } = useParams();
   useEscapeTo("/");
   let line;
-  try {
-    const id = parseInt(lineId);
-    line = skinlines.find((l) => l.id === id);
-    if (!line) throw new Error("Bad skinline id");
-  } catch (e) {
-    return navigate("/");
-  }
+  const id = parseInt(lineId);
+  line = skinlines.find((l) => l.id === id);
+  useTitle(line?.name);
+
+  if (!line) return navigate("/");
 
   const skins = skinlineSkins(line.id);
 
