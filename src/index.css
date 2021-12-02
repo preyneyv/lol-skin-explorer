@@ -6,7 +6,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   /* background: linear-gradient(to top right, rgb(40, 38, 48), rgb(12, 8, 12)); */
-  background: black;
+  background: linear-gradient(to top, #050505, #111);
   background-attachment: fixed;
   color: white;
   overflow-x: hidden;

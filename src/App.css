@@ -5,6 +5,7 @@
   }
 }
 .preloader {
+  opacity: 0.3;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -15,7 +16,7 @@
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 1fr;
-  gap: 24px;
+  gap: 18px;
 }
 .preloader > div > div {
   width: 18px;
@@ -23,6 +24,7 @@
   background: white;
   opacity: 0.3;
   transform: translateY(10px);
+  border-radius: 100%;
   animation: preload 1s infinite;
 }
 .preloader > div > div:nth-child(1) {
