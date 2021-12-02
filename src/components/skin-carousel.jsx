@@ -8,6 +8,7 @@ import {
 } from "../data";
 import {
   ArrowLeft,
+  ArrowRight,
   ExternalLink,
   Info,
   Maximize2,
@@ -18,7 +19,7 @@ import {
 import { Link, useNavigate, generatePath } from "react-router-dom";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
-import { useTitle } from "../hooks";
+import { useEscapeTo, useLocalStorageState, useTitle } from "../hooks";
 
 export function SkinCarousel({
   back,
@@ -31,8 +32,11 @@ export function SkinCarousel({
 }) {
   const [hovering, setHovering] = useState("");
   const [loaded, setLoaded] = useState(false);
-  const [centered, setCentered] = useState(false);
-  const [fill, setFill] = useState(false);
+  const [centered, setCentered] = useLocalStorageState(
+    "carousel__centered",
+    false
+  );
+  const [fill, setFill] = useLocalStorageState("carousel__fill", false);
   useEffect(() => {
     setLoaded(false);
   }, [current, centered]);
@@ -47,6 +51,7 @@ export function SkinCarousel({
   }
 
   useTitle(currentSkin.name);
+  useEscapeTo(back);
 
   const r = rarity(currentSkin);
   const champId = splitId(current)[0];
@@ -63,10 +68,23 @@ export function SkinCarousel({
         if (e.key === "ArrowLeft") navigate(linkTo(prevSkin));
         if (e.key === "ArrowRight") navigate(linkTo(nextSkin));
       }
+      console.log(e.key);
+      if (e.code === "KeyZ") setFill(!fill);
+      if (e.code === "KeyC") setCentered(!centered);
     }
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [skins, prevSkin, nextSkin, linkTo, navigate]);
+  }, [
+    skins,
+    prevSkin,
+    nextSkin,
+    linkTo,
+    navigate,
+    fill,
+    setFill,
+    centered,
+    setCentered,
+  ]);
 
   const vidPath = centered
     ? currentSkin.splashVideoPath
@@ -91,10 +109,18 @@ export function SkinCarousel({
           <ArrowLeft />
           <span>{title}</span>
         </Link>
-        <div className="btn" onClick={() => setFill(!fill)}>
+        <div
+          className="btn"
+          onClick={() => setFill(!fill)}
+          title="Fill Screen (Z)"
+        >
           {fill ? <Minimize2 /> : <Maximize2 />}
         </div>
-        <div className="btn" onClick={() => setCentered(!centered)}>
+        <div
+          className="btn"
+          onClick={() => setCentered(!centered)}
+          title="Centered (C)"
+        >
           {centered ? <User /> : <Users />}
         </div>
       </header>
@@ -108,6 +134,7 @@ export function SkinCarousel({
         >
           <img src={asset(prevSkin.splashPath)} alt={prevSkin.name} />
           <div>{prevSkin.name}</div>
+          <ArrowLeft />
         </Link>
       )}
       <div
@@ -178,6 +205,7 @@ export function SkinCarousel({
         >
           <img src={asset(nextSkin.splashPath)} alt={nextSkin.name} />
           <div>{nextSkin.name}</div>
+          <ArrowRight />
         </Link>
       )}
     </div>

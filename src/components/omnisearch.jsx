@@ -1,7 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import Fuse from "fuse.js";
-import { _ready, champions, skinlines, skins, asset } from "../data";
+import { _ready, champions, skinlines, skins, asset, splitId } from "../data";
 import classNames from "classnames";
+import { useNavigate, generatePath } from "react-router";
 
 let fuse;
 _ready.then(
@@ -15,8 +16,9 @@ _ready.then(
     ))
 );
 
-export function Omnisearch({ onSelect }) {
+export function Omnisearch() {
   const ref = useRef();
+  const navigate = useNavigate();
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState(0);
   const [showResults, setShowResults] = useState(false);
@@ -26,6 +28,25 @@ export function Omnisearch({ onSelect }) {
   );
 
   useEffect(() => setSelected(0), [query]);
+
+  function onSelect(type, entity) {
+    if (type === "champion") {
+      navigate(generatePath("/champions/:champion", { champion: entity.key }));
+    }
+    if (type === "skinline") {
+      navigate(generatePath("/skinlines/:id", { id: entity.id }));
+    }
+    if (type === "skin") {
+      const champId = splitId(entity.id)[0];
+      const champ = champions.find((c) => c.id === champId);
+      navigate(
+        generatePath("/champions/:cKey/skins/:sId", {
+          cKey: champ.key,
+          sId: entity.id,
+        })
+      );
+    }
+  }
 
   function selectActive() {
     const opt = matches[selected];

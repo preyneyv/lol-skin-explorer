@@ -2,6 +2,7 @@ import { ArrowLeft } from "react-feather";
 import { Link } from "react-router-dom";
 import { asset, rarity } from "../data";
 import { Footer, FooterContainer } from "./footer";
+import { Omnisearch } from "./omnisearch";
 
 export function SkinList({ title, skins, linkTo }) {
   return (
@@ -12,7 +13,10 @@ export function SkinList({ title, skins, linkTo }) {
             <ArrowLeft />
             <span>Home</span>
           </Link>
-          <h1>{title}</h1>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <h1>{title}</h1>
+            <Omnisearch />
+          </div>
         </header>
         <div>
           {skins.map((skin) => {

@@ -50,11 +50,15 @@
 .search-container input {
   font: inherit;
   color: white;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.1);
   border: 0;
   padding: 8px 10px;
   width: 350px;
   outline: none;
+}
+
+.search-container input:focus {
+  background: rgba(255, 255, 255, 0.15);
 }
 
 .search-container ul {
@@ -298,7 +302,7 @@
 
 .skin-list > div > a > div > img {
   height: 20px;
-  margin-right: 12px;
+  margin-right: 8px;
 }
 
 .skin-list > div > a:hover > div {
@@ -416,17 +420,30 @@
   position: fixed;
   z-index: 3;
   font-weight: 500;
-  left: 24px;
+  left: 64px;
   bottom: 24px;
   opacity: 0;
-  transform: translateX(-50px);
+  transform: translateX(-20px);
   transition: transform 300ms, opacity 300ms;
 }
 
 .skin-carousel .next div {
   left: unset;
+  right: 64px;
+  transform: translateX(20px);
+}
+
+.skin-carousel .prev svg,
+.skin-carousel .next svg {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  opacity: 0.3;
+}
+
+.skin-carousel .next svg {
+  left: unset;
   right: 24px;
-  transform: translateX(50px);
 }
 
 .skin-carousel .prev:hover img,
@@ -438,7 +455,6 @@
 .skin-carousel .prev:hover div,
 .skin-carousel .next:hover div {
   transition-delay: 100ms;
-
   opacity: 1;
   transform: none;
 }
@@ -447,7 +463,7 @@
   position: fixed;
   top: 0;
   width: 100vw;
-  height: 76px;
+  height: 200px;
   left: 0;
   z-index: 99;
 }

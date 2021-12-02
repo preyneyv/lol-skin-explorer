@@ -2,7 +2,7 @@ import { Link, generatePath, useParams } from "react-router-dom";
 import { SkinCarousel } from "../components/skin-carousel";
 import { SkinList } from "../components/skin-list";
 import { skinlines, skinlineSkins } from "../data";
-import { navigate } from "../hooks";
+import { navigate, useEscapeHome, useEscapeTo } from "../hooks";
 
 export function SkinlineIndex() {
   return (
@@ -21,7 +21,7 @@ export function SkinlineIndex() {
 
 export function Skinline() {
   const { lineId } = useParams();
-
+  useEscapeTo("/");
   let line;
   try {
     const id = parseInt(lineId);

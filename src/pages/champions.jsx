@@ -2,7 +2,7 @@ import { Link, generatePath, useParams } from "react-router-dom";
 import { SkinCarousel } from "../components/skin-carousel";
 import { SkinList } from "../components/skin-list";
 import { asset, champions, championSkins } from "../data";
-import { navigate, useTitle } from "../hooks";
+import { navigate, useEscapeTo, useTitle } from "../hooks";
 
 export function ChampionsIndex() {
   return (
@@ -27,7 +27,7 @@ export function Champion() {
 
   champ = champions.find((c) => c.key === champion);
   useTitle(champ?.name);
-
+  useEscapeTo("/");
   if (!champ) return navigate("/");
 
   const skins = championSkins(champ.id);
