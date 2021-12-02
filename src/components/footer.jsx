@@ -1,4 +1,5 @@
 import React from "react";
+import { v } from "../data";
 export function Footer() {
   return (
     <footer>
@@ -13,6 +14,7 @@ export function Footer() {
         Games are trademarks or registered trademarks of Riot Games, Inc.
       </div>
       <div>
+        <div>Patch {v}</div>
         <div>
           Built by{" "}
           <a
@@ -23,14 +25,14 @@ export function Footer() {
             @preyneyv
           </a>
           .
+          <a
+            href="https://github.com/preyneyv/lol-skin-explorer"
+            target="_blank"
+            rel="noreferrer"
+          >
+            View Source on GitHub
+          </a>
         </div>
-        <a
-          href="https://github.com/preyneyv/lol-skin-explorer"
-          target="_blank"
-          rel="noreferrer"
-        >
-          View Source on GitHub
-        </a>
       </div>
     </footer>
   );

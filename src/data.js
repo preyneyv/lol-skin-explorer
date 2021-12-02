@@ -1,6 +1,7 @@
 export const champions = [];
 export const skinlines = [];
 export const skins = {};
+export let v = "";
 
 const root = `https://raw.communitydragon.org/pbe`,
   dataRoot = `${root}/plugins/rcp-be-lol-game-data/global/default`;
@@ -10,7 +11,7 @@ export const _ready = (async () => {
     method: "GET",
     cache: "no-cache",
   }).then((r) => r.json());
-
+  v = version.version;
   const cacheBreak = `?${encodeURIComponent(version.version)}`;
 
   await Promise.all([
