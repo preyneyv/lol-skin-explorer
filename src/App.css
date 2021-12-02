@@ -36,6 +36,67 @@
   padding: 32px;
 }
 
+.home header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-container input {
+  font: inherit;
+  color: white;
+  background: rgba(255, 255, 255, 0.05);
+  border: 0;
+  padding: 8px 10px;
+  width: 350px;
+  outline: none;
+}
+
+.search-container ul {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  list-style: none;
+  padding: 0;
+  z-index: 999;
+  margin: 0;
+  background: rgb(31, 29, 37);
+  width: 100%;
+}
+
+.search-container ul li {
+  padding: 10px 10px;
+  cursor: pointer;
+  line-height: 1.15;
+  display: flex;
+  gap: 8px;
+}
+.search-container ul li:nth-child(2n) {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.search-container ul li img {
+  height: 36px;
+  width: 36px;
+}
+
+.search-container ul li div > div {
+  font-weight: 500;
+}
+.search-container ul li span {
+  font-size: 0.9em;
+  opacity: 0.5;
+}
+
+.search-container ul li.selected {
+  background: rgba(255, 255, 255, 0.1);
+}
+
 .champions-index {
   display: grid;
   grid-template-columns: repeat(auto-fit, 80px);
@@ -92,7 +153,37 @@
 }
 
 .skinlines-index {
-  columns: 6;
+  columns: 8;
+}
+
+@media screen and (max-width: 1750px) {
+  .skinlines-index {
+    columns: 7;
+  }
+}
+
+@media screen and (max-width: 1500px) {
+  .skinlines-index {
+    columns: 6;
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .skinlines-index {
+    columns: 5;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .skinlines-index {
+    columns: 4;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .skinlines-index {
+    columns: 3;
+  }
 }
 
 .skinlines-index > a {
@@ -220,6 +311,9 @@
   left: 0;
   padding: 24px;
   z-index: 999;
+  display: flex;
+  gap: 24px;
+  align-items: center;
 }
 
 .skin-carousel header a {
@@ -268,6 +362,10 @@
   position: fixed;
   z-index: 1;
   transition: left 300ms, width 300ms, opacity 300ms;
+}
+
+.skin-carousel .current.fill > * {
+  object-fit: cover;
 }
 
 .skin-carousel .current > *.loading {
@@ -476,6 +574,17 @@
 }
 .skin-carousel .overlay > div > a:hover {
   text-decoration: underline;
+}
+
+.skin-carousel .btn {
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 150ms;
+  height: 24px;
+}
+
+.skin-carousel .btn:hover {
+  opacity: 1;
 }
 
 .footer-container {

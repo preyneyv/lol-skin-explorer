@@ -6,7 +6,15 @@ import {
   splitId,
   teemoGGUrl,
 } from "../data";
-import { ArrowLeft, ExternalLink, Info } from "react-feather";
+import {
+  ArrowLeft,
+  ExternalLink,
+  Info,
+  Maximize2,
+  Minimize2,
+  User,
+  Users,
+} from "react-feather";
 import { Link, useNavigate, generatePath } from "react-router-dom";
 import { useEffect, useState } from "react";
 import classNames from "classnames";
@@ -23,9 +31,11 @@ export function SkinCarousel({
 }) {
   const [hovering, setHovering] = useState("");
   const [loaded, setLoaded] = useState(false);
+  const [centered, setCentered] = useState(false);
+  const [fill, setFill] = useState(false);
   useEffect(() => {
     setLoaded(false);
-  }, [current]);
+  }, [current, centered]);
   const navigate = useNavigate();
 
   const currentIdx = skins.findIndex((s) => s.id === current);
@@ -58,13 +68,35 @@ export function SkinCarousel({
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [skins, prevSkin, nextSkin, linkTo, navigate]);
 
+  const vidPath = centered
+    ? currentSkin.splashVideoPath
+    : currentSkin.collectionSplashVideoPath;
+  const imgPath = centered
+    ? currentSkin.splashPath
+    : currentSkin.uncenteredSplashPath;
+
   return (
     <div className="skin-carousel">
+      {!loaded && (
+        <div className="preloader">
+          <div>
+            <div />
+            <div />
+            <div />
+          </div>
+        </div>
+      )}
       <header>
         <Link to={back}>
           <ArrowLeft />
           <span>{title}</span>
         </Link>
+        <div className="btn" onClick={() => setFill(!fill)}>
+          {fill ? <Minimize2 /> : <Maximize2 />}
+        </div>
+        <div className="btn" onClick={() => setCentered(!centered)}>
+          {centered ? <User /> : <Users />}
+        </div>
       </header>
       <div className="mouse-event-block" />
       {prevSkin && (
@@ -82,19 +114,18 @@ export function SkinCarousel({
         className={classNames("current", {
           "hover-prev": hovering === "prev",
           "hover-next": hovering === "next",
+          fill: fill,
         })}
       >
-        {currentSkin.collectionSplashVideoPath ? (
-          <video muted autoPlay loop>
-            <source src={asset(currentSkin.collectionSplashVideoPath)} />
-          </video>
+        {vidPath ? (
+          <video muted autoPlay loop src={asset(vidPath)} />
         ) : (
           <img
             onLoad={() => setLoaded(true)}
             className={classNames({
               loading: !loaded,
             })}
-            src={asset(currentSkin.uncenteredSplashPath)}
+            src={asset(imgPath)}
             alt={currentSkin.name}
           />
         )}
@@ -127,7 +158,7 @@ export function SkinCarousel({
               ))}
           </div>
           {currentSkin.description ? (
-            <p>{currentSkin.description}</p>
+            <p dangerouslySetInnerHTML={{ __html: currentSkin.description }} />
           ) : (
             <p>
               <i>No description available.</i>
