@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/lol-skin-explorer/static/css/main.6cdaa55c.chunk.css",
-    "main.js": "/lol-skin-explorer/static/js/main.424a521c.chunk.js",
-    "main.js.map": "/lol-skin-explorer/static/js/main.424a521c.chunk.js.map",
+    "main.css": "/lol-skin-explorer/static/css/main.2c638709.chunk.css",
+    "main.js": "/lol-skin-explorer/static/js/main.f25825b1.chunk.js",
+    "main.js.map": "/lol-skin-explorer/static/js/main.f25825b1.chunk.js.map",
     "runtime-main.js": "/lol-skin-explorer/static/js/runtime-main.05f5d0df.js",
     "runtime-main.js.map": "/lol-skin-explorer/static/js/runtime-main.05f5d0df.js.map",
-    "static/js/2.321d901d.chunk.js": "/lol-skin-explorer/static/js/2.321d901d.chunk.js",
-    "static/js/2.321d901d.chunk.js.map": "/lol-skin-explorer/static/js/2.321d901d.chunk.js.map",
+    "static/js/2.4dac9b7c.chunk.js": "/lol-skin-explorer/static/js/2.4dac9b7c.chunk.js",
+    "static/js/2.4dac9b7c.chunk.js.map": "/lol-skin-explorer/static/js/2.4dac9b7c.chunk.js.map",
     "index.html": "/lol-skin-explorer/index.html",
-    "static/css/main.6cdaa55c.chunk.css.map": "/lol-skin-explorer/static/css/main.6cdaa55c.chunk.css.map",
-    "static/js/2.321d901d.chunk.js.LICENSE.txt": "/lol-skin-explorer/static/js/2.321d901d.chunk.js.LICENSE.txt"
+    "static/css/main.2c638709.chunk.css.map": "/lol-skin-explorer/static/css/main.2c638709.chunk.css.map",
+    "static/js/2.4dac9b7c.chunk.js.LICENSE.txt": "/lol-skin-explorer/static/js/2.4dac9b7c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.05f5d0df.js",
-    "static/js/2.321d901d.chunk.js",
-    "static/css/main.6cdaa55c.chunk.css",
-    "static/js/main.424a521c.chunk.js"
+    "static/js/2.4dac9b7c.chunk.js",
+    "static/css/main.2c638709.chunk.css",
+    "static/js/main.f25825b1.chunk.js"
   ]
 }
