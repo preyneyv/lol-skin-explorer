@@ -97,7 +97,7 @@ export function Omnisearch() {
           {matches.map(({ item }, i) => (
             <li
               onMouseEnter={() => setSelected(i)}
-              onClick={selectActive}
+              onMouseDown={selectActive}
               className={classNames(item.$$type, {
                 selected: selected === i,
               })}

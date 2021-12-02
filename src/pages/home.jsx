@@ -1,14 +1,10 @@
 import React from "react";
-import { generatePath, useNavigate } from "react-router";
 import { Footer, FooterContainer } from "../components/footer";
 import { Omnisearch } from "../components/omnisearch";
-import { champions, splitId } from "../data";
 import { ChampionsIndex } from "./champions";
 import { SkinlineIndex } from "./skinlines";
 
 export function Home() {
-  const navigate = useNavigate();
-
   return (
     <FooterContainer>
       <div className="home">

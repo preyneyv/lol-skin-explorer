@@ -60,15 +60,12 @@ export function SkinCarousel({
     ? currentSkin.skinLines.map((l) => skinlines.find((l2) => l2.id === l.id))
     : [];
 
-  console.log(champ, skinLines);
-
   useEffect(() => {
     function onKeyDown(e) {
       if (skins.length > 1) {
         if (e.key === "ArrowLeft") navigate(linkTo(prevSkin));
         if (e.key === "ArrowRight") navigate(linkTo(nextSkin));
       }
-      console.log(e.key);
       if (e.code === "KeyZ") setFill(!fill);
       if (e.code === "KeyC") setCentered(!centered);
     }

@@ -26,7 +26,6 @@ export function useEscapeTo(url) {
   const navigate = useNavigate();
   useEffect(() => {
     function onKeyDown(e) {
-      console.log(e.code);
       if (e.code === "Escape") {
         navigate(url);
         e.preventDefault();

@@ -4,19 +4,18 @@ import { Home } from "./pages/home";
 import { Champion, ChampionSkin } from "./pages/champions";
 import { Skinline, SkinlineSkin } from "./pages/skinlines";
 
+import { ScrollFix } from "./components/scroll-fix";
 import { _ready } from "./data";
 import { usePromise } from "./hooks";
 
 import "./App.css";
-import { useEffect } from "react";
 
 function App() {
   const ready = usePromise(_ready);
-  useEffect(() => {
-    document.body.scrollTo({ top: 0 });
-  }, [window.location.hash]);
+
   return (
     <HashRouter>
+      <ScrollFix />
       {ready ? (
         <Routes>
           <Route path="/" element={<Home />} />
