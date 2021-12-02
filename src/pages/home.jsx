@@ -13,7 +13,7 @@ export function Home() {
     <FooterContainer>
       <div className="home">
         <header>
-          <h1 style={{ color: "rgb(53, 46, 53)" }}>Skin Explorer</h1>
+          <h1>Skin Explorer</h1>
           <Omnisearch
             onSelect={(type, entity) => {
               if (type === "champion") {
@@ -37,8 +37,10 @@ export function Home() {
             }}
           />
         </header>
+        <h2>Champions</h2>
         <ChampionsIndex />
         <hr />
+        <h2>Skinlines</h2>
         <SkinlineIndex />
       </div>
       <Footer />
