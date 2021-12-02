@@ -24,7 +24,7 @@ export function Footer() {
           >
             @preyneyv
           </a>
-          .
+          .{" "}
           <a
             href="https://github.com/preyneyv/lol-skin-explorer"
             target="_blank"
