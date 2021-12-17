@@ -1,7 +1,7 @@
 {
   "name": "lol-champ-skins",
   "version": "0.1.0",
-  "homepage": "https://preyneyv.github.com/lol-skin-explorer",
+  "homepage": "/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
