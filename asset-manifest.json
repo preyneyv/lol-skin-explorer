@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/lol-skin-explorer/static/css/main.6da818d9.chunk.css",
-    "main.js": "/lol-skin-explorer/static/js/main.461a78b9.chunk.js",
-    "main.js.map": "/lol-skin-explorer/static/js/main.461a78b9.chunk.js.map",
-    "runtime-main.js": "/lol-skin-explorer/static/js/runtime-main.05f5d0df.js",
-    "runtime-main.js.map": "/lol-skin-explorer/static/js/runtime-main.05f5d0df.js.map",
-    "static/js/2.8eba0c42.chunk.js": "/lol-skin-explorer/static/js/2.8eba0c42.chunk.js",
-    "static/js/2.8eba0c42.chunk.js.map": "/lol-skin-explorer/static/js/2.8eba0c42.chunk.js.map",
-    "index.html": "/lol-skin-explorer/index.html",
-    "static/css/main.6da818d9.chunk.css.map": "/lol-skin-explorer/static/css/main.6da818d9.chunk.css.map",
-    "static/js/2.8eba0c42.chunk.js.LICENSE.txt": "/lol-skin-explorer/static/js/2.8eba0c42.chunk.js.LICENSE.txt"
+    "main.css": "/static/css/main.6da818d9.chunk.css",
+    "main.js": "/static/js/main.461a78b9.chunk.js",
+    "main.js.map": "/static/js/main.461a78b9.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.8325d052.js",
+    "runtime-main.js.map": "/static/js/runtime-main.8325d052.js.map",
+    "static/js/2.8eba0c42.chunk.js": "/static/js/2.8eba0c42.chunk.js",
+    "static/js/2.8eba0c42.chunk.js.map": "/static/js/2.8eba0c42.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.6da818d9.chunk.css.map": "/static/css/main.6da818d9.chunk.css.map",
+    "static/js/2.8eba0c42.chunk.js.LICENSE.txt": "/static/js/2.8eba0c42.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.05f5d0df.js",
+    "static/js/runtime-main.8325d052.js",
     "static/js/2.8eba0c42.chunk.js",
     "static/css/main.6da818d9.chunk.css",
     "static/js/main.461a78b9.chunk.js"
