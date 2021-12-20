@@ -24,13 +24,11 @@ export async function fetchSkinChanges(patch, patches) {
   const [champions, skins] = await Promise.all([patch.champions, patch.skins]);
   const changes = {};
   await Promise.all(
-    champions
-      .slice(0, 5)
-      .map((c) =>
-        limit(async () =>
-          Object.assign(changes, await getSkinArtChanges(c, skins, patches))
-        )
+    champions.map((c) =>
+      limit(async () =>
+        Object.assign(changes, await getSkinArtChanges(c, skins, patches))
       )
+    )
   );
   console.log("[Skin Changes] Update complete.");
   return changes;
@@ -71,7 +69,6 @@ async function getSkinArtChanges(champion, skins, patches) {
       if (!split.length === 2) return false;
 
       const patch = split.map((e) => parseInt(e, 10));
-      // Ignore 7.1, since we can't do anything with that information.
       if (comparePatches(patch, MIN_SUPPORTED_VERSION) <= 0) return false;
 
       return true;
@@ -83,11 +80,8 @@ async function getSkinArtChanges(champion, skins, patches) {
       if (!subset.length) return;
 
       const patch = parsePatch(t.find("a").attr("title").slice(1));
-      console.log(patches);
       const prevPatch =
-        patches[
-          patches.findIndex((p) => comparePatches(p, patch) === 0) + 1
-        ].join(".");
+        patches[patches.findIndex((p) => comparePatches(p, patch) === 0) + 1];
       subset.each((_, el) => {
         $(el)
           .find("a[href]")
