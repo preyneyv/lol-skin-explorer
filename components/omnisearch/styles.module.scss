@@ -7,7 +7,7 @@
 .search input {
   font: inherit;
   color: white;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgb(31, 39, 48);
   border: 0;
   padding: 0 10px;
   height: 36px;
@@ -17,7 +17,7 @@
 }
 
 .search input:focus {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgb(40, 49, 59);
 }
 
 .search ul {
@@ -43,12 +43,13 @@
   gap: 8px;
 }
 .search ul li:nth-child(2n) {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(163, 206, 255, 0.03);
 }
 
 .search ul li img {
   height: 36px;
   width: 36px;
+  background: rgba(163, 206, 255, 0.1);
 }
 
 .search ul li div > div {
@@ -60,5 +61,5 @@
 }
 
 .search ul li.selected {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(163, 206, 255, 0.1);
 }

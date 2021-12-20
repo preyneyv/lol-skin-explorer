@@ -104,6 +104,7 @@ export function Omnisearch() {
             >
               {match.image && (
                 <Image
+                  unoptimized
                   src={asset(match.image)}
                   alt={match.name}
                   width={36}

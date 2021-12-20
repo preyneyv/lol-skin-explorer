@@ -1,0 +1,31 @@
+.footer {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  font-size: 0.9em;
+  color: rgb(90, 107, 129);
+  padding: 10px;
+  margin-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  position: relative;
+  gap: 60px;
+
+  p {
+    margin: 0;
+    padding: 0;
+
+    &:not(:first-child) {
+      margin-top: 10px;
+    }
+  }
+
+  a[href] {
+    text-decoration: underline;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+}

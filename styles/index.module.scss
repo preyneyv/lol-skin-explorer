@@ -5,7 +5,7 @@
     display: flex;
     gap: 10px;
     align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgb(31, 39, 48);
     user-select: none;
 
     > div {
@@ -20,14 +20,14 @@
         height: calc(100% + 4px);
         left: -10px;
         position: absolute;
-        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        border-left: 1px solid rgb(31, 39, 48);
       }
     }
 
     .tabs > div {
       padding: 4px 12px;
       cursor: pointer;
-      color: rgba(255, 255, 255, 0.3);
+      color: rgb(90, 107, 129);
       border-radius: 100px;
       transition: background-color 200ms, color 200ms;
 
@@ -38,7 +38,7 @@
       &.active {
         cursor: default;
         color: white;
-        background-color: rgba(255, 255, 255, 0.1);
+        background-color: rgb(31, 39, 48);
       }
     }
 
@@ -53,7 +53,7 @@
       }
       select {
         font: inherit;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgb(31, 39, 48);
         color: white;
         font-size: 0.9em;
         padding: 4px 18px 4px 6px;
@@ -79,18 +79,20 @@
     position: relative;
     grid-template-columns: 40px auto;
     align-items: center;
+    z-index: 1;
     gap: 12px;
 
     &::before {
       content: "";
-      background: rgba(255, 255, 255, 0.1);
+      background: rgb(31, 39, 48);
       position: absolute;
       top: -6px;
       left: -6px;
       width: calc(100% + 12px);
       height: calc(100% + 12px);
       opacity: 0;
-      transition: opacity 150ms;
+      z-index: -1;
+      // transition: opacity 150ms;
     }
 
     &:hover::before {
@@ -98,13 +100,18 @@
     }
 
     div {
-      opacity: 0.7;
-      transition: opacity 200ms;
+      color: rgb(165, 178, 196);
+      transition: color 200ms;
       font-weight: 300;
     }
 
     &:hover div {
-      opacity: 1;
+      color: white;
+      // opacity: 1;
+    }
+
+    img {
+      background: rgba(163, 206, 255, 0.1);
     }
   }
 }
@@ -121,13 +128,15 @@
     break-inside: avoid;
 
     a {
-      opacity: 0.7;
+      color: rgb(165, 178, 196);
+      // opacity: 0.7;
       display: block;
       padding: 6px 8px;
-      transition: opacity 200ms;
+      transition: color 200ms, opacity 200ms;
 
       &:hover {
-        background: rgba(255, 255, 255, 0.1);
+        background: rgb(23, 29, 36);
+        color: white;
         opacity: 1;
       }
     }
@@ -140,7 +149,7 @@
       list-style: none;
       a {
         margin-left: 32px;
-        opacity: 0.4;
+        color: rgb(90, 107, 129);
       }
     }
   }

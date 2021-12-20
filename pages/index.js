@@ -3,6 +3,7 @@ import classNames from "classnames";
 import { useMemo, useState } from "react";
 import Head from "next/head";
 import { Header } from "../components/header";
+import { Footer, FooterContainer } from "../components/footer";
 import { useProps } from "../data/contexts";
 import styles from "../styles/index.module.scss";
 import Link from "next/link";
@@ -31,6 +32,7 @@ function ChampionsList({ role }) {
           <a>
             <Image
               unoptimized
+              className={styles.img}
               src={asset(c.squarePortraitPath)}
               alt={c.name}
               width={80}
@@ -104,7 +106,6 @@ function UniversesList() {
 }
 
 export default function Index() {
-  const { patch } = useProps();
   const [active, setActive] = useState("champions");
   const [champRole, setChampRole] = useState("");
 
@@ -113,67 +114,78 @@ export default function Index() {
       <Head>
         <title>Skin Explorer</title>
       </Head>
-      <Header patch={patch} />
-      <div className={styles.container}>
-        <nav>
-          <div className={styles.tabs}>
-            <div
-              className={classNames({
-                [styles.active]: active === "champions",
-              })}
-              onClick={() => setActive("champions")}
-            >
-              Champions
-            </div>
-            <div
-              className={classNames({
-                [styles.active]: active === "universes",
-              })}
-              onClick={() => setActive("universes")}
-            >
-              Universes
-            </div>
-            <div
-              className={classNames({
-                [styles.active]: active === "skinlines",
-              })}
-              onClick={() => setActive("skinlines")}
-            >
-              Skinlines
-            </div>
-          </div>
-          <div
-            className={styles.filters}
-            style={{ display: active === "champions" ? "block" : "none" }}
-          >
-            <label>
-              <span>Role</span>
-              <select
-                value={champRole}
-                onChange={(e) => setChampRole(e.target.value)}
+      <FooterContainer>
+        <div>
+          <Header />
+          <div className={styles.container}>
+            <nav>
+              <div className={styles.tabs}>
+                <div
+                  className={classNames({
+                    [styles.active]: active === "champions",
+                  })}
+                  onClick={() => setActive("champions")}
+                >
+                  Champions
+                </div>
+                <div
+                  className={classNames({
+                    [styles.active]: active === "universes",
+                  })}
+                  onClick={() => setActive("universes")}
+                >
+                  Universes
+                </div>
+                <div
+                  className={classNames({
+                    [styles.active]: active === "skinlines",
+                  })}
+                  onClick={() => setActive("skinlines")}
+                >
+                  Skinlines
+                </div>
+              </div>
+              <div
+                className={styles.filters}
+                style={{ display: active === "champions" ? "block" : "none" }}
               >
-                <option value="">All</option>
-                {Object.entries(classes).map(([k, v]) => (
-                  <option key={k} value={k}>
-                    {v}
-                  </option>
-                ))}
-              </select>
-            </label>
+                <label>
+                  <span>Role</span>
+                  <select
+                    value={champRole}
+                    onChange={(e) => setChampRole(e.target.value)}
+                  >
+                    <option value="">All</option>
+                    {Object.entries(classes).map(([k, v]) => (
+                      <option key={k} value={k}>
+                        {v}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              </div>
+            </nav>
+            <main>
+              <div
+                style={{ display: active === "champions" ? "block" : "none" }}
+              >
+                <ChampionsList role={champRole} />
+              </div>
+              <div
+                style={{ display: active === "skinlines" ? "block" : "none" }}
+              >
+                <SkinlinesList />
+              </div>
+              <div
+                style={{ display: active === "universes" ? "block" : "none" }}
+              >
+                <UniversesList />
+              </div>
+            </main>
           </div>
-        </nav>
-        <main>
-          <div style={{ display: active === "champions" ? "block" : "none" }}>
-            <ChampionsList role={champRole} />
-          </div>
-          <div style={{ display: active === "skinlines" ? "block" : "none" }}>
-            <SkinlinesList />
-          </div>
-          <div style={{ display: active === "universes" ? "block" : "none" }}>
-            <UniversesList />
-          </div>
-        </main>
-      </div>
+        </div>
+        <Footer />
+      </FooterContainer>
     </>
   );
 }
@@ -188,7 +200,12 @@ export async function getStaticProps() {
   ]);
 
   return {
-    props: { champions, skinlines, universes },
+    props: {
+      champions,
+      skinlines,
+      universes,
+      patch: store.patch.fullVersionString,
+    },
     revalidate: 600,
   };
 }
