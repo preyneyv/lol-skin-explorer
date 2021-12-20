@@ -7,7 +7,7 @@ class Document extends BaseDocument {
         <Head>
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
-          {/* <link rel="preconnect" href="https://raw.communitydragon.org" /> */}
+          <link rel="preconnect" href="https://raw.communitydragon.org" />
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"

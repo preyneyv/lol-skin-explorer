@@ -1,5 +1,6 @@
 import axios from "axios";
 import { CDRAGON } from "./constants";
+import { skinlineSkins } from "./helpers";
 
 export function parsePatch(s) {
   return s.split(".").map((s) => parseInt(s, 10));
@@ -20,6 +21,7 @@ export class Patch {
   _champions = null;
   _skinlines = null;
   _skins = null;
+  _universes = null;
 
   get champions() {
     return new Promise(async (resolve) => {
@@ -53,10 +55,32 @@ export class Patch {
     });
   }
 
+  get universes() {
+    return new Promise(async (resolve) => {
+      if (this._universes !== null) return resolve(this._universes);
+
+      const { data } = await axios.get(this.data("/v1/universes.json"));
+
+      resolve(
+        (this._universes = data
+          .filter((d) => d.id !== 0)
+          .sort((a, b) => (a.name > b.name ? 1 : -1)))
+      );
+
+      console.log(`[Patch ${this.name}] Loaded universes.`);
+    });
+  }
+
   get skins() {
     return new Promise(async (resolve) => {
       if (this._skins !== null) return resolve(this._skins);
       const { data } = await axios.get(this.data("/v1/skins.json"));
+      Object.keys(data).map((id) => {
+        const skin = data[id];
+        if (skin.isBase) {
+          skin.name = "Original " + skin.name;
+        }
+      });
 
       resolve((this._skins = data));
       console.log(`[Patch ${this.name}] Loaded skins.`);
@@ -65,6 +89,7 @@ export class Patch {
 
   /**
    * Pull the latest data from remote sources (CommunityDragon, Fandom).
+   * Returns whether there was a change in the version string.
    */
   async fetch() {
     if (this.fullVersionString) {
@@ -74,7 +99,7 @@ export class Patch {
     const metadata = (await axios.get(this.url("/content-metadata.json"))).data;
     if (metadata.version === this.fullVersionString) {
       // Patch has not changed! We can early-exit.
-      return;
+      return false;
     }
     if (this.fullVersionString) {
       console.log(
@@ -84,7 +109,8 @@ export class Patch {
     this.fullVersionString = metadata.version;
 
     // We can assume we need to fetch new data here. Delete all cached copies.
-    this._champions = this._skinlines = this._skins = null;
+    this._champions = this._skinlines = this._skins = this._universes = null;
+    return true;
   }
 
   url(path) {

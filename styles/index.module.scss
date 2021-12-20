@@ -1,3 +1,147 @@
-.main {
-  // background: red;
+.container {
+  display: grid;
+
+  nav {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    user-select: none;
+
+    > div {
+      display: flex;
+      align-items: center;
+      padding: 8px 10px;
+      position: relative;
+
+      &:not(:first-child)::before {
+        content: "";
+        top: -2px;
+        height: calc(100% + 4px);
+        left: -10px;
+        position: absolute;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    .tabs > div {
+      padding: 4px 12px;
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.3);
+      border-radius: 100px;
+      transition: background-color 200ms, color 200ms;
+
+      &:hover {
+        color: white;
+      }
+
+      &.active {
+        cursor: default;
+        color: white;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    .filters label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      span {
+        opacity: 0.7;
+        font-size: 0.8em;
+      }
+      select {
+        font: inherit;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+        font-size: 0.9em;
+        padding: 4px 18px 4px 6px;
+        border: none;
+
+        option {
+          background: black;
+        }
+      }
+    }
+  }
+}
+
+.champions {
+  display: grid;
+  padding: 10px;
+  grid-template-columns: repeat(auto-fit, 190px);
+  gap: 14px;
+  justify-content: space-between;
+
+  > a {
+    display: grid;
+    position: relative;
+    grid-template-columns: 40px auto;
+    align-items: center;
+    gap: 12px;
+
+    &::before {
+      content: "";
+      background: rgba(255, 255, 255, 0.1);
+      position: absolute;
+      top: -6px;
+      left: -6px;
+      width: calc(100% + 12px);
+      height: calc(100% + 12px);
+      opacity: 0;
+      transition: opacity 150ms;
+    }
+
+    &:hover::before {
+      opacity: 1;
+    }
+
+    div {
+      opacity: 0.7;
+      transition: opacity 200ms;
+      font-weight: 300;
+    }
+
+    &:hover div {
+      opacity: 1;
+    }
+  }
+}
+
+.universes,
+.skinlines {
+  columns: 6;
+  padding: 10px;
+  font-weight: 300;
+  line-height: 1.3;
+
+  > div {
+    display: block;
+    break-inside: avoid;
+
+    a {
+      opacity: 0.7;
+      display: block;
+      padding: 6px 8px;
+      transition: opacity 200ms;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        opacity: 1;
+      }
+    }
+
+    > ul {
+      padding: 0;
+      margin: 0;
+      z-index: 12;
+      width: 100%;
+      list-style: none;
+      a {
+        margin-left: 32px;
+        opacity: 0.4;
+      }
+    }
+  }
 }

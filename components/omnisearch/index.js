@@ -1,34 +1,25 @@
+import Image from "next/image";
 import { useRouter } from "next/router";
-import { useMemo, useRef, useState, useEffect } from "react";
-import Fuse from "fuse.js";
+import { useRef, useState, useEffect } from "react";
+import { asset } from "../../data/helpers";
 import classNames from "classnames";
-import { useData } from "../../data/contexts";
 import styles from "./styles.module.scss";
+import axios from "axios";
 
 export function Omnisearch() {
   const ref = useRef();
   const router = useRouter();
-  const { champions, skinlines, skins } = useData();
-  const fuse = useMemo(
-    () =>
-      new Fuse(
-        champions
-          .map((c) => ({ ...c, $$type: "champion" }))
-          .concat(skinlines.map((l) => ({ ...l, $$type: "skinline" })))
-          .concat(Object.values(skins).map((s) => ({ ...s, $$type: "skin" }))),
-        { keys: ["name"] }
-      ),
-    [champions, skinlines, skins]
-  );
 
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState(0);
   const [showResults, setShowResults] = useState(false);
+  const [matches, setMatches] = useState([]);
 
-  const matches = useMemo(
-    () => (query.length ? fuse.search(query, { limit: 5 }) : []),
-    [query, fuse]
-  );
+  useEffect(() => {
+    axios
+      .get("/api/omnisearch", { params: { query } })
+      .then((res) => setMatches(res.data));
+  }, [query]);
 
   useEffect(() => setSelected(0), [query]);
 
@@ -72,7 +63,7 @@ export function Omnisearch() {
       <input
         ref={ref}
         type="search"
-        placeholder="Search "
+        placeholder="Search"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onFocus={() => setShowResults(true)}
@@ -95,26 +86,31 @@ export function Omnisearch() {
       />
       {showResults && matches.length !== 0 && (
         <ul>
-          {matches.map(({ item }, i) => (
+          {matches.map((match, i) => (
             <li
               onMouseEnter={() => setSelected(i)}
               onMouseDown={selectActive}
-              className={classNames(item.$$type, {
+              className={classNames(match.$$type, {
                 [styles.selected]: selected === i,
               })}
               key={i}
             >
-              {/* {item.$$type === "champion" ? (
-                <img src={asset(item.squarePortraitPath)} alt={item.name} />
-              ) : item.$$type === "skin" ? (
-                <img src={asset(item.tilePath)} alt={item.name} />
-              ) : null} */}
+              {match.image && (
+                <Image
+                  src={asset(match.image)}
+                  alt={match.name}
+                  width={36}
+                  height={36}
+                />
+              )}
               <div>
-                <div>{item.name}</div>
-                {item.$$type === "champion" ? (
+                <div>{match.name}</div>
+                {match.type === "champion" ? (
                   <span>Champion</span>
-                ) : item.$$type === "skinline" ? (
+                ) : match.type === "skinline" ? (
                   <span>Skinline</span>
+                ) : match.type === "universe" ? (
+                  <span>Universe</span>
                 ) : (
                   <span>Skin</span>
                 )}

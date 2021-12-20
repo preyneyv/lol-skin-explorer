@@ -13,7 +13,7 @@ export const MIN_SUPPORTED_VERSION = [7, 1];
 /**
  * Minimum interval in between store updates, in seconds.
  */
-export const REVALIDATE_INTERVAL = 600;
+export const REVALIDATE_INTERVAL = 60;
 
 /* Skin Changes Scraping */
 export const ALIASES = {

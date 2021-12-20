@@ -1,7 +1,7 @@
 import React from "react";
 
-export const DataContext = React.createContext({});
-DataContext.displayName = "DataContext";
+export const PropsContext = React.createContext({});
+PropsContext.displayName = "PropsContext";
 
-export const DataProvider = DataContext.Provider;
-export const useData = () => React.useContext(DataContext);
+export const PropsProvider = PropsContext.Provider;
+export const useProps = () => React.useContext(PropsContext);
