@@ -23,29 +23,36 @@ export function Omnisearch() {
 
   useEffect(() => setSelected(0), [query]);
 
-  function onSelect(type, entity) {
+  function onSelect(entity) {
+    const { type } = entity;
     if (type === "champion") {
-      navigate(generatePath("/champions/:champion", { champion: entity.key }));
+      router.push({
+        pathname: "/champions/[key]",
+        query: { key: entity.key },
+      });
     }
     if (type === "skinline") {
-      navigate(generatePath("/skinlines/:id", { id: entity.id }));
+      router.push({
+        pathname: "/skinlines/[id]",
+        query: { id: entity.id },
+      });
+    }
+    if (type === "universe") {
+      router.push({
+        pathname: "/universes/[id]",
+        query: { id: entity.id },
+      });
     }
     if (type === "skin") {
-      const champId = splitId(entity.id)[0];
-      const champ = champions.find((c) => c.id === champId);
-      navigate(
-        generatePath("/champions/:cKey/skins/:sId", {
-          cKey: champ.key,
-          sId: entity.id,
-        })
-      );
+      router.push({
+        pathname: "/champions/[key]/skins/[id]",
+        query: { key: entity.key, id: entity.id },
+      });
     }
   }
 
   function selectActive() {
-    const opt = matches[selected];
-    console.log(opt);
-    onSelect(opt.item.$$type, opt.item);
+    onSelect(matches[selected]);
     setQuery("");
   }
 
@@ -90,7 +97,7 @@ export function Omnisearch() {
             <li
               onMouseEnter={() => setSelected(i)}
               onMouseDown={selectActive}
-              className={classNames(match.$$type, {
+              className={classNames({
                 [styles.selected]: selected === i,
               })}
               key={i}

@@ -1,5 +1,7 @@
 .search {
   position: relative;
+  width: 100%;
+  max-width: 400px;
 }
 
 .search input {
@@ -10,7 +12,6 @@
   padding: 0 10px;
   height: 36px;
   width: 100%;
-  max-width: 400px;
   box-sizing: border-box;
   outline: none;
 }
@@ -21,14 +22,17 @@
 
 .search ul {
   position: absolute;
-  top: 40px;
+  top: 36px;
   left: 0;
   list-style: none;
   padding: 0;
   z-index: 999;
   margin: 0;
-  background: rgb(31, 29, 37);
+  background: rgb(21, 26, 32);
   width: 100%;
+  max-height: calc(100vh - 80px);
+  overflow: auto;
+  filter: drop-shadow(0 3px 7px rgba(0, 0, 0, 0.4));
 }
 
 .search ul li {
