@@ -1,36 +1,39 @@
 import pLimit from "p-limit";
 import Fuse from "fuse.js";
-
-import { splitId } from "./helpers";
 import cheerio from "cheerio";
-
-const aliases = {
-  "Nunu Bot": "Nunu & Willump Bot",
-};
-
-const ignoreMissing = [
-  // Unmasked Kayle => Transcended Kayle, 9.5
-  "Unmasked Kayle",
-  // Crimson Akali => Infernal Akali, 8.15
-  "Crimson Akali",
-];
-
-// -----
-
-// Populated at runtime.
-export const changes = {};
+import axios from "axios";
+import { splitId } from "./helpers";
+import {
+  ALIASES,
+  IGNORED_WARNINGS,
+  MIN_SUPPORTED_VERSION,
+  SKIN_SCRAPE_INTERVAL,
+} from "./constants";
+import { parsePatch, comparePatches } from "./patch";
 
 const limit = pLimit(10);
 
-export async function updateSkinChanges(patch) {
+let lastUpdate = 0;
+
+export async function fetchSkinChanges(patch, patches) {
+  const now = Date.now();
+  if (now - lastUpdate < SKIN_SCRAPE_INTERVAL * 1000) return false;
+  lastUpdate = now;
+
   console.log("[Skin Changes] Updating...");
   const [champions, skins] = await Promise.all([patch.champions, patch.skins]);
+  const changes = {};
   await Promise.all(
-    champions.map((c) =>
-      limit(async () => Object.assign(changes, await getSkinArtChanges(c)))
-    )
+    champions
+      .slice(0, 5)
+      .map((c) =>
+        limit(async () =>
+          Object.assign(changes, await getSkinArtChanges(c, skins, patches))
+        )
+      )
   );
   console.log("[Skin Changes] Update complete.");
+  return changes;
 }
 
 /**
@@ -39,7 +42,7 @@ export async function updateSkinChanges(patch) {
  *
  * https://leagueoflegends.fandom.com/wiki/Aatrox/LoL/Patch_history
  */
-async function getSkinArtChanges(champion) {
+async function getSkinArtChanges(champion, skins, patches) {
   const changes = {};
   const champSkins = new Fuse(
     Object.values(skins).filter((skin) => splitId(skin.id)[0] === champion.id),
@@ -56,5 +59,71 @@ async function getSkinArtChanges(champion) {
       )
     ).data,
     false
+  );
+
+  $("dl dt a")
+    .toArray()
+    .filter((el) => {
+      const t = $(el).attr("title");
+      if (!t.startsWith("V")) return false;
+
+      const split = t.slice(1).split(".");
+      if (!split.length === 2) return false;
+
+      const patch = split.map((e) => parseInt(e, 10));
+      // Ignore 7.1, since we can't do anything with that information.
+      if (comparePatches(patch, MIN_SUPPORTED_VERSION) <= 0) return false;
+
+      return true;
+    })
+    .map((x) => {
+      const t = $(x).parents("dl"),
+        c = t.next(),
+        subset = c.find(':contains(" art")');
+      if (!subset.length) return;
+
+      const patch = parsePatch(t.find("a").attr("title").slice(1));
+      console.log(patches);
+      const prevPatch =
+        patches[
+          patches.findIndex((p) => comparePatches(p, patch) === 0) + 1
+        ].join(".");
+      subset.each((_, el) => {
+        $(el)
+          .find("a[href]")
+          .each((_, link) => {
+            const name = $(link).text().trim();
+            if (!name) return;
+
+            let matches = champSkins.search(name, { limit: 1 });
+            if (!matches.length) {
+              if (name.startsWith("Original ")) {
+                matches = champSkins.search(name.slice(9), { limit: 1 });
+              }
+              if (ALIASES[name]) {
+                matches = champSkins.search(ALIASES[name], { limit: 1 });
+              }
+
+              if (!matches.length) {
+                if (!IGNORED_WARNINGS.includes(name)) {
+                  console.error(
+                    `Couldn't find a match for ${name} (${champion.name}, ${p})`
+                  );
+                }
+                return;
+              }
+            }
+            const skin = matches[0].item;
+            changes[skin.id] = new Set([
+              ...(changes[skin.id] ?? []),
+              prevPatch,
+            ]);
+          });
+      });
+    });
+
+  return Object.keys(changes).reduce(
+    (obj, key) => ({ ...obj, [key]: [...changes[key]] }),
+    {}
   );
 }

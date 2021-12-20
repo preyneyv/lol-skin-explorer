@@ -1,23 +1,18 @@
 import axios from "axios";
-import { CDRAGON } from "./constants";
-import { comparePatches, compareVersions, Patch } from "./patch";
+import { CDRAGON, REVALIDATE_INTERVAL } from "./constants";
+import { parsePatch, comparePatches, Patch } from "./patch";
+import { fetchSkinChanges } from "./skin-changes";
+
+const PATCH_REGEX = /^\d+\.\d+$/;
 
 /**
- * Minimum interval in between store updates, in seconds.
+ * Handle the logic behind cache invalidation and triggering all the datasets
+ * to fetch new copies.
  */
-const REVALIDATE_INTERVAL = 60;
-
-/**
- * The lowest patch number that will be displayed on the website.
- */
-const MIN_SUPPORTED_PATCH = [7, 21];
-
-const PATCH_REGEX = /^\d+\.\d+$/g;
-
 export class Store {
-  patches = {};
-  live = null;
-  pbe = new Patch("pbe", true);
+  patch = new Patch();
+  patches = [];
+  skinChanges = {};
 
   lastUpdate = 0;
   fetching = false;
@@ -30,33 +25,16 @@ export class Store {
     this.lastUpdate = now;
     this.fetching = true;
 
-    const patchStrings = (await axios.get(`${CDRAGON}/json`)).data
+    // Get listing of patches from CD
+    this.patches = (await axios.get(`${CDRAGON}/json`)).data
       .filter(
         (entry) => entry.type === "directory" && entry.name.match(PATCH_REGEX)
       )
-      .map((e) => e.name)
+      .map((e) => parsePatch(e.name))
       .sort((a, b) => -comparePatches(a, b));
 
-    // For all new patches, create new Patch objects
-    patchStrings
-      .filter((n) => !this.patches[n])
-      .map((name) => new Patch(name))
-      .filter((patch) => patch.cmp(MIN_SUPPORTED_PATCH) >= 0)
-      .map((patch) => (this.patches[patch.name] = patch));
-
-    const patches = Object.values(this.patches);
-
-    // Mark the right patch as live.
-    patches.map((p) => {
-      p.isLive = p.name == patchStrings[0];
-      if (p.isLive) this.live = p;
-    });
-
-    // Wait for all patches to fetch new data.
-    await Promise.all([
-      this.pbe.fetch(),
-      ...Object.values(this.patches).map((p) => p.fetch()),
-    ]);
+    this.skinChanges =
+      (await fetchSkinChanges(this.patch, this.patches)) || this.skinChanges;
 
     this.fetching = false;
   }

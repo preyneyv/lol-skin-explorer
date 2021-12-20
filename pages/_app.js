@@ -21,25 +21,22 @@ export default function App({ Component, pageProps, data }) {
 App.getInitialProps = async (appContext) => {
   const appProps = await BaseApp.getInitialProps(appContext);
   await store.fetch();
-  const { patchId } = appContext.ctx.query;
-  const patch = patchId ? store.patches[patchId] : store.pbe;
+  const { patch } = store;
 
-  let data = {};
+  const [champions, skinlines, skins] = await Promise.all([
+    patch.champions,
+    patch.skinlines,
+    patch.skins,
+  ]);
 
-  if (patch) {
-    const [champions, skinlines, skins] = await Promise.all([
-      patch.champions,
-      patch.skinlines,
-      patch.skins,
-    ]);
-    data = {
-      champions,
-      skinlines,
-      skins,
-      patches: Object.keys(store.patches).sort((a, b) => -comparePatches(a, b)),
-      patch: patch.name,
-    };
-  }
+  const data = {
+    champions,
+    skinlines,
+    skins,
+    skinChanges: store.skinChanges,
+    version: patch.fullVersionString,
+    patch: patch.name,
+  };
 
   return { ...appProps, data };
 };

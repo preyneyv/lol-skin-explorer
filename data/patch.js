@@ -1,21 +1,20 @@
 import axios from "axios";
 import { CDRAGON } from "./constants";
 
-export function compareVersions(a, b) {
+export function parsePatch(s) {
+  return s.split(".").map((s) => parseInt(s, 10));
+}
+
+export function comparePatches(a, b) {
   for (let i = 0; i < a.length; i++) {
     if (a[i] > b[i]) return 1;
     else if (a[i] < b[i]) return -1;
   }
-
   return 0;
 }
 
-export function comparePatches(a, b) {
-  [a, b] = [a, b].map((s) => s.split(".").map((s) => parseInt(s, 10)));
-  return compareVersions(a, b);
-}
-
 export class Patch {
+  name = "pbe";
   fullVersionString = null;
 
   _champions = null;
@@ -34,7 +33,7 @@ export class Patch {
           .sort((a, b) => (a.name > b.name ? 1 : -1))
           .map((a) => ({ ...a, key: a.alias.toLowerCase() })))
       );
-      console.log(`[${this.name}] Loaded champions.`);
+      console.log(`[Patch ${this.name}] Loaded champions.`);
     });
   }
 
@@ -50,7 +49,7 @@ export class Patch {
           .sort((a, b) => (a.name > b.name ? 1 : -1)))
       );
 
-      console.log(`[${this.name}] Loaded skinlines.`);
+      console.log(`[Patch ${this.name}] Loaded skinlines.`);
     });
   }
 
@@ -60,51 +59,29 @@ export class Patch {
       const { data } = await axios.get(this.data("/v1/skins.json"));
 
       resolve((this._skins = data));
-      console.log(`[${this.name}] Loaded skins.`);
+      console.log(`[Patch ${this.name}] Loaded skins.`);
     });
-  }
-
-  constructor(name, isPBE = false) {
-    this.name = name;
-    this.isPBE = isPBE;
-    this.isLive = false;
-
-    this.version = this.isPBE
-      ? null
-      : name.split(".").map((s) => parseInt(s, 10));
   }
 
   /**
    * Pull the latest data from remote sources (CommunityDragon, Fandom).
    */
   async fetch() {
-    // Patch is really old, doesn't have a content-metadata file.
-    if (this.fullVersionString === false) return;
-
-    // Only keep fetching the live/PBE patches.
-    if (!(this.fullVersionString === null || this.isLive || this.isPBE)) return;
-
     if (this.fullVersionString) {
       console.log(`Checking for new changes on ${this.name}`);
     }
 
-    try {
-      const metadata = (await axios.get(this.url("/content-metadata.json")))
-        .data;
-      if (metadata.version === this.fullVersionString) {
-        // Patch has not changed! We can early-exit.
-        return;
-      }
-      if (this.fullVersionString) {
-        console.log(
-          `Patch ${this.name} has changed! (${this.fullVersionString} => ${metadata.version})`
-        );
-      }
-      this.fullVersionString = metadata.version;
-    } catch (e) {
-      // Patch doesn't have content-metadata.json
-      this.fullVersionString = false;
+    const metadata = (await axios.get(this.url("/content-metadata.json"))).data;
+    if (metadata.version === this.fullVersionString) {
+      // Patch has not changed! We can early-exit.
+      return;
     }
+    if (this.fullVersionString) {
+      console.log(
+        `Patch ${this.name} has changed! (${this.fullVersionString} => ${metadata.version})`
+      );
+    }
+    this.fullVersionString = metadata.version;
 
     // We can assume we need to fetch new data here. Delete all cached copies.
     this._champions = this._skinlines = this._skins = null;
@@ -120,15 +97,5 @@ export class Patch {
 
   asset(path) {
     return this.data(path.replace("/lol-game-data/assets", "").toLowerCase());
-  }
-
-  /**
-   * Check if a patch is greater than or equal to a given patch version.
-   */
-  cmp(version) {
-    if (!this.version) return 1;
-    if (!version) return -1;
-
-    return compareVersions(this.version, version);
   }
 }
