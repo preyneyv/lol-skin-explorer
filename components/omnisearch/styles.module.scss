@@ -8,7 +8,9 @@
   background: rgba(255, 255, 255, 0.1);
   border: 0;
   padding: 8px 10px;
-  width: 350px;
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
   outline: none;
 }
 

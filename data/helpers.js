@@ -1,4 +1,9 @@
+import { CDRAGON } from "./constants";
 import { useData } from "./contexts";
+
+export function dataRoot(patch = "pbe") {
+  return `${CDRAGON}/${patch}/plugins/rcp-be-lol-game-data/global/default`;
+}
 
 export function splitId(id) {
   return [Math.floor(id / 1000), id % 1000];
@@ -22,8 +27,8 @@ export function useSkinlineSkins(id) {
     });
 }
 
-export function asset(path, patch) {
-  return path.replace("/lol-game-data/assets", dataRoot).toLowerCase();
+export function asset(path, patch = "pbe") {
+  return path.replace("/lol-game-data/assets", dataRoot(patch)).toLowerCase();
 }
 
 const rarities = {

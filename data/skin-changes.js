@@ -16,6 +16,7 @@ const limit = pLimit(10);
 let lastUpdate = 0;
 
 export async function fetchSkinChanges(patch, patches) {
+  return false;
   const now = Date.now();
   if (now - lastUpdate < SKIN_SCRAPE_INTERVAL * 1000) return false;
   lastUpdate = now;
@@ -81,7 +82,9 @@ async function getSkinArtChanges(champion, skins, patches) {
 
       const patch = parsePatch(t.find("a").attr("title").slice(1));
       const prevPatch =
-        patches[patches.findIndex((p) => comparePatches(p, patch) === 0) + 1];
+        patches[
+          patches.findIndex((p) => comparePatches(p, patch) === 0) + 1
+        ].join(".");
       subset.each((_, el) => {
         $(el)
           .find("a[href]")
