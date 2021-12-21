@@ -1,0 +1,60 @@
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  filter: blur(2px);
+  opacity: 0.2;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+}
+
+.title {
+  letter-spacing: -0.04em;
+  font-size: 5em;
+  text-align: center;
+  margin: 32px 0 0;
+  color: white;
+}
+
+.groupTitle {
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 20px 0 -8px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.controls {
+  display: flex;
+  margin-top: 0.2em;
+  justify-content: center;
+  label {
+    display: block;
+
+    span {
+      color: rgb(165, 178, 196);
+      display: block;
+    }
+
+    select {
+      font: inherit;
+      background: rgba(121, 163, 207, 0.2);
+      color: white;
+      font-size: 0.9em;
+      padding: 4px 18px 4px 6px;
+      border: none;
+
+      option {
+        background: black;
+      }
+    }
+  }
+}

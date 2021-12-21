@@ -1,5 +1,7 @@
 import { CDRAGON } from "./constants";
 import { useProps } from "./contexts";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export function dataRoot(patch = "pbe") {
   return `${CDRAGON}/${patch}/plugins/rcp-be-lol-game-data/global/default`;
@@ -39,7 +41,7 @@ export function useSkinlineSkins(id) {
   return skinlineSkins(id, skins, champions);
 }
 
-const rarities = {
+export const rarities = {
   kUltimate: ["ultimate.png", "Ultimate"],
   kMythic: ["mythic.png", "Mythic"],
   kLegendary: ["legendary.png", "Legendary"],
@@ -58,7 +60,7 @@ export const classes = {
 export function rarity(skin) {
   if (!rarities[skin.rarity]) return null;
   const [imgName, name] = rarities[skin.rarity];
-  const imgUrl = `${dataRoot}/v1/rarity-gem-icons/${imgName}`;
+  const imgUrl = `${dataRoot()}/v1/rarity-gem-icons/${imgName}`;
   return [imgUrl, name];
 }
 
@@ -66,4 +68,44 @@ export function teemoGGUrl(skin) {
   const [champId, skinId] = splitId(skin.id);
   const champ = champions.find((c) => c.id === champId).key;
   return `https://teemo.gg/model-viewer?game=league-of-legends&type=champions&object=${champ}&skinid=${champ}-${skinId}`;
+}
+
+export function useLocalStorageState(name, initialValue) {
+  const [value, _setValue] = useState(initialValue);
+  useEffect(() => {
+    localStorage[name] && _setValue(JSON.parse(localStorage[name]));
+  }, [name]);
+
+  const setValue = (v) => {
+    _setValue(v);
+    localStorage[name] = JSON.stringify(v);
+  };
+  return [value, setValue];
+}
+
+export function useSortedSkins(sortByRarity, skins) {
+  if (sortByRarity) {
+    const keys = Object.keys(rarities).reverse();
+    return skins
+      .slice()
+      .sort((a, b) => keys.indexOf(b.rarity) - keys.indexOf(a.rarity));
+  }
+
+  return skins;
+}
+
+export function useEscapeTo(url) {
+  const router = useRouter();
+  useEffect(() => {
+    function onKeyDown(e) {
+      if (document.activeElement !== document.body) return; // Ignore events when an input is active.
+      if (e.code === "Escape") {
+        router.push(url);
+        e.preventDefault();
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [router, url]);
 }

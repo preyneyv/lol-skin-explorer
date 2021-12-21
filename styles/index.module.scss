@@ -25,10 +25,10 @@
     }
 
     .tabs > div {
-      padding: 4px 12px;
+      padding: 4px 8px;
       cursor: pointer;
-      color: rgb(90, 107, 129);
-      border-radius: 100px;
+      color: rgba(121, 163, 207, 0.5);
+      // border-radius: 100px;
       transition: background-color 200ms, color 200ms;
 
       &:hover {
@@ -38,7 +38,7 @@
       &.active {
         cursor: default;
         color: white;
-        background-color: rgb(31, 39, 48);
+        background-color: rgba(121, 163, 207, 0.2);
       }
     }
 
@@ -46,16 +46,16 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      font-size: 0.9em;
 
       span {
-        opacity: 0.7;
-        font-size: 0.8em;
+        color: rgb(165, 178, 196);
       }
+
       select {
         font: inherit;
-        background: rgb(31, 39, 48);
+        background: rgba(121, 163, 207, 0.2);
         color: white;
-        font-size: 0.9em;
         padding: 4px 18px 4px 6px;
         border: none;
 
@@ -84,7 +84,7 @@
 
     &::before {
       content: "";
-      background: rgb(31, 39, 48);
+      background: rgba(121, 163, 207, 0.1);
       position: absolute;
       top: -6px;
       left: -6px;
@@ -92,7 +92,7 @@
       height: calc(100% + 12px);
       opacity: 0;
       z-index: -1;
-      // transition: opacity 150ms;
+      transition: opacity 200ms;
     }
 
     &:hover::before {
@@ -111,7 +111,7 @@
     }
 
     img {
-      background: rgba(163, 206, 255, 0.1);
+      background: rgba(121, 163, 207, 0.1);
     }
   }
 }
@@ -132,7 +132,7 @@
       // opacity: 0.7;
       display: block;
       padding: 6px 8px;
-      transition: color 200ms, opacity 200ms;
+      transition: background-color 200ms, color 200ms, opacity 200ms;
 
       &:hover {
         background: rgb(23, 29, 36);
@@ -149,7 +149,7 @@
       list-style: none;
       a {
         margin-left: 32px;
-        color: rgb(90, 107, 129);
+        color: rgba(121, 163, 207, 0.6);
       }
     }
   }

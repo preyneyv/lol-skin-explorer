@@ -1,14 +1,38 @@
 .header {
-  display: grid;
+  position: fixed;
+  top: 0;
+  width: 100vw;
   height: 56px;
+  z-index: 999;
+  display: grid;
   border-bottom: 1px solid rgb(31, 39, 48);
   grid-template-columns: auto 1fr;
+  background: rgb(12, 15, 19);
   align-items: center;
   padding: 0 10px;
   gap: 10px;
+
+  transition: background-color 300ms, border-color 300ms;
 
   .logo {
     display: block;
     height: 36px;
   }
+
+  &.flat {
+    background: rgba(8, 13, 19, 0.9);
+    border-color: transparent;
+  }
+}
+
+@supports (backdrop-filter: blur(1px)) {
+  .header.flat {
+    border-color: transparent;
+    background: rgba(8, 13, 19, 0.5);
+    backdrop-filter: blur(24px);
+  }
+}
+
+.headerSpacer {
+  height: 56px;
 }

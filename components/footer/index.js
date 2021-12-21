@@ -1,12 +1,14 @@
+import classNames from "classnames";
 import styles from "./styles.module.scss";
 import { useProps } from "../../data/contexts";
 import getConfig from "next/config";
 
 const { publicRuntimeConfig } = getConfig();
-export function Footer() {
+
+export function Footer({ flat }) {
   const { patch } = useProps();
   return (
-    <footer className={styles.footer}>
+    <footer className={classNames(styles.footer, { [styles.flat]: flat })}>
       <div>
         <p>
           In-game data provided by{" "}
@@ -54,6 +56,7 @@ export function Footer() {
           <a
             target="_blank"
             href="https://github.com/preyneyv/lol-skin-explorer"
+            rel="noreferrer"
           >
             View Source on GitHub
           </a>

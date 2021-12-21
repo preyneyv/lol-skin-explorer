@@ -80,6 +80,16 @@ export class Patch {
         if (skin.isBase) {
           skin.name = "Original " + skin.name;
         }
+        if (skin.questSkinInfo) {
+          // At the time of writing (12.1), only K/DA ALL OUT Seraphine (147001)
+          const base = { ...skin };
+          delete base.questSkinInfo;
+
+          skin.questSkinInfo.tiers.map((tier) => {
+            const s = { ...base, ...tier };
+            data[s.id.toString()] = s;
+          });
+        }
       });
 
       resolve((this._skins = data));

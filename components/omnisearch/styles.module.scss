@@ -7,17 +7,21 @@
 .search input {
   font: inherit;
   color: white;
-  background: rgb(31, 39, 48);
+  background: rgba(121, 163, 207, 0.1);
   border: 0;
   padding: 0 10px;
   height: 36px;
   width: 100%;
   box-sizing: border-box;
   outline: none;
+
+  &::placeholder {
+    color: rgba(121, 163, 207, 0.5);
+  }
 }
 
 .search input:focus {
-  background: rgb(40, 49, 59);
+  background: rgba(121, 163, 207, 0.15);
 }
 
 .search ul {
@@ -43,13 +47,13 @@
   gap: 8px;
 }
 .search ul li:nth-child(2n) {
-  background: rgba(163, 206, 255, 0.03);
+  background: rgba(121, 163, 207, 0.03);
 }
 
 .search ul li img {
   height: 36px;
   width: 36px;
-  background: rgba(163, 206, 255, 0.1);
+  background: rgba(121, 163, 207, 0.1);
 }
 
 .search ul li div > div {
@@ -61,5 +65,5 @@
 }
 
 .search ul li.selected {
-  background: rgba(163, 206, 255, 0.1);
+  background: rgba(121, 163, 207, 0.1);
 }
