@@ -87,7 +87,7 @@ export async function getStaticPaths() {
             if (!u) return null;
             return {
               params: {
-                universeId: u.id,
+                universeId: u.id.toString(),
                 skinId: skin.id.toString(),
               },
             };
