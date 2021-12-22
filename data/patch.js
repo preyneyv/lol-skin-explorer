@@ -1,6 +1,7 @@
-import axios from "axios";
+// import axios from "axios";
 import { CDRAGON } from "./constants";
-import { skinlineSkins } from "./helpers";
+// import { skinlineSkins } from "./helpers";
+import { cache } from "./cache";
 
 export function parsePatch(s) {
   return s.split(".").map((s) => parseInt(s, 10));
@@ -26,15 +27,15 @@ export class Patch {
   get champions() {
     return new Promise(async (resolve) => {
       if (this._champions !== null) return resolve(this._champions);
+      resolve((this._champions = await cache.get("champions")));
+      // const { data } = await axios.get(this.data("/v1/champion-summary.json"));
 
-      const { data } = await axios.get(this.data("/v1/champion-summary.json"));
-
-      resolve(
-        (this._champions = data
-          .filter((d) => d.id !== -1)
-          .sort((a, b) => (a.name > b.name ? 1 : -1))
-          .map((a) => ({ ...a, key: a.alias.toLowerCase() })))
-      );
+      // resolve(
+      //   (this._champions = data
+      //     .filter((d) => d.id !== -1)
+      //     .sort((a, b) => (a.name > b.name ? 1 : -1))
+      //     .map((a) => ({ ...a, key: a.alias.toLowerCase() })))
+      // );
       console.log(`[Patch ${this.name}] Loaded champions.`);
     });
   }
@@ -42,14 +43,15 @@ export class Patch {
   get skinlines() {
     return new Promise(async (resolve) => {
       if (this._skinlines !== null) return resolve(this._skinlines);
+      resolve((this._skinlines = await cache.get("skinlines")));
 
-      const { data } = await axios.get(this.data("/v1/skinlines.json"));
+      // const { data } = await axios.get(this.data("/v1/skinlines.json"));
 
-      resolve(
-        (this._skinlines = data
-          .filter((d) => d.id !== 0)
-          .sort((a, b) => (a.name > b.name ? 1 : -1)))
-      );
+      // resolve(
+      //   (this._skinlines = data
+      //     .filter((d) => d.id !== 0)
+      //     .sort((a, b) => (a.name > b.name ? 1 : -1)))
+      // );
 
       console.log(`[Patch ${this.name}] Loaded skinlines.`);
     });
@@ -58,14 +60,14 @@ export class Patch {
   get universes() {
     return new Promise(async (resolve) => {
       if (this._universes !== null) return resolve(this._universes);
+      resolve((this._universes = await cache.get("universes")));
+      // const { data } = await axios.get(this.data("/v1/universes.json"));
 
-      const { data } = await axios.get(this.data("/v1/universes.json"));
-
-      resolve(
-        (this._universes = data
-          .filter((d) => d.id !== 0)
-          .sort((a, b) => (a.name > b.name ? 1 : -1)))
-      );
+      // resolve(
+      //   (this._universes = data
+      //     .filter((d) => d.id !== 0)
+      //     .sort((a, b) => (a.name > b.name ? 1 : -1)))
+      // );
 
       console.log(`[Patch ${this.name}] Loaded universes.`);
     });
@@ -74,25 +76,26 @@ export class Patch {
   get skins() {
     return new Promise(async (resolve) => {
       if (this._skins !== null) return resolve(this._skins);
-      const { data } = await axios.get(this.data("/v1/skins.json"));
-      Object.keys(data).map((id) => {
-        const skin = data[id];
-        if (skin.isBase) {
-          skin.name = "Original " + skin.name;
-        }
-        if (skin.questSkinInfo) {
-          // At the time of writing (12.1), only K/DA ALL OUT Seraphine (147001)
-          const base = { ...skin };
-          delete base.questSkinInfo;
+      resolve((this._skins = await cache.get("skins")));
+      // const { data } = await axios.get(this.data("/v1/skins.json"));
+      // Object.keys(data).map((id) => {
+      //   const skin = data[id];
+      //   if (skin.isBase) {
+      //     skin.name = "Original " + skin.name;
+      //   }
+      //   if (skin.questSkinInfo) {
+      //     // At the time of writing (12.1), only K/DA ALL OUT Seraphine (147001)
+      //     const base = { ...skin };
+      //     delete base.questSkinInfo;
 
-          skin.questSkinInfo.tiers.map((tier) => {
-            const s = { ...base, ...tier };
-            data[s.id.toString()] = s;
-          });
-        }
-      });
+      //     skin.questSkinInfo.tiers.map((tier) => {
+      //       const s = { ...base, ...tier };
+      //       data[s.id.toString()] = s;
+      //     });
+      //   }
+      // });
 
-      resolve((this._skins = data));
+      // resolve((this._skins = data));
       console.log(`[Patch ${this.name}] Loaded skins.`);
     });
   }
@@ -106,17 +109,18 @@ export class Patch {
       console.log(`Checking for new changes on ${this.name}`);
     }
 
-    const metadata = (await axios.get(this.url("/content-metadata.json"))).data;
-    if (metadata.version === this.fullVersionString) {
+    const { oldVersionString: verString } = await cache.get("persistentVars");
+    if (verString === this.fullVersionString) {
       // Patch has not changed! We can early-exit.
       return false;
     }
+
     if (this.fullVersionString) {
       console.log(
-        `Patch ${this.name} has changed! (${this.fullVersionString} => ${metadata.version})`
+        `Patch ${this.name} has changed! (${this.fullVersionString} => ${verString})`
       );
     }
-    this.fullVersionString = metadata.version;
+    this.fullVersionString = verString;
 
     // We can assume we need to fetch new data here. Delete all cached copies.
     this._champions = this._skinlines = this._skins = this._universes = null;

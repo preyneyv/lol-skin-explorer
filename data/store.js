@@ -2,7 +2,7 @@ import Fuse from "fuse.js";
 import axios from "axios";
 import { CDRAGON, REVALIDATE_INTERVAL } from "./constants";
 import { parsePatch, comparePatches, Patch } from "./patch";
-import { fetchSkinChanges } from "./skin-changes";
+// import { fetchSkinChanges } from "./skin-changes";
 import { splitId } from "./helpers";
 
 const PATCH_REGEX = /^\d+\.\d+$/;
@@ -15,8 +15,8 @@ const NON_ALPHANUMERIC_REGEX = /[^A-Za-z0-9]/g;
  */
 export class Store {
   patch = new Patch();
-  patches = [];
-  skinChanges = {};
+  // patches = [];
+  _skinChanges = {};
 
   fuse = new Fuse([], FUSE_OPTIONS);
 
@@ -34,13 +34,13 @@ export class Store {
     await Promise.all([
       (async () => {
         // Get listing of patches from CD
-        this.patches = (await axios.get(`${CDRAGON}/json`)).data
-          .filter(
-            (entry) =>
-              entry.type === "directory" && entry.name.match(PATCH_REGEX)
-          )
-          .map((e) => parsePatch(e.name))
-          .sort((a, b) => -comparePatches(a, b));
+        // this.patches = (await axios.get(`${CDRAGON}/json`)).data
+        //   .filter(
+        //     (entry) =>
+        //       entry.type === "directory" && entry.name.match(PATCH_REGEX)
+        //   )
+        //   .map((e) => parsePatch(e.name))
+        //   .sort((a, b) => -comparePatches(a, b));
       })(),
       (async () => {
         // Update the stored patch.
@@ -99,8 +99,8 @@ export class Store {
       })(),
     ]);
 
-    this.skinChanges =
-      (await fetchSkinChanges(this.patch, this.patches)) || this.skinChanges;
+    // this.skinChanges =
+    //   (await fetchSkinChanges(this.patch, this.patches)) || this.skinChanges;
 
     this.fetching = false;
   }
