@@ -1,3 +1,4 @@
+import classNames from "classnames";
 import Image from "next/image";
 import Link from "next/link";
 import { asset, rarity } from "../../data/helpers";
@@ -20,8 +21,9 @@ export function SkinGrid({ skins, linkTo }) {
                 height={300}
               />
               <div>
-                {r && (
-                  <div className={styles.rarityBadge}>
+                {skin.name}
+                <div className={classNames({ [styles.rarityBadge]: r })}>
+                  {r && (
                     <Image
                       src={r[0]}
                       title={r[1]}
@@ -30,9 +32,8 @@ export function SkinGrid({ skins, linkTo }) {
                       objectPosition="center"
                       layout="fill"
                     />
-                  </div>
-                )}
-                {skin.name}
+                  )}
+                </div>
               </div>
             </a>
           </Link>

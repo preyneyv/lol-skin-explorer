@@ -28,6 +28,7 @@
   text-align: center;
   text-transform: uppercase;
   letter-spacing: 1px;
+  font-size: 1.5em;
   margin: 20px 0 -8px;
   padding-top: 20px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -57,5 +58,27 @@
         background: black;
       }
     }
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .title {
+    font-size: 4em;
+  }
+
+  .groupTitle {
+    margin: 12px 0 -4px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .title {
+    font-size: 2.5em;
+  }
+
+  .groupTitle {
+    font-size: 1.3em;
+    // margin: 12px 0 -8px;
+    // padding-top: 12px;
   }
 }
