@@ -45,7 +45,7 @@ function _Page() {
                 alt={skinline.name}
               />
             </div>
-            <Header backArrow flat />
+            <Header backTo="/skinlines" flat />
             <main>
               <h1 className={styles.title}>{skinline.name}</h1>
               <div className={styles.controls}>

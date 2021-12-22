@@ -47,7 +47,7 @@ function _Page() {
                 alt={champion.name}
               />
             </div>
-            <Header backArrow flat />
+            <Header backTo="/" flat />
             <main>
               <h1 className={styles.title}>{champion.name}</h1>
               <div className={styles.controls}>

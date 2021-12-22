@@ -1,6 +1,5 @@
 import Image from "next/image";
-import classNames from "classnames";
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import Head from "next/head";
 import { Header } from "../components/header";
 import { Footer, FooterContainer } from "../components/footer";
@@ -46,80 +45,9 @@ function ChampionsList({ role }) {
   );
 }
 
-function SkinlinesList() {
-  const { skinlines } = useProps();
-  return (
-    <div className={styles.skinlines}>
-      {skinlines.map((l) => (
-        <div key={l.id}>
-          <Link
-            href={{
-              pathname: "/skinlines/[skinlineId]",
-              query: { skinlineId: l.id },
-            }}
-            prefetch={false}
-          >
-            <a>{l.name}</a>
-          </Link>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function UniversesList() {
-  const { universes, skinlines } = useProps();
-  return (
-    <div className={styles.universes}>
-      {universes.map((u) => {
-        const skinSets = u.skinSets
-          .map((id) => ({
-            id,
-            name: skinlines.find((s) => s.id === id).name,
-          }))
-          .sort((a, b) => (a.name > b.name ? 1 : -1));
-        return (
-          <div key={u.id}>
-            <Link
-              href={{
-                pathname: "/universes/[universeId]",
-                query: { universeId: u.id },
-              }}
-              prefetch={false}
-            >
-              <a>{u.name}</a>
-            </Link>
-            {(skinSets.length > 1 || skinSets[0].name !== u.name) && (
-              <ul>
-                {skinSets.map(({ name, id }) => (
-                  <li key={id}>
-                    <Link
-                      href={{
-                        pathname: "/skinlines/[id]",
-                        query: { id },
-                      }}
-                      prefetch={false}
-                    >
-                      <a>{name}</a>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
 export default function Index() {
-  const [active, setActive] = useLocalStorageState(
-    "index__active",
-    "champions"
-  );
   const [champRole, setChampRole] = useLocalStorageState(
-    "index__champRole",
+    "champs_index__champRole",
     ""
   );
 
@@ -134,35 +62,17 @@ export default function Index() {
           <div className={styles.container}>
             <nav>
               <div className={styles.tabs}>
-                <div
-                  className={classNames({
-                    [styles.active]: active === "champions",
-                  })}
-                  onClick={() => setActive("champions")}
-                >
-                  Champions
-                </div>
-                <div
-                  className={classNames({
-                    [styles.active]: active === "universes",
-                  })}
-                  onClick={() => setActive("universes")}
-                >
-                  Universes
-                </div>
-                <div
-                  className={classNames({
-                    [styles.active]: active === "skinlines",
-                  })}
-                  onClick={() => setActive("skinlines")}
-                >
-                  Skinlines
-                </div>
+                <Link href="/">
+                  <a className={styles.active}>Champions</a>
+                </Link>
+                <Link href="/universes">
+                  <a>Universes</a>
+                </Link>
+                <Link href="/skinlines">
+                  <a>Skinlines</a>
+                </Link>
               </div>
-              <div
-                className={styles.filters}
-                style={{ display: active === "champions" ? "block" : "none" }}
-              >
+              <div className={styles.filters}>
                 <label>
                   <span>Role</span>
                   <select
@@ -180,21 +90,7 @@ export default function Index() {
               </div>
             </nav>
             <main>
-              <div
-                style={{ display: active === "champions" ? "block" : "none" }}
-              >
-                <ChampionsList role={champRole} />
-              </div>
-              <div
-                style={{ display: active === "skinlines" ? "block" : "none" }}
-              >
-                <SkinlinesList />
-              </div>
-              <div
-                style={{ display: active === "universes" ? "block" : "none" }}
-              >
-                <UniversesList />
-              </div>
+              <ChampionsList role={champRole} />
             </main>
           </div>
         </div>
@@ -207,19 +103,13 @@ export default function Index() {
 export async function getStaticProps() {
   await store.fetch();
 
-  const [champions, skinlines, universes] = await Promise.all([
-    store.patch.champions,
-    store.patch.skinlines,
-    store.patch.universes,
-  ]);
+  const champions = await store.patch.champions;
 
   return {
     props: {
       champions,
-      skinlines,
-      universes,
       patch: store.patch.fullVersionString,
     },
-    revalidate: 600,
+    revalidate: 60,
   };
 }

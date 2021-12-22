@@ -6,4 +6,7 @@ module.exports = {
     domains: ["raw.communitydragon.org"],
   },
   publicRuntimeConfig: { version },
+  async redirects() {
+    return [{ source: "/champions", destination: "/", permanent: false }];
+  },
 };

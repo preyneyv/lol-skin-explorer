@@ -24,7 +24,7 @@
       }
     }
 
-    .tabs > div {
+    .tabs > a {
       padding: 4px 8px;
       cursor: pointer;
       color: rgba(121, 163, 207, 0.5);
@@ -70,7 +70,8 @@
 .champions {
   display: grid;
   padding: 10px;
-  grid-template-columns: repeat(auto-fit, 190px);
+  line-height: 1.2;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
   gap: 14px;
   justify-content: space-between;
 
@@ -103,6 +104,8 @@
       color: rgb(165, 178, 196);
       transition: color 200ms;
       font-weight: 300;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
     &:hover div {
@@ -152,5 +155,65 @@
         color: rgba(121, 163, 207, 0.6);
       }
     }
+  }
+}
+
+@media screen and (max-width: 1250px) {
+  .universes,
+  .skinlines {
+    columns: 5;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .champions {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 10px;
+  }
+
+  .universes,
+  .skinlines {
+    columns: 4;
+
+    > div > ul a {
+      margin-left: 16px;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .universes,
+  .skinlines {
+    columns: 3;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+
+    > div:not(:first-child) {
+      // border-left: none;
+      border-top: 1px solid rgb(31, 39, 48);
+    }
+    ::before {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .universes,
+  .skinlines {
+    columns: 2;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .universes,
+  .skinlines {
+    columns: 1;
   }
 }

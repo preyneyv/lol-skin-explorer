@@ -21,7 +21,7 @@
 }
 
 .search input:focus {
-  background: rgba(121, 163, 207, 0.15);
+  background: rgb(22, 33, 48);
 }
 
 .search ul {
@@ -32,7 +32,7 @@
   padding: 0;
   z-index: 999;
   margin: 0;
-  background: rgb(21, 26, 32);
+  background: rgb(22, 33, 48);
   width: 100%;
   max-height: calc(100vh - 80px);
   overflow: auto;

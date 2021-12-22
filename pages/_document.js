@@ -6,6 +6,7 @@ class Document extends BaseDocument {
       <Html>
         <Head>
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
+          <meta name="theme-color" content="rgb(12, 15, 19)" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://raw.communitydragon.org" />
           <link
@@ -22,7 +23,7 @@ class Document extends BaseDocument {
               async
               defer
               data-website-id="9de8a8b2-be77-4c8b-9b1c-5e22f32e70d7"
-              src="https://skin-explorer-umami.herokuapp.com/umami.js"
+              src="https://analytics.skinexplorer.lol/umami.js"
             />
           )}
         </Head>

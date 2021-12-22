@@ -65,7 +65,7 @@ function _Page() {
                 alt={universe.name}
               />
             </div>
-            <Header backArrow flat />
+            <Header backTo="/universes" flat />
             <main>
               <h1 className={styles.title}>{universe.name}</h1>
               <div className={styles.controls}>

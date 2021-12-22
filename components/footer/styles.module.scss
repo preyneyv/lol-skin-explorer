@@ -2,20 +2,17 @@
   display: grid;
   grid-template-columns: 1fr auto;
   font-size: 0.85em;
-  color: rgba(121, 163, 207, 0.3);
+  color: rgba(121, 163, 207, 0.5);
   padding: 10px;
   margin-top: 20px;
   transition: color 200ms;
   border-top: 1px solid rgb(31, 39, 48);
   position: relative;
-  gap: 60px;
-
-  &:hover {
-    color: rgba(121, 163, 207, 0.5);
-  }
+  gap: 16px;
 
   p {
     margin: 0;
+    text-align: justify;
     padding: 0;
 
     &:not(:first-child) {
@@ -52,5 +49,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: calc(100vh + 50px);
+  min-height: 100vh;
+}
+
+@media screen and (max-width: 1000px) {
+  .footer {
+    grid-template-columns: 1fr;
+    p {
+      text-align: left;
+    }
+  }
 }
