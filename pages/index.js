@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import Head from "next/head";
 import { Header } from "../components/header";
 import { Footer, FooterContainer } from "../components/footer";
@@ -50,6 +50,10 @@ export default function Index() {
     "champs_index__champRole",
     ""
   );
+
+  useEffect(() => {
+    localStorage.lastIndex = "/";
+  }, []);
 
   return (
     <>

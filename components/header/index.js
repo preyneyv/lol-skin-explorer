@@ -9,13 +9,16 @@ import { ArrowLeft, ExternalLink, Menu } from "react-feather";
 import { useState } from "react";
 
 export const Header = ({ flat, backTo }) => {
-  useEscapeTo(backTo);
+  const back =
+    typeof window !== "undefined" ? localStorage.lastIndex ?? backTo : backTo;
+  useEscapeTo(back);
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
     <>
       <header className={classNames(styles.header, { [styles.flat]: flat })}>
-        <Link href={backTo ?? "/"}>
+        <Link href={back ?? "/"}>
           <a className={styles.logo}>
             {backTo && <ArrowLeft />}
             <Image
@@ -65,7 +68,7 @@ export const Header = ({ flat, backTo }) => {
             </li>
             <li>
               <a
-                href="http://analytics.skinexplorer.lol/share/kcHTswSS/Skin%20Explorer"
+                href="https://analytics.skinexplorer.lol/share/JlbPP3v4/Skin%20Explorer"
                 target="_blank"
                 rel="noreferrer"
               >

@@ -22,8 +22,8 @@ class Document extends BaseDocument {
             <script
               async
               defer
-              data-website-id="9de8a8b2-be77-4c8b-9b1c-5e22f32e70d7"
-              src="http://analytics.skinexplorer.lol/umami.js"
+              data-website-id="0b628597-38a2-4c1c-964c-e83027ce1692"
+              src="https://analytics.skinexplorer.lol/umami.js"
             />
           )}
         </Head>

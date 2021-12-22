@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import Head from "next/head";
 import { Header } from "../../components/header";
 import { Footer, FooterContainer } from "../../components/footer";
@@ -31,6 +31,10 @@ function SkinlinesList() {
 }
 
 export default function Index() {
+  useEffect(() => {
+    localStorage.lastIndex = "/skinlines";
+  }, []);
+
   return (
     <>
       <Head>
