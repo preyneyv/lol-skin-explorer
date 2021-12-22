@@ -3,7 +3,7 @@ import BaseDocument, { Html, Head, Main, NextScript } from "next/document";
 class Document extends BaseDocument {
   render() {
     return (
-      <Html>
+      <Html lang="en">
         <Head>
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
           <meta name="theme-color" content="rgb(12, 15, 19)" />
@@ -23,7 +23,7 @@ class Document extends BaseDocument {
               async
               defer
               data-website-id="9de8a8b2-be77-4c8b-9b1c-5e22f32e70d7"
-              src="https://analytics.skinexplorer.lol/umami.js"
+              src="http://analytics.skinexplorer.lol/umami.js"
             />
           )}
         </Head>

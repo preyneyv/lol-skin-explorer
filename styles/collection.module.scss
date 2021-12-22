@@ -72,27 +72,29 @@
 }
 
 @media screen and (max-width: 850px) {
+  .title,
+  .groupTitle,
+  .controls {
+    padding-left: 16px;
+  }
+
   .title {
+    margin: 16px 0 8px;
     font-size: 4em;
-    text-align: center;
-    padding-left: 0;
   }
 
   .groupTitle {
     margin: 12px 0 -4px;
-    text-align: center;
-    padding-left: 0;
   }
 }
 
 @media screen and (max-width: 650px) {
   .title {
+    margin: 16px 0 8px;
     font-size: 2.5em;
   }
 
   .groupTitle {
     font-size: 1.3em;
-    // margin: 12px 0 -8px;
-    // padding-top: 12px;
   }
 }
