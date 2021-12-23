@@ -5,8 +5,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useCallback, useRef, useEffect, useMemo, useState } from "react";
-import { ArrowLeft, ArrowRight } from "react-feather";
-import { asset, useEscapeTo, useLocalStorageState } from "../../data/helpers";
+import {
+  ArrowLeft,
+  ArrowRight,
+  ExternalLink,
+  Info,
+  Maximize2,
+  Minimize2,
+  User,
+  Users,
+} from "react-feather";
+import {
+  asset,
+  teemoGGUrl,
+  useEscapeTo,
+  useLocalStorageState,
+} from "../../data/helpers";
 import styles from "./styles.module.scss";
 
 const prefetchSkin = (skin, preload = true) => {
@@ -59,6 +73,7 @@ function _SkinViewer({
   const [exiting, setExiting] = useState(false);
   const [loaded, setLoaded] = useState(true);
   const [showUI, setShowUI] = useState(true);
+  const [showInfoBox, setShowInfoBox] = useState(false);
   const showUIRef = useRef();
 
   useEffect(() => {
@@ -71,7 +86,7 @@ function _SkinViewer({
   useEffect(() => {
     if (showUI) {
       clearTimeout(showUIRef.current);
-      // setTimeout(() => setShowUI(false), 3000);
+      setTimeout(() => setShowUI(false), 3000);
     }
   }, [showUI, setShowUI]);
 
@@ -112,6 +127,15 @@ function _SkinViewer({
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [goNext, goPrevious, toggleFill, toggleCentered]);
+
+  useEffect(() => {
+    function onClick() {
+      setShowInfoBox(false);
+    }
+
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  });
 
   const vidPath = supportsVideo
     ? centered
@@ -167,6 +191,14 @@ function _SkinViewer({
                 </div>
               </a>
             </Link>
+            <div className={styles.controls}>
+              <div onClick={toggleFill} title="Fill Screen (Z)">
+                {fill ? <Minimize2 /> : <Maximize2 />}
+              </div>
+              <div onClick={toggleCentered} title="Centered (C)">
+                {centered ? <User /> : <Users />}
+              </div>
+            </div>
           </header>
           {prev && (
             <Link href={linkTo(prev)}>
@@ -184,6 +216,27 @@ function _SkinViewer({
               </a>
             </Link>
           )}
+        </div>
+        <div
+          className={classNames(styles.infoBox, { [styles.show]: showInfoBox })}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div
+            className={styles.name}
+            onClickCapture={(e) => setShowInfoBox(!showInfoBox)}
+          >
+            <span>{skin.name}</span>
+            <Info />
+          </div>
+          <div className={styles.popup}>
+            {skin.description ? (
+              <p dangerouslySetInnerHTML={{ __html: skin.description }} />
+            ) : (
+              <p>
+                <i>No description available.</i>
+              </p>
+            )}
+          </div>
         </div>
         <div className={styles.letterBox}>
           {vidPath ? (

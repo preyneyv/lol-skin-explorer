@@ -41,11 +41,15 @@
 }
 
 .viewer header {
+  display: flex;
+  // align-items: center;
   position: fixed;
   z-index: 999;
+  user-select: none;
+  gap: 12px;
 
   .backTo {
-    filter: drop-shadow(0 0 10px black);
+    filter: drop-shadow(0 0 5px black);
 
     display: flex;
     align-items: center;
@@ -53,6 +57,7 @@
     gap: 4px;
     > svg {
       opacity: 0.5;
+      transition: opacity 200ms;
     }
     div {
       display: flex;
@@ -60,6 +65,35 @@
       align-items: center;
       svg {
         height: 18px;
+      }
+    }
+
+    &:hover {
+      > svg {
+        opacity: 1;
+      }
+    }
+  }
+
+  .controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    > div {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      opacity: 1;
+      transition: opacity 200ms;
+      filter: drop-shadow(0 0 5px black);
+      cursor: pointer;
+
+      @media (pointer: fine) {
+        opacity: 0.5;
+        &:hover {
+          opacity: 1;
+        }
       }
     }
   }
@@ -92,7 +126,7 @@
   display: flex;
   align-items: flex-end;
   gap: 4px;
-  filter: drop-shadow(0 0 10px black);
+  filter: drop-shadow(0 0 5px black);
 
   div {
     max-width: calc(50vw - 40px);
@@ -184,9 +218,127 @@
   }
 }
 
-@media screen and (max-width: 650px) {
+.infoBox {
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  filter: drop-shadow(0 0 5px black);
+
+  .name {
+    position: fixed;
+    white-space: nowrap;
+    top: 0;
+    right: 0;
+    transition: opacity 300ms ease;
+    opacity: 0.5;
+    user-select: none;
+    display: flex;
+    cursor: default;
+    align-items: center;
+    padding: 8px;
+    gap: 8px;
+    transition: background 300ms ease, opacity 300ms ease;
+  }
+
+  .popup {
+    width: 400px;
+    max-width: calc(100vw - 24px);
+    position: fixed;
+    top: 41px;
+    pointer-events: none;
+    right: 0;
+    background: rgb(22, 33, 48);
+    opacity: 0;
+    transition: opacity 300ms ease, transform 300ms ease;
+    padding: 8px;
+    font-size: 0.9em;
+    transform: translateY(6px);
+    line-height: 1.6;
+
+    p {
+      margin: 0;
+    }
+  }
+
+  @supports (backdrop-filter: blur(1px)) {
+    .popup {
+      background: rgba(8, 13, 19, 0.5);
+      backdrop-filter: blur(24px);
+    }
+  }
+
+  @media (pointer: fine) {
+    &:hover {
+      .name {
+        opacity: 1 !important;
+        background: rgb(22, 33, 48);
+      }
+      @supports (backdrop-filter: blur(1px)) {
+        .name {
+          border-color: transparent;
+          background: rgba(8, 13, 19, 0.5);
+          backdrop-filter: blur(24px);
+        }
+      }
+      .popup {
+        pointer-events: all;
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+
+  @media (pointer: coarse) {
+    &.show {
+      .name {
+        opacity: 1 !important;
+        background: rgb(22, 33, 48);
+      }
+      @supports (backdrop-filter: blur(1px)) {
+        .name {
+          border-color: transparent;
+          background: rgba(8, 13, 19, 0.5);
+          // backdrop-filter: blur(24px);
+        }
+      }
+      .popup {
+        pointer-events: all;
+        opacity: 1;
+        transform: none;
+      }
+    }
+  }
+}
+
+.viewer.show .infoBox .name {
+  opacity: 0.7;
+}
+
+@media screen and (max-width: 600px) {
+  .viewer header {
+    width: 100%;
+    justify-content: space-between;
+  }
   .prev,
   .next {
     display: none;
+  }
+
+  .infoBox {
+    top: unset;
+    bottom: 0;
+    .name {
+      bottom: 0;
+      top: unset;
+      width: 100%;
+      justify-content: flex-end;
+    }
+    .popup {
+      top: unset;
+      bottom: 41px;
+      max-width: unset;
+      width: 100%;
+    }
   }
 }

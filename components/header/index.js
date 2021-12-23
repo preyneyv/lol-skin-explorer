@@ -61,11 +61,11 @@ export const Header = ({ flat, backTo }) => {
               </Link>
             </li>
             <li className={styles.divider} />
-            <li>
+            {/* <li>
               <a href="https://discord.gg" target="_blank" rel="noreferrer">
                 Discord <ExternalLink />
               </a>
-            </li>
+            </li> */}
             <li>
               <a
                 href="https://analytics.skinexplorer.lol/share/JlbPP3v4/Skin%20Explorer"
@@ -73,6 +73,15 @@ export const Header = ({ flat, backTo }) => {
                 rel="noreferrer"
               >
                 Analytics <ExternalLink />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/preyneyv/lol-skin-explorer/issues/new/choose"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Bug Report <ExternalLink />
               </a>
             </li>
           </ul>
