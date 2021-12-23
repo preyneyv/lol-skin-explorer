@@ -42,7 +42,15 @@ export function Footer({ flat }) {
           <b>Patch {patch} (PBE)</b>
         </p>
         <p>
-          Skin Explorer v{publicRuntimeConfig?.version}
+          <a
+            target="_blank"
+            href={`https://github.com/preyneyv/lol-skin-explorer/tree/${
+              process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ?? "main"
+            }`}
+            rel="noreferrer"
+          >
+            Skin Explorer v{publicRuntimeConfig?.version}
+          </a>
           <br />
           Built by{" "}
           <a
