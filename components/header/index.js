@@ -18,7 +18,7 @@ export const Header = ({ flat, backTo }) => {
   return (
     <>
       <header className={classNames(styles.header, { [styles.flat]: flat })}>
-        <Link href={back ?? "/"}>
+        <Link href={back ?? "/"} as={back ?? "/"}>
           <a className={styles.logo}>
             {backTo && <ArrowLeft />}
             <Image
@@ -45,18 +45,18 @@ export const Header = ({ flat, backTo }) => {
               </Link>
             </li>
             <li>
-              <Link href="/changelog">
+              <Link href="/changelog" as="/changelog">
                 <a>Changelog</a>
               </Link>
             </li>
             <li className={styles.divider} />
             <li>
-              <Link href="/about">
+              <Link href="/about" as="/about">
                 <a>About</a>
               </Link>
             </li>
             <li>
-              <Link href="/sponsor">
+              <Link href="/sponsor" as="/sponsor">
                 <a>Sponsor</a>
               </Link>
             </li>

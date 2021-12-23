@@ -56,6 +56,7 @@ function _SkinViewer({
   linkTo,
   collectionName,
   collectionIcon,
+  collectionPage,
   prev,
   next,
   skin,
@@ -94,8 +95,13 @@ function _SkinViewer({
     (swipe) => {
       if (!prev || exiting) return;
       setExiting(true);
-      setDeltaX(swipe ? "100vw" : "80px");
-      setTimeout(() => router.push(router.pathname, linkTo(prev)), 300);
+
+      if (swipe) {
+        setDeltaX(swipe ? "100vw" : "80px");
+        setTimeout(() => router.push(router.pathname, linkTo(prev)), 300);
+      } else {
+        router.push(router.pathname, linkTo(prev));
+      }
     },
     [router, linkTo, prev, setExiting, setDeltaX, exiting]
   );
@@ -104,8 +110,11 @@ function _SkinViewer({
     (swipe) => {
       if (!next || exiting) return;
       setExiting(true);
-      setDeltaX(swipe ? "-100vw" : "-80px");
-      setTimeout(() => router.push(router.pathname, linkTo(next)), 300);
+      if (swipe) {
+        setDeltaX(swipe ? "-100vw" : "-80px");
+        setTimeout(() => router.push(router.pathname, linkTo(next)), 300);
+      }
+      router.push(router.pathname, linkTo(next));
     },
     [router, linkTo, next, setExiting, setDeltaX, exiting]
   );
@@ -182,7 +191,7 @@ function _SkinViewer({
       >
         <div className={styles.overlay}>
           <header>
-            <Link href={backTo}>
+            <Link href={collectionPage} as={backTo}>
               <a className={styles.backTo}>
                 <ArrowLeft />
                 <div>
@@ -201,7 +210,7 @@ function _SkinViewer({
             </div>
           </header>
           {prev && (
-            <Link href={linkTo(prev)}>
+            <Link href={router.pathname} as={linkTo(prev)}>
               <a className={styles.prev}>
                 <ArrowLeft />
                 <div>{prev.name}</div>
@@ -209,7 +218,7 @@ function _SkinViewer({
             </Link>
           )}
           {next && (
-            <Link href={linkTo(next)}>
+            <Link href={router.pathname} as={linkTo(next)}>
               <a className={styles.next}>
                 <div>{next.name}</div>
                 <ArrowRight />

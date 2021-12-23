@@ -1,14 +1,13 @@
 import Image from "next/image";
 import { useEffect, useMemo } from "react";
 import Head from "next/head";
-import { Header } from "../components/header";
-import { Footer, FooterContainer } from "../components/footer";
 import { useProps } from "../data/contexts";
 import styles from "../styles/index.module.scss";
 import Link from "next/link";
 import { asset, classes, useLocalStorageState } from "../data/helpers";
 import { store } from "../data/store";
-import { Folder, Globe, User } from "react-feather";
+import { Nav } from "../components/nav";
+import { Layout } from "../components";
 
 function ChampionsList({ role }) {
   const { champions } = useProps();
@@ -23,10 +22,8 @@ function ChampionsList({ role }) {
       {filteredChamps.map((c) => (
         <Link
           key={c.id}
-          href={{
-            pathname: "/champions/[champId]",
-            query: { champId: c.key },
-          }}
+          href="/champions/[champId]"
+          as={`/champions/${c.key}`}
           prefetch={false}
         >
           <a>
@@ -61,58 +58,35 @@ export default function Index() {
       <Head>
         <title>Skin Explorer</title>
       </Head>
-      <FooterContainer>
-        <div>
-          <Header />
-          <div className={styles.container}>
-            <nav>
-              <div className={styles.tabs}>
-                <Link href="/">
-                  <a className={styles.active}>
-                    <User />
-                    Champions
-                  </a>
-                </Link>
-                <Link href="/universes">
-                  <a>
-                    <Globe />
-                    Universes
-                  </a>
-                </Link>
-                <Link href="/skinlines">
-                  <a>
-                    <Folder />
-                    Skinlines
-                  </a>
-                </Link>
-              </div>
-              <div className={styles.filters}>
-                <label>
-                  <span>Role</span>
-                  <select
-                    value={champRole}
-                    onChange={(e) => setChampRole(e.target.value)}
-                  >
-                    <option value="">All</option>
-                    {Object.entries(classes).map(([k, v]) => (
-                      <option key={k} value={k}>
-                        {v}
-                      </option>
-                    ))}
-                  </select>
-                </label>
-              </div>
-            </nav>
-            <main>
-              <ChampionsList role={champRole} />
-            </main>
-          </div>
-        </div>
-        <Footer />
-      </FooterContainer>
+      <div className={styles.container}>
+        <Nav
+          active="champions"
+          filters={
+            <label>
+              <span>Role</span>
+              <select
+                value={champRole}
+                onChange={(e) => setChampRole(e.target.value)}
+              >
+                <option value="">All</option>
+                {Object.entries(classes).map(([k, v]) => (
+                  <option key={k} value={k}>
+                    {v}
+                  </option>
+                ))}
+              </select>
+            </label>
+          }
+        />
+        <main>
+          <ChampionsList role={champRole} />
+        </main>
+      </div>
     </>
   );
 }
+
+Index.getLayout = (page) => <Layout>{page}</Layout>;
 
 export async function getStaticProps() {
   await store.fetch();

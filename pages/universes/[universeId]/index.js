@@ -23,19 +23,18 @@ function Skinline({ sortByRarity, skinline, linkTo }) {
   return (
     <>
       <h2 className={styles.groupTitle}>
-        <Link
-          href={{
-            pathname: "/skinlines/[id]",
-            query: { id: skinline.id.toString() },
-          }}
-        >
+        <Link href="/skinlines/[skinlineId]" as={`/skinlines/${skinline.id}`}>
           <a>
             <Folder />
             {skinline.name}
           </a>
         </Link>
       </h2>
-      <SkinGrid skins={sortedSkins} linkTo={linkTo} />
+      <SkinGrid
+        skins={sortedSkins}
+        viewerPage="/universes/[uId]/skins/[sId]"
+        linkTo={linkTo}
+      />
     </>
   );
 }
@@ -47,10 +46,7 @@ function _Page() {
     "champion"
   );
 
-  const linkTo = (skin) => ({
-    pathname: "/universes/[uId]/skins/[sId]",
-    query: { uId: universe.id.toString(), sId: skin.id.toString() },
-  });
+  const linkTo = (skin) => `/universes/${universe.id}/skins/${skin.id}`;
 
   return (
     <>
@@ -95,9 +91,6 @@ function _Page() {
                   linkTo={linkTo}
                   skinline={l}
                   sortByRarity={sortBy === "rarity"}
-                  showTitle={
-                    skinlines.length > 1 || skinlines[0].name !== universe.name
-                  }
                 />
               ))}
             </main>

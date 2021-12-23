@@ -1,14 +1,11 @@
-import Image from "next/image";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import Head from "next/head";
-import { Header } from "../../components/header";
-import { Footer, FooterContainer } from "../../components/footer";
 import { useProps } from "../../data/contexts";
 import styles from "../../styles/index.module.scss";
 import Link from "next/link";
-import { asset, classes, useLocalStorageState } from "../../data/helpers";
 import { store } from "../../data/store";
-import { Folder, Globe, User } from "react-feather";
+import { Nav } from "../../components/nav";
+import { Layout } from "../../components";
 
 function UniversesList() {
   const { universes, skinlines } = useProps();
@@ -24,10 +21,8 @@ function UniversesList() {
         return (
           <div key={u.id}>
             <Link
-              href={{
-                pathname: "/universes/[universeId]",
-                query: { universeId: u.id },
-              }}
+              href="/universes/[universeId]"
+              as={`/universes/${u.id}`}
               prefetch={false}
             >
               <a>{u.name}</a>
@@ -37,10 +32,8 @@ function UniversesList() {
                 {skinSets.map(({ name, id }) => (
                   <li key={id}>
                     <Link
-                      href={{
-                        pathname: "/skinlines/[id]",
-                        query: { id },
-                      }}
+                      href="/skinlines/[skinlineId]"
+                      as={`/skinlines/${id}`}
                       prefetch={false}
                     >
                       <a>{name}</a>
@@ -66,42 +59,17 @@ export default function Index() {
       <Head>
         <title>Universes &middot; Skin Explorer</title>
       </Head>
-      <FooterContainer>
-        <div>
-          <Header />
-          <div className={styles.container}>
-            <nav>
-              <div className={styles.tabs}>
-                <Link href="/">
-                  <a>
-                    <User />
-                    Champions
-                  </a>
-                </Link>
-                <Link href="/universes">
-                  <a className={styles.active}>
-                    <Globe />
-                    Universes
-                  </a>
-                </Link>
-                <Link href="/skinlines">
-                  <a>
-                    <Folder />
-                    Skinlines
-                  </a>
-                </Link>
-              </div>
-            </nav>
-            <main>
-              <UniversesList />
-            </main>
-          </div>
-        </div>
-        <Footer />
-      </FooterContainer>
+      <div className={styles.container}>
+        <Nav active="universes" />
+        <main>
+          <UniversesList />
+        </main>
+      </div>
     </>
   );
 }
+
+Index.getLayout = (page) => <Layout>{page}</Layout>;
 
 export async function getStaticProps() {
   await store.fetch();

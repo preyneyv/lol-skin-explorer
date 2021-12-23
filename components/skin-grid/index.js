@@ -4,13 +4,13 @@ import Link from "next/link";
 import { asset, rarity } from "../../data/helpers";
 import styles from "./styles.module.scss";
 
-export function SkinGrid({ skins, linkTo }) {
+export function SkinGrid({ skins, linkTo, viewerPage }) {
   return (
     <div className={styles.grid}>
       {skins.map((skin) => {
         const r = rarity(skin);
         return (
-          <Link key={skin.id} href={linkTo(skin)}>
+          <Link key={skin.id} href={viewerPage} as={linkTo(skin)}>
             <a>
               <Image
                 className={styles.tile}

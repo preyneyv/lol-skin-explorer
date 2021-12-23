@@ -1,0 +1,37 @@
+@keyframes preload {
+  50% {
+    transform: translateY(-10px);
+    background: rgba(121, 163, 207, 0.8);
+  }
+}
+
+.preloader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  > div {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 18px;
+    padding: y 20px;
+
+    > div {
+      width: 18px;
+      height: 18px;
+      background: rgba(121, 163, 207, 0.2);
+      transform: translateY(10px);
+      border-radius: 100%;
+      animation: preload 1s infinite;
+
+      &:nth-child(1) {
+        animation-delay: -300ms;
+      }
+
+      &:nth-child(2) {
+        animation-delay: -150ms;
+      }
+    }
+  }
+}

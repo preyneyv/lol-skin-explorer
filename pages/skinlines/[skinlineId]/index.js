@@ -22,10 +22,7 @@ function _Page() {
     "champion"
   );
 
-  const linkTo = (skin) => ({
-    pathname: "/skinlines/[lId]/skins/[sId]",
-    query: { lId: skinline.id.toString(), sId: skin.id.toString() },
-  });
+  const linkTo = (skin) => `/skinlines/${skinline.id}/skins/${skin.id}`;
 
   const sortedSkins = useSortedSkins(sortBy === "rarity", skins);
 
@@ -65,7 +62,11 @@ function _Page() {
                   </select>
                 </label>
               </div>
-              <SkinGrid skins={sortedSkins} linkTo={linkTo} />
+              <SkinGrid
+                skins={sortedSkins}
+                linkTo={linkTo}
+                viewerPage="/skinlines/[lId]/skins/[sId]"
+              />
             </main>
           </div>
           <Footer flat />

@@ -23,10 +23,7 @@ function _Page() {
   );
   const base = useMemo(() => skins.find((s) => s.isBase), [skins]);
 
-  const linkTo = (skin) => ({
-    pathname: "/champions/[key]/skins/[id]",
-    query: { key: champion.key, id: skin.id.toString() },
-  });
+  const linkTo = (skin) => `/champions/${champion.key}/skins/${skin.id}`;
 
   const sortedSkins = useSortedSkins(sortBy === "rarity", skins);
 
@@ -62,7 +59,11 @@ function _Page() {
                   </select>
                 </label>
               </div>
-              <SkinGrid skins={sortedSkins} linkTo={linkTo} />
+              <SkinGrid
+                skins={sortedSkins}
+                linkTo={linkTo}
+                viewerPage="/champions/[key]/skins/[id]"
+              />
             </main>
           </div>
           <Footer flat />

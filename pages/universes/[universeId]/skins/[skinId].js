@@ -11,13 +11,11 @@ export default function Page() {
   const { skin, prev, next, id, name } = useProps();
   return (
     <SkinViewer
-      backTo={{
-        pathname: "/universes/[id]",
-        query: { id },
-      }}
+      backTo={`/universes/${id}`}
       linkTo={(s) => `/universes/${id}/skins/${s.id}`}
       collectionName={name}
       collectionIcon={<Globe />}
+      collectionPage="/universes/[id]"
       {...{ skin, prev, next }}
     />
   );

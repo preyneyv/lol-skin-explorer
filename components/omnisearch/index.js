@@ -16,6 +16,7 @@ export function Omnisearch() {
   const [matches, setMatches] = useState([]);
 
   useEffect(() => {
+    if (!query) return setMatches([]);
     axios
       .get("/api/omnisearch", { params: { query } })
       .then((res) => setMatches(res.data));
