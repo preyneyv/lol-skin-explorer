@@ -13,6 +13,7 @@ import {
 } from "../../../data/helpers";
 import { store } from "../../../data/store";
 import styles from "../../../styles/collection.module.scss";
+import { Folder } from "react-feather";
 
 function _Page() {
   const { skinline, skins } = useProps();
@@ -47,6 +48,10 @@ function _Page() {
             </div>
             <Header backTo="/skinlines" flat />
             <main>
+              <h2 className={styles.subtitle}>
+                <Folder />
+                Skinline
+              </h2>
               <h1 className={styles.title}>{skinline.name}</h1>
               <div className={styles.controls}>
                 <label>

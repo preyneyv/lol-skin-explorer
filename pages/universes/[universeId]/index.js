@@ -15,6 +15,7 @@ import styles from "../../../styles/collection.module.scss";
 import { Footer, FooterContainer } from "../../../components/footer";
 import { SkinGrid } from "../../../components/skin-grid";
 import Link from "next/link";
+import { Folder, Globe } from "react-feather";
 
 function Skinline({ sortByRarity, skinline, linkTo }) {
   const sortedSkins = useSortedSkins(sortByRarity, skinline.skins);
@@ -28,7 +29,10 @@ function Skinline({ sortByRarity, skinline, linkTo }) {
             query: { id: skinline.id.toString() },
           }}
         >
-          <a>{skinline.name}</a>
+          <a>
+            <Folder />
+            {skinline.name}
+          </a>
         </Link>
       </h2>
       <SkinGrid skins={sortedSkins} linkTo={linkTo} />
@@ -67,6 +71,10 @@ function _Page() {
             </div>
             <Header backTo="/universes" flat />
             <main>
+              <h2 className={styles.subtitle}>
+                <Globe />
+                Universe
+              </h2>
               <h1 className={styles.title}>{universe.name}</h1>
               <div className={styles.controls}>
                 <label>
