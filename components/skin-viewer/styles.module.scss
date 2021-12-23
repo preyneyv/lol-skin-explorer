@@ -1,0 +1,192 @@
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadeOut50 {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn50 {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+.viewer {
+  touch-action: "pan-y";
+  cursor: none;
+
+  &.show {
+    cursor: unset;
+  }
+}
+
+.viewer header {
+  position: fixed;
+  z-index: 999;
+
+  .backTo {
+    filter: drop-shadow(0 0 10px black);
+
+    display: flex;
+    align-items: center;
+    padding: 8px 4px;
+    gap: 4px;
+    > svg {
+      opacity: 0.5;
+    }
+    div {
+      display: flex;
+      gap: 2px;
+      align-items: center;
+      svg {
+        height: 18px;
+      }
+    }
+  }
+}
+
+.letterBox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(10px);
+  z-index: 1;
+  user-select: none;
+  opacity: 0;
+
+  video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.prev,
+.next {
+  position: fixed;
+  bottom: 0;
+  padding: 8px 4px;
+  z-index: 999;
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  filter: drop-shadow(0 0 10px black);
+
+  div {
+    max-width: calc(50vw - 40px);
+    overflow: hidden;
+    line-height: 1.2;
+  }
+
+  svg {
+    height: 18px;
+    opacity: 0.5;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    height: calc(100% + 64px);
+    width: calc(100% + 64px);
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+.prev {
+  left: 0;
+  &::before {
+    left: 0;
+  }
+}
+
+.next {
+  right: 0;
+  &::before {
+    right: 0;
+  }
+  text-align: right;
+}
+
+.overlay {
+  position: fixed;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.viewer.show .overlay {
+  opacity: 1;
+}
+
+.viewer main {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  opacity: 0;
+
+  user-select: none;
+
+  video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.viewer.smoothX {
+  main {
+    transition: transform 300ms ease;
+  }
+}
+
+.viewer.loaded {
+  main {
+    animation: fadeIn 300ms ease forwards;
+  }
+  .letterBox {
+    animation: fadeIn50 300ms ease forwards;
+  }
+}
+
+.viewer.exiting {
+  main {
+    transition: transform 300ms ease;
+    animation: fadeOut 300ms ease forwards;
+  }
+
+  .letterBox {
+    animation: fadeOut50 300ms ease forwards;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .prev,
+  .next {
+    display: none;
+  }
+}

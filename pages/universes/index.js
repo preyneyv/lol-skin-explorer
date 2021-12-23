@@ -8,6 +8,7 @@ import styles from "../../styles/index.module.scss";
 import Link from "next/link";
 import { asset, classes, useLocalStorageState } from "../../data/helpers";
 import { store } from "../../data/store";
+import { Folder, Globe, User } from "react-feather";
 
 function UniversesList() {
   const { universes, skinlines } = useProps();
@@ -63,7 +64,7 @@ export default function Index() {
   return (
     <>
       <Head>
-        <title>Skinlines &middot; Skin Explorer</title>
+        <title>Universes &middot; Skin Explorer</title>
       </Head>
       <FooterContainer>
         <div>
@@ -72,13 +73,22 @@ export default function Index() {
             <nav>
               <div className={styles.tabs}>
                 <Link href="/">
-                  <a>Champions</a>
+                  <a>
+                    <User />
+                    Champions
+                  </a>
                 </Link>
                 <Link href="/universes">
-                  <a className={styles.active}>Universes</a>
+                  <a className={styles.active}>
+                    <Globe />
+                    Universes
+                  </a>
                 </Link>
                 <Link href="/skinlines">
-                  <a>Skinlines</a>
+                  <a>
+                    <Folder />
+                    Skinlines
+                  </a>
                 </Link>
               </div>
             </nav>

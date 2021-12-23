@@ -31,10 +31,6 @@
     background: rgba(8, 13, 19, 0.9);
     border-color: transparent;
   }
-
-  :nth-child(1) {
-    max-width: 1000px;
-  }
 }
 
 @supports (backdrop-filter: blur(1px)) {

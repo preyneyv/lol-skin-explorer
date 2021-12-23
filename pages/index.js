@@ -8,6 +8,7 @@ import styles from "../styles/index.module.scss";
 import Link from "next/link";
 import { asset, classes, useLocalStorageState } from "../data/helpers";
 import { store } from "../data/store";
+import { Folder, Globe, User } from "react-feather";
 
 function ChampionsList({ role }) {
   const { champions } = useProps();
@@ -67,13 +68,22 @@ export default function Index() {
             <nav>
               <div className={styles.tabs}>
                 <Link href="/">
-                  <a className={styles.active}>Champions</a>
+                  <a className={styles.active}>
+                    <User />
+                    Champions
+                  </a>
                 </Link>
                 <Link href="/universes">
-                  <a>Universes</a>
+                  <a>
+                    <Globe />
+                    Universes
+                  </a>
                 </Link>
                 <Link href="/skinlines">
-                  <a>Skinlines</a>
+                  <a>
+                    <Folder />
+                    Skinlines
+                  </a>
                 </Link>
               </div>
               <div className={styles.filters}>

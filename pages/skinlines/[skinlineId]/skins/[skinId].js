@@ -1,3 +1,4 @@
+import { Folder } from "react-feather";
 import {
   SkinViewer,
   prepareCollection,
@@ -14,11 +15,9 @@ export default function Page() {
         pathname: "/skinlines/[id]",
         query: { id },
       }}
-      linkTo={(sId) => ({
-        pathname: "/skinlines/[id]/skins/[sId]",
-        query: { id, sId },
-      })}
+      linkTo={(skin) => `/skinlines/${id}/skins/${skin.id}`}
       collectionName={name}
+      collectionIcon={<Folder />}
       {...{ skin, prev, next }}
     />
   );

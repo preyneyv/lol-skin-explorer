@@ -6,6 +6,7 @@ import {
   prepareCollection,
 } from "../../../../components/skin-viewer";
 import { useProps } from "../../../../data/contexts";
+import { User } from "react-feather";
 
 export default function Page() {
   const { skin, prev, next, key, name } = useProps();
@@ -15,11 +16,9 @@ export default function Page() {
         pathname: "/champions/[key]",
         query: { key },
       }}
-      linkTo={(id) => ({
-        pathname: "/champions/[key]/skins/[id]",
-        query: { key, id },
-      })}
+      linkTo={(skin) => `/champions/${key}/skins/${skin.id}`}
       collectionName={name}
+      collectionIcon={<User />}
       {...{ skin, prev, next }}
     />
   );

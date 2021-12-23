@@ -1,3 +1,4 @@
+import { Globe } from "react-feather";
 import {
   SkinViewer,
   prepareCollection,
@@ -14,11 +15,9 @@ export default function Page() {
         pathname: "/universes/[id]",
         query: { id },
       }}
-      linkTo={(sId) => ({
-        pathname: "/universes/[id]/skins/[sId]",
-        query: { id, sId },
-      })}
+      linkTo={(s) => `/universes/${id}/skins/${s.id}`}
       collectionName={name}
+      collectionIcon={<Globe />}
       {...{ skin, prev, next }}
     />
   );
