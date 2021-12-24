@@ -356,7 +356,7 @@ function _SkinViewer({
                 {centered ? <User /> : <Users />}
               </div>
               {meta.changes && (
-                <div>
+                <div className={styles.dropdown}>
                   <select
                     value={patch}
                     onChange={(e) => setPatch(e.target.value)}
