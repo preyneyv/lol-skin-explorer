@@ -1,10 +1,11 @@
+import { Loading } from "../loading";
+import { useCallback, useRef, useEffect, useMemo, useState } from "react";
 import classNames from "classnames";
 import { useSwipeable } from "react-swipeable";
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { useCallback, useRef, useEffect, useMemo, useState } from "react";
 import {
   ArrowLeft,
   ArrowRight,
@@ -51,6 +52,10 @@ const canPlayWebM = () => {
   );
 };
 
+let draggingOrigin;
+
+const clamp = (v) => Math.min(1, Math.max(0, v));
+
 function _SkinViewer({
   backTo,
   linkTo,
@@ -75,14 +80,36 @@ function _SkinViewer({
   const [loaded, setLoaded] = useState(true);
   const [showUI, setShowUI] = useState(true);
   const [showInfoBox, setShowInfoBox] = useState(false);
+  const [position, setPosition] = useState({ top: 0.5, left: 0.5 });
+  const [velocity, setVelocity] = useState({ top: 0, left: 0 });
   const showUIRef = useRef();
+  const dimensions = useRef({ width: 1, height: 1 });
 
   useEffect(() => {
     setDeltaX(0);
     setSmoothX(false);
     setExiting(false);
     setLoaded(false);
+    setPosition({ top: 0.5, left: 0.5 });
+    setVelocity({ top: 0, left: 0 });
   }, [skin]);
+
+  useEffect(() => {
+    if (Math.abs(velocity.top) < 0.000001 && Math.abs(velocity.left) < 0.000001)
+      return;
+
+    const i = requestAnimationFrame(() => {
+      setPosition({
+        top: clamp(position.top - velocity.top * 18),
+        left: clamp(position.left - velocity.left * 18),
+      });
+      setVelocity({
+        top: velocity.top * 0.95,
+        left: velocity.left * 0.95,
+      });
+    });
+    return () => cancelAnimationFrame(i);
+  }, [position.top, position.left, velocity]);
 
   useEffect(() => {
     if (showUI) {
@@ -98,6 +125,7 @@ function _SkinViewer({
 
       if (swipe) {
         setDeltaX(swipe ? "100vw" : "80px");
+        router.prefetch(router.pathname, linkTo(prev));
         setTimeout(() => router.push(router.pathname, linkTo(prev)), 300);
       } else {
         router.push(router.pathname, linkTo(prev));
@@ -110,11 +138,14 @@ function _SkinViewer({
     (swipe) => {
       if (!next || exiting) return;
       setExiting(true);
+
       if (swipe) {
         setDeltaX(swipe ? "-100vw" : "-80px");
+        router.prefetch(router.pathname, linkTo(next));
         setTimeout(() => router.push(router.pathname, linkTo(next)), 300);
+      } else {
+        router.push(router.pathname, linkTo(next));
       }
-      router.push(router.pathname, linkTo(next));
     },
     [router, linkTo, next, setExiting, setDeltaX, exiting]
   );
@@ -146,30 +177,85 @@ function _SkinViewer({
     return () => document.removeEventListener("click", onClick);
   });
 
+  const doPan = (x, y, isDelta = false) => {
+    const delta = isDelta
+      ? [x, y]
+      : [x - draggingOrigin[0], y - draggingOrigin[1]];
+    const { width, height } = dimensions.current;
+    !isDelta && (draggingOrigin = [x, y]);
+    setPosition({
+      left: clamp(
+        position.left -
+          delta[0] / ((width / height) * window.innerHeight - window.innerWidth)
+      ),
+      top: clamp(
+        position.top -
+          delta[1] / ((height / width) * window.innerWidth - window.innerHeight)
+      ),
+    });
+  };
+
+  const handlers = useSwipeable({
+    onSwipeStart(e) {
+      e.event.preventDefault();
+      if (fill) {
+        draggingOrigin = [e.deltaX, e.deltaY];
+      }
+    },
+    onSwiping(e) {
+      e.event.preventDefault();
+      if (fill) {
+        doPan(e.deltaX, e.deltaY);
+      } else {
+        if (!prev) return;
+        setDeltaX(`${e.deltaX}px`);
+        setSmoothX(false);
+      }
+    },
+    onSwiped(e) {
+      e.event.preventDefault();
+      if (fill) {
+        const { width, height } = dimensions.current;
+        let left = e.vxvy[0] / (width - window.innerWidth),
+          top = e.vxvy[1] / (height - window.innerHeight);
+        if (Math.abs(e.vxvy[0]) < 1) left = 0;
+        if (Math.abs(e.vxvy[1]) < 1) top = 0;
+        setVelocity({
+          left,
+          top,
+        });
+        draggingOrigin = null;
+      } else {
+        setDeltaX(`0px`);
+        setSmoothX(true);
+      }
+    },
+    onSwipedLeft(e) {
+      e.event.preventDefault();
+      !fill && e.velocity > 0.6 && goNext(true);
+    },
+    onSwipedRight(e) {
+      e.event.preventDefault();
+      !fill && e.velocity > 0.6 && goPrevious(true);
+    },
+    onSwipedDown(e) {
+      e.event.preventDefault();
+      router.push(collectionPage, backTo);
+    },
+    preventDefaultTouchmoveEvent: true,
+    delta: 0,
+  });
+
   const vidPath = supportsVideo
     ? centered
       ? skin.splashVideoPath
       : skin.collectionSplashVideoPath
     : false;
   const imgPath = centered ? skin.splashPath : skin.uncenteredSplashPath;
-  const handlers = useSwipeable({
-    onSwiping(e) {
-      if (!prev) return;
-      setDeltaX(`${e.deltaX}px`);
-      setSmoothX(false);
-    },
-    onSwiped() {
-      setDeltaX(`0px`);
-      setSmoothX(true);
-    },
-    onSwipedLeft(e) {
-      e.velocity > 0.8 && goNext(true);
-    },
-    onSwipedRight(e) {
-      e.velocity > 0.8 && goPrevious(true);
-    },
-    delta: 10,
-  });
+  const objectFit = fill ? "cover" : "contain";
+  const objectPosition = fill
+    ? `${position.left * 100}% ${position.top * 100}% `
+    : "center center";
   return (
     <>
       <Head>
@@ -177,17 +263,49 @@ function _SkinViewer({
         {prefetchSkin(skin, true)}
         {prev && prefetchSkin(prev, false)}
         {next && prefetchSkin(next, false)}
+        <style>
+          {`
+          body {
+            overscroll-behavior: none;
+          }
+        `}
+        </style>
       </Head>
       <div
         className={classNames(styles.viewer, {
           [styles.exiting]: exiting,
           [styles.smoothX]: smoothX,
           [styles.loaded]: loaded,
+          [styles.fill]: fill,
           [styles.show]: showUI,
         })}
         {...handlers}
+        onTouchStart={() =>
+          setVelocity({
+            top: 0,
+            left: 0,
+          })
+        }
         onDoubleClick={toggleFill}
-        onMouseMove={() => setShowUI(true)}
+        onMouseDown={(e) => {
+          if (fill) {
+            draggingOrigin = [e.screenX, e.screenY];
+          }
+        }}
+        onMouseMove={(e) => {
+          if (fill && draggingOrigin) {
+            doPan(e.screenX, e.screenY);
+          }
+          setShowUI(true);
+        }}
+        onMouseUp={(e) => {
+          draggingOrigin = null;
+        }}
+        onWheel={(e) => {
+          if (fill) {
+            doPan(-e.deltaX, -e.deltaY, true);
+          }
+        }}
       >
         <div className={styles.overlay}>
           <header>
@@ -280,8 +398,14 @@ function _SkinViewer({
               autoPlay
               loop
               key={vidPath}
-              style={{ objectFit: fill ? "cover" : "contain" }}
+              style={{ objectFit, objectPosition }}
               onLoadedData={() => setLoaded(true)}
+              onLoadedMetadata={(e) => {
+                dimensions.current = {
+                  width: e.target.videoWidth,
+                  height: e.target.videoHeight,
+                };
+              }}
             >
               <source src={asset(vidPath)} />
             </video>
@@ -292,8 +416,15 @@ function _SkinViewer({
               src={asset(imgPath)}
               layout="fill"
               alt={skin.name}
-              objectFit={fill ? "cover" : "contain"}
-              onLoadingComplete={() => setLoaded(true)}
+              objectFit={objectFit}
+              objectPosition={objectPosition}
+              onLoadingComplete={({ naturalHeight, naturalWidth }) => {
+                dimensions.current = {
+                  width: naturalWidth,
+                  height: naturalHeight,
+                };
+                setLoaded(true);
+              }}
             />
           )}
         </main>
@@ -307,7 +438,16 @@ export function SkinViewer(props) {
   if (router.isFallback) {
     return (
       <>
-        <div>Loading</div>
+        <div
+          style={{
+            display: "flex",
+            height: "100vh",
+            alignContent: "center",
+            justifyContent: "center",
+          }}
+        >
+          <Loading />
+        </div>
       </>
     );
   }

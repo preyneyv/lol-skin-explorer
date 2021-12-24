@@ -34,9 +34,22 @@
 .viewer {
   touch-action: "pan-y";
   cursor: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 
   &.show {
     cursor: unset;
+  }
+
+  &.fill {
+    cursor: grab;
+
+    &:active {
+      cursor: grabbing;
+    }
   }
 }
 
@@ -100,6 +113,8 @@
 }
 
 .letterBox {
+  pointer-events: none;
+
   position: fixed;
   top: 0;
   left: 0;
@@ -177,6 +192,7 @@
 }
 
 .viewer main {
+  pointer-events: none;
   position: fixed;
   width: 100%;
   height: 100%;
