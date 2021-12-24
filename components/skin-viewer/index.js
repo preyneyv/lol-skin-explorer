@@ -277,6 +277,12 @@ function _SkinViewer({
     <>
       <Head>
         <title>{skin.name} &middot; Skin Explorer</title>
+        <meta
+          name="description"
+          content={
+            skin.description || `Look at the splash art for ${skin.name}!`
+          }
+        />
         {prefetchSkin(skin, true)}
         {prev && prefetchSkin(prev, false)}
         {next && prefetchSkin(next, false)}

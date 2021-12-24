@@ -54,10 +54,16 @@ export default function Index() {
     localStorage.lastIndex = "/universes";
   }, []);
 
+  const { universes } = useProps();
+
   return (
     <>
       <Head>
         <title>Universes &middot; Skin Explorer</title>
+        <meta
+          name="description"
+          content={`Skin Explorer is an online skin splash art viewer that lets you browse through League of Legends skins from the comfort of your browser. Take a look at these ${universes.length} universes!`}
+        />
       </Head>
       <div className={styles.container}>
         <Nav active="universes" />

@@ -30,6 +30,12 @@ function _Page() {
     <>
       <Head>
         <title>{skinline.name} &middot; Skin Explorer</title>
+        <meta
+          name="description"
+          content={`Browse through all ${skins.length} skin${
+            skins.length == 1 ? "" : "s"
+          } in the League of Legends ${skinline.name} skinline!`}
+        />
       </Head>
       <div className={styles.container}>
         <FooterContainer>

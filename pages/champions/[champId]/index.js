@@ -31,6 +31,12 @@ function _Page() {
     <>
       <Head>
         <title>{champion.name} &middot; Skin Explorer</title>
+        <meta
+          name="description"
+          content={`Browse through the ${skins.length} skin${
+            skins.length == 1 ? "" : "s"
+          } that ${champion.name} has!`}
+        />
       </Head>
       <div className={styles.container}>
         <FooterContainer>

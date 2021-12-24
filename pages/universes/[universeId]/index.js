@@ -52,6 +52,13 @@ function _Page() {
     <>
       <Head>
         <title>{universe.name} &middot; Skin Explorer</title>
+        <meta
+          name="description"
+          content={
+            universe.description ||
+            `Browse through all the skins in the League of Legends ${universe.name} universe!`
+          }
+        />
       </Head>
       <div className={styles.container}>
         <FooterContainer>
