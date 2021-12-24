@@ -2,12 +2,22 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: -2;
   width: 100vw;
   height: 100vh;
   background-size: cover;
-  filter: blur(2px);
+  filter: blur(4px);
   opacity: 0.2;
+
+  &::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent);
+  }
 }
 
 .container {
@@ -37,11 +47,18 @@
   color: rgb(165, 178, 196);
 }
 
+.description {
+  padding: 0 32px;
+  color: rgb(165, 178, 196);
+  filter: drop-shadow(0 0 4px black);
+}
+
 .groupTitle {
   text-align: left;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 1.5em;
+  line-height: 1.2;
   margin: 20px 0 -8px;
   padding-top: 20px;
   padding-left: 32px;
@@ -62,6 +79,8 @@
   margin-top: 0.2em;
   justify-content: flex-start;
   padding-left: 32px;
+
+  margin-bottom: 0.4em;
   label {
     display: block;
 
@@ -71,16 +90,7 @@
     }
 
     select {
-      font: inherit;
-      background-color: rgba(121, 163, 207, 0.2);
-      color: white;
       font-size: 0.9em;
-      padding: 6px 32px 6px 6px;
-      border: none;
-
-      option {
-        background: black;
-      }
     }
   }
 }
@@ -90,6 +100,9 @@
   .subtitle {
     padding-left: 24px;
   }
+  .description {
+    padding: 0 24px;
+  }
 }
 
 @media screen and (max-width: 850px) {
@@ -98,6 +111,10 @@
   .subtitle,
   .controls {
     padding-left: 16px;
+  }
+  .description {
+    padding: 0 16px;
+    line-height: 1.4;
   }
 
   .title {
@@ -118,6 +135,9 @@
     svg {
       height: 1.1em;
     }
+  }
+  .description {
+    font-size: 0.9em;
   }
   .title {
     margin: 16px 0 8px;

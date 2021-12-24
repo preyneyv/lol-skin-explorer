@@ -72,6 +72,9 @@ function _Page() {
                 Universe
               </h2>
               <h1 className={styles.title}>{universe.name}</h1>
+              {universe.description && (
+                <p className={styles.description}>{universe.description}</p>
+              )}
               <div className={styles.controls}>
                 <label>
                   <span>Sort By</span>

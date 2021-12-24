@@ -1,8 +1,6 @@
 import { Globe } from "react-feather";
-import {
-  SkinViewer,
-  prepareCollection,
-} from "../../../../components/skin-viewer";
+import { SkinViewer } from "../../../../components/skin-viewer";
+import { prepareCollection } from "../../../../components/skin-viewer/helpers";
 import { useProps } from "../../../../data/contexts";
 import { skinlineSkins } from "../../../../data/helpers";
 import { store } from "../../../../data/store";
@@ -53,7 +51,7 @@ export async function getStaticProps(ctx) {
       revalidate: 60,
     };
 
-  const { skin, prev, next } = prepareCollection(skins, currentIdx);
+  const { skin, prev, next } = await prepareCollection(skins, currentIdx);
 
   return {
     props: {

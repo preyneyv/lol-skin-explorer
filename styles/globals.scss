@@ -48,6 +48,16 @@ select {
   border-radius: 0;
   -moz-appearance: none;
   -webkit-appearance: none;
+
+  font: inherit;
+  background-color: rgba(121, 163, 207, 0.2);
+  color: white;
+  padding: 6px 32px 6px 6px;
+  border: none;
+
+  option {
+    background: black;
+  }
   appearance: none;
 }
 

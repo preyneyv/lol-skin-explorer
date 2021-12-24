@@ -55,11 +55,11 @@ export const Header = ({ flat, backTo }) => {
                 <a>About</a>
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link href="/sponsor" as="/sponsor">
                 <a>Sponsor</a>
               </Link>
-            </li>
+            </li> */}
             <li className={styles.divider} />
             {/* <li>
               <a href="https://discord.gg" target="_blank" rel="noreferrer">

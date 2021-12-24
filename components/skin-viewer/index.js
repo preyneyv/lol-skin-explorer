@@ -18,10 +18,11 @@ import {
 } from "react-feather";
 import {
   asset,
-  teemoGGUrl,
+  rarity,
   useEscapeTo,
   useLocalStorageState,
 } from "../../data/helpers";
+import { Popup } from "./popup";
 import styles from "./styles.module.scss";
 
 const prefetchSkin = (skin, preload = true) => {
@@ -66,6 +67,7 @@ function _SkinViewer({
   next,
   skin,
 }) {
+  const meta = skin.$skinExplorer;
   const supportsVideo = useMemo(() => canPlayWebM(), []);
   const router = useRouter();
   useEscapeTo(backTo);
@@ -82,6 +84,7 @@ function _SkinViewer({
   const [showInfoBox, setShowInfoBox] = useState(false);
   const [position, setPosition] = useState({ top: 0.5, left: 0.5 });
   const [velocity, setVelocity] = useState({ top: 0, left: 0 });
+  const [patch, setPatch] = useState("");
   const showUIRef = useRef();
   const dimensions = useRef({ width: 1, height: 1 });
 
@@ -91,6 +94,7 @@ function _SkinViewer({
     setExiting(false);
     setLoaded(false);
     setPosition({ top: 0.5, left: 0.5 });
+    setPatch("");
     setVelocity({ top: 0, left: 0 });
   }, [skin]);
 
@@ -161,12 +165,16 @@ function _SkinViewer({
     function onKeyDown(e) {
       if (e.key === "ArrowLeft") goPrevious(false);
       if (e.key === "ArrowRight") goNext(false);
+      if (meta.changes && e.key === "ArrowUp")
+        setPatch(meta.changes[meta.changes.indexOf(patch) - 1] || "");
+      if (meta.changes && e.key === "ArrowDown")
+        setPatch(meta.changes[meta.changes.indexOf(patch) + 1] || patch);
       if (e.code === "KeyZ") toggleFill();
       if (e.code === "KeyC") toggleCentered();
     }
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [goNext, goPrevious, toggleFill, toggleCentered]);
+  }, [goNext, goPrevious, toggleFill, toggleCentered, patch, meta.changes]);
 
   useEffect(() => {
     function onClick() {
@@ -208,8 +216,10 @@ function _SkinViewer({
         doPan(e.deltaX, e.deltaY);
       } else {
         if (!prev) return;
-        setDeltaX(`${e.deltaX}px`);
-        setSmoothX(false);
+        if (e.dir === "Left" || e.dir === "Right") {
+          setDeltaX(`${e.deltaX}px`);
+          setSmoothX(false);
+        }
       }
     },
     onSwiped(e) {
@@ -238,12 +248,18 @@ function _SkinViewer({
       e.event.preventDefault();
       !fill && e.velocity > 0.6 && goPrevious(true);
     },
-    onSwipedDown(e) {
+    onSwipedUp(e) {
       e.event.preventDefault();
-      router.push(collectionPage, backTo);
+
+      if (meta.changes)
+        setPatch(
+          meta.changes[
+            (meta.changes.indexOf(patch) + 1) % (meta.changes.length + 1)
+          ] || ""
+        );
     },
     preventDefaultTouchmoveEvent: true,
-    delta: 0,
+    delta: { left: 3, right: 3, up: 30 },
   });
 
   const vidPath = supportsVideo
@@ -256,6 +272,7 @@ function _SkinViewer({
   const objectPosition = fill
     ? `${position.left * 100}% ${position.top * 100}% `
     : "center center";
+  const r = rarity(skin);
   return (
     <>
       <Head>
@@ -279,34 +296,37 @@ function _SkinViewer({
           [styles.fill]: fill,
           [styles.show]: showUI,
         })}
-        {...handlers}
-        onTouchStart={() =>
-          setVelocity({
-            top: 0,
-            left: 0,
-          })
-        }
-        onDoubleClick={toggleFill}
-        onMouseDown={(e) => {
-          if (fill) {
-            draggingOrigin = [e.screenX, e.screenY];
-          }
-        }}
-        onMouseMove={(e) => {
-          if (fill && draggingOrigin) {
-            doPan(e.screenX, e.screenY);
-          }
-          setShowUI(true);
-        }}
-        onMouseUp={(e) => {
-          draggingOrigin = null;
-        }}
-        onWheel={(e) => {
-          if (fill) {
-            doPan(-e.deltaX, -e.deltaY, true);
-          }
-        }}
       >
+        <div
+          className={styles.hitbox}
+          {...handlers}
+          onTouchStart={() =>
+            setVelocity({
+              top: 0,
+              left: 0,
+            })
+          }
+          onDoubleClick={toggleFill}
+          onMouseDown={(e) => {
+            if (fill) {
+              draggingOrigin = [e.screenX, e.screenY];
+            }
+          }}
+          onMouseMove={(e) => {
+            if (fill && draggingOrigin) {
+              doPan(e.screenX, e.screenY);
+            }
+            setShowUI(true);
+          }}
+          onMouseUp={(e) => {
+            draggingOrigin = null;
+          }}
+          onWheel={(e) => {
+            if (fill) {
+              doPan(-e.deltaX, -e.deltaY, true);
+            }
+          }}
+        />
         <div className={styles.overlay}>
           <header>
             <Link href={collectionPage} as={backTo}>
@@ -325,6 +345,22 @@ function _SkinViewer({
               <div onClick={toggleCentered} title="Centered (C)">
                 {centered ? <User /> : <Users />}
               </div>
+              {meta.changes && (
+                <div>
+                  <select
+                    value={patch}
+                    onChange={(e) => setPatch(e.target.value)}
+                  >
+                    <option disabled>Game Patch</option>
+                    <option value="">PBE</option>
+                    {meta.changes.map((patch) => (
+                      <option key={patch} value={patch}>
+                        {patch}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
             </div>
           </header>
           {prev && (
@@ -352,18 +388,24 @@ function _SkinViewer({
             className={styles.name}
             onClickCapture={(e) => setShowInfoBox(!showInfoBox)}
           >
-            <span>{skin.name}</span>
+            <span>
+              {r && (
+                <Image
+                  src={r[0]}
+                  title={r[1]}
+                  alt={r[1]}
+                  objectFit="contain"
+                  objectPosition="center"
+                  layout="fixed"
+                  width={18}
+                  height={18}
+                />
+              )}
+              {skin.name}
+            </span>
             <Info />
           </div>
-          <div className={styles.popup}>
-            {skin.description ? (
-              <p dangerouslySetInnerHTML={{ __html: skin.description }} />
-            ) : (
-              <p>
-                <i>No description available.</i>
-              </p>
-            )}
-          </div>
+          <Popup skin={skin} />
         </div>
         <div className={styles.letterBox}>
           {vidPath ? (
@@ -374,13 +416,13 @@ function _SkinViewer({
               key={vidPath}
               style={{ objectFit: "cover" }}
             >
-              <source src={asset(vidPath)} />
+              <source src={asset(vidPath, patch || "pbe")} />
             </video>
           ) : (
             <Image
               unoptimized
               priority
-              src={asset(imgPath)}
+              src={asset(imgPath, patch || "pbe")}
               layout="fill"
               alt={skin.name}
               objectFit="cover"
@@ -407,13 +449,13 @@ function _SkinViewer({
                 };
               }}
             >
-              <source src={asset(vidPath)} />
+              <source src={asset(vidPath, patch || "pbe")} />
             </video>
           ) : (
             <Image
               priority
               unoptimized
-              src={asset(imgPath)}
+              src={asset(imgPath, patch || "pbe")}
               layout="fill"
               alt={skin.name}
               objectFit={objectFit}
@@ -453,16 +495,4 @@ export function SkinViewer(props) {
   }
 
   return <_SkinViewer {...props} />;
-}
-
-export function prepareCollection(collection, idx) {
-  const skin = collection[idx];
-  let prev = null,
-    next = null;
-  if (collection.length > 1) {
-    prev = collection[(idx === 0 ? collection.length : idx) - 1];
-    next = collection[(idx + 1) % collection.length];
-  }
-
-  return { skin, prev, next };
 }
