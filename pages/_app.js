@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { PropsProvider } from "../data/contexts";
-import "../styles/globals.css";
+import "../styles/globals.scss";
 
 export default function App({ Component, pageProps }) {
   const getLayout = Component.getLayout || ((page) => page);
