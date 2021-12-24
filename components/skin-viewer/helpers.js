@@ -18,9 +18,18 @@ export async function prepareCollection(collection, idx) {
   meta.skinlines = (skin.skinLines ?? []).map(({ id }) =>
     skinlines.find((l) => l.id === id)
   );
+  meta.skinlines = [
+    ...new Map(meta.skinlines.map((item) => [item.id, item])).values(),
+  ];
   meta.universes = meta.skinlines
     .map(({ id }) => universes.find((u) => u.skinSets.includes(id)))
     .filter((u) => u);
+  meta.universes = [
+    ...new Map(meta.universes.map((item) => [item.id, item])).values(),
+  ];
+
+  meta.universes;
+
   meta.teemoGGUrl = teemoGGUrl(skin, meta.champion);
 
   let prev = null,

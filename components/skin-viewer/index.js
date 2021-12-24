@@ -228,8 +228,8 @@ function _SkinViewer({
         const { width, height } = dimensions.current;
         let left = e.vxvy[0] / (width - window.innerWidth),
           top = e.vxvy[1] / (height - window.innerHeight);
-        if (Math.abs(e.vxvy[0]) < 1) left = 0;
-        if (Math.abs(e.vxvy[1]) < 1) top = 0;
+        if (Math.abs(e.vxvy[0]) < 0.8) left = 0;
+        if (Math.abs(e.vxvy[1]) < 0.8) top = 0;
         setVelocity({
           left,
           top,
@@ -250,8 +250,12 @@ function _SkinViewer({
     },
     onSwipedUp(e) {
       e.event.preventDefault();
+      const { width, height } = dimensions.current;
 
-      if (meta.changes)
+      if (
+        (!fill || (height / width) * window.innerWidth <= window.innerHeight) &&
+        meta.changes
+      )
         setPatch(
           meta.changes[
             (meta.changes.indexOf(patch) + 1) % (meta.changes.length + 1)
@@ -259,7 +263,7 @@ function _SkinViewer({
         );
     },
     preventDefaultTouchmoveEvent: true,
-    delta: { left: 3, right: 3, up: 30 },
+    delta: { left: 3, right: 3, up: 50 },
   });
 
   const vidPath = supportsVideo

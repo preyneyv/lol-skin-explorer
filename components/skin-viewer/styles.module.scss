@@ -223,6 +223,8 @@
   height: 100%;
   z-index: 2;
   opacity: 0;
+  top: 0;
+  left: 0;
 
   user-select: none;
 
@@ -260,15 +262,18 @@
 }
 
 .infoBox {
-  position: fixed;
+  position: relative;
   z-index: 999;
   top: 0;
   right: 0;
   filter: drop-shadow(0 0 5px black);
   height: 100%;
+  width: 100%;
+  pointer-events: none;
 
   .name {
     position: fixed;
+    z-index: 999;
     white-space: nowrap;
     top: 0;
     right: 0;
@@ -281,6 +286,8 @@
     padding: 8px;
     gap: 8px;
     transition: background 300ms ease, opacity 300ms ease;
+    pointer-events: auto;
+
     > span {
       display: flex;
       align-items: center;
@@ -295,7 +302,7 @@
   .popup {
     width: 400px;
     max-width: calc(100vw - 24px);
-    max-height: calc(100% - 60px);
+    max-height: calc(100vh - 60px);
     overflow: auto;
     cursor: initial !important;
     position: fixed;
@@ -337,7 +344,7 @@
         }
       }
       .popup {
-        pointer-events: all;
+        pointer-events: auto;
         opacity: 1;
         transform: none;
         transition-delay: none !important;
