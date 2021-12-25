@@ -361,7 +361,7 @@ function _SkinViewer({
                     value={patch}
                     onChange={(e) => setPatch(e.target.value)}
                   >
-                    <option disabled>Game Patch</option>
+                    <option disabled>Patch</option>
                     <option value="">PBE</option>
                     {meta.changes.map((patch) => (
                       <option key={patch} value={patch}>

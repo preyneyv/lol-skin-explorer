@@ -77,13 +77,17 @@
     align-items: center;
     padding: 8px 4px;
     gap: 4px;
+    white-space: nowrap;
+    overflow: hidden;
     > svg {
       opacity: 0.5;
       transition: opacity 200ms;
+      width: 24px;
+      flex: 0 0 24px;
     }
     div {
       display: flex;
-      gap: 2px;
+      gap: 4px;
       align-items: center;
       svg {
         height: 18px;
@@ -422,7 +426,6 @@
   nav {
     display: flex;
     gap: 4px 12px;
-    baseline-shift: baseline;
     flex-wrap: wrap;
     align-items: center;
     margin-bottom: 8px;

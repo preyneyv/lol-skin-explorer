@@ -1,3 +1,4 @@
+import React, { useImperativeHandle } from "react";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useRef, useState, useEffect } from "react";
@@ -6,9 +7,16 @@ import classNames from "classnames";
 import styles from "./styles.module.scss";
 import axios from "axios";
 
-export function Omnisearch() {
-  const ref = useRef();
+export const Omnisearch = React.forwardRef(({}, ref) => {
+  const inp = useRef();
   const router = useRouter();
+  useImperativeHandle(
+    ref,
+    () => ({
+      focus: () => inp.current?.focus(),
+    }),
+    []
+  );
 
   const [query, setQuery] = useState("");
   const [selected, setSelected] = useState(0);
@@ -60,7 +68,7 @@ export function Omnisearch() {
   useEffect(() => {
     function onKeyDown() {
       if (document.activeElement === document.body) {
-        ref.current?.focus();
+        inp.current?.focus();
       }
     }
     document.addEventListener("keypress", onKeyDown);
@@ -69,7 +77,7 @@ export function Omnisearch() {
   return (
     <div className={styles.search}>
       <input
-        ref={ref}
+        ref={inp}
         type="search"
         placeholder="Search"
         value={query}
@@ -130,4 +138,5 @@ export function Omnisearch() {
       )}
     </div>
   );
-}
+});
+Omnisearch.displayName = "Omnisearch";

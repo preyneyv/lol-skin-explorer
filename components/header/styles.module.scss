@@ -34,30 +34,29 @@
     border-color: transparent;
   }
 
+  .omnisearchIcon,
   .menuIcon {
     height: 56px;
     width: 56px;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
-    border-left: 1px solid rgb(31, 39, 48);
     user-select: none;
-
-    transition: background 200ms, border-color 200ms;
-
-    // &:hover {
-    //   background: rgb(22, 33, 48);
-    //   border-color: transparent;
-    // }
 
     > svg {
       color: rgb(72, 89, 111);
       transition: color 200ms;
     }
-    // &:hover > svg {
-    //   color: white;
-    // }
+  }
+
+  .omnisearchIcon {
+    display: none;
+  }
+
+  .menuIcon {
+    position: relative;
+    border-left: 1px solid rgb(31, 39, 48);
+    transition: background 200ms, border-color 200ms;
 
     ul {
       list-style: none;
@@ -123,17 +122,31 @@
 
 @media screen and (max-width: 440px) {
   .header {
-    grid-template-columns: 1fr auto;
-  }
-  .omnisearch {
-    position: fixed;
-    display: none;
-  }
+    grid-template-columns: 1fr auto auto;
+    gap: 0;
+    .omnisearch {
+      display: none;
+      padding-left: 8px;
+    }
 
-  .menuIcon ul {
-    width: 100vw;
-    height: calc(100vh - 56px);
-    background: rgb(12, 15, 19) !important;
+    .omnisearchIcon {
+      display: flex;
+    }
+
+    .menuIcon ul {
+      width: 100vw;
+      height: calc(100vh - 56px);
+      background: rgb(12, 15, 19) !important;
+    }
+
+    &.search {
+      .logo {
+        display: none;
+      }
+      .omnisearch {
+        display: block;
+      }
+    }
   }
 }
 
