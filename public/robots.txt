@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.skinexplorer.lol
+
+# Sitemaps
+Sitemap: https://www.skinexplorer.lol/sitemap.xml

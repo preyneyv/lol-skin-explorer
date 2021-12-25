@@ -6,7 +6,7 @@ import logo from "../../assets/logo.png";
 import { Omnisearch } from "../omnisearch";
 import { useEscapeTo } from "../../data/helpers";
 import { ArrowLeft, ExternalLink, Menu, Search, X } from "react-feather";
-import { useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useEffect, useRef, useState } from "react";
 
 export const Header = ({ flat, backTo }) => {
   const back =
@@ -16,7 +16,7 @@ export const Header = ({ flat, backTo }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const omnisearch = useRef();
-  useLayoutEffect(() => {
+  (typeof window === "undefined" ? useEffect : useLayoutEffect)(() => {
     if (showSearch) omnisearch.current?.focus();
   }, [showSearch]);
 

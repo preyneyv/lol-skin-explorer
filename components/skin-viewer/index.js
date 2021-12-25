@@ -18,6 +18,10 @@ import {
 } from "react-feather";
 import {
   asset,
+  makeCanonical,
+  makeDescription,
+  makeImage,
+  makeTitle,
   rarity,
   useEscapeTo,
   useLocalStorageState,
@@ -130,9 +134,9 @@ function _SkinViewer({
       if (swipe) {
         setDeltaX(swipe ? "100vw" : "80px");
         router.prefetch(router.pathname, linkTo(prev));
-        setTimeout(() => router.push(router.pathname, linkTo(prev)), 300);
+        setTimeout(() => router.replace(router.pathname, linkTo(prev)), 300);
       } else {
-        router.push(router.pathname, linkTo(prev));
+        router.replace(router.pathname, linkTo(prev));
       }
     },
     [router, linkTo, prev, setExiting, setDeltaX, exiting]
@@ -146,9 +150,9 @@ function _SkinViewer({
       if (swipe) {
         setDeltaX(swipe ? "-100vw" : "-80px");
         router.prefetch(router.pathname, linkTo(next));
-        setTimeout(() => router.push(router.pathname, linkTo(next)), 300);
+        setTimeout(() => router.replace(router.pathname, linkTo(next)), 300);
       } else {
-        router.push(router.pathname, linkTo(next));
+        router.replace(router.pathname, linkTo(next));
       }
     },
     [router, linkTo, next, setExiting, setDeltaX, exiting]
@@ -280,13 +284,12 @@ function _SkinViewer({
   return (
     <>
       <Head>
-        <title>{skin.name} &middot; Skin Explorer</title>
-        <meta
-          name="description"
-          content={
-            skin.description || `Look at the splash art for ${skin.name}!`
-          }
-        />
+        {makeTitle(skin.name)}
+        {makeDescription(
+          skin.description || `Look at the splash art for ${skin.name}!`
+        )}
+        {makeImage(asset(skin.uncenteredSplashPath), skin.name)}
+        {makeCanonical(`/champions/${meta.champion.key}/skins/${skin.id}`)}
         {prefetchSkin(skin, true)}
         {prev && prefetchSkin(prev, false)}
         {next && prefetchSkin(next, false)}
@@ -374,7 +377,7 @@ function _SkinViewer({
             </div>
           </header>
           {prev && (
-            <Link href={router.pathname} as={linkTo(prev)}>
+            <Link href={router.pathname} as={linkTo(prev)} replace>
               <a className={styles.prev}>
                 <ArrowLeft />
                 <div>{prev.name}</div>
@@ -382,7 +385,7 @@ function _SkinViewer({
             </Link>
           )}
           {next && (
-            <Link href={router.pathname} as={linkTo(next)}>
+            <Link href={router.pathname} as={linkTo(next)} replace>
               <a className={styles.next}>
                 <div>{next.name}</div>
                 <ArrowRight />

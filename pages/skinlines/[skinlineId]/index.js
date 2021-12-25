@@ -7,6 +7,9 @@ import { Header } from "../../../components/header";
 import { SkinGrid } from "../../../components/skin-grid";
 import {
   asset,
+  makeDescription,
+  makeImage,
+  makeTitle,
   skinlineSkins,
   useLocalStorageState,
   useSortedSkins,
@@ -29,13 +32,13 @@ function _Page() {
   return (
     <>
       <Head>
-        <title>{skinline.name} &middot; Skin Explorer</title>
-        <meta
-          name="description"
-          content={`Browse through all ${skins.length} skin${
+        {makeTitle(skinline.name)}
+        {makeDescription(
+          `Browse through all ${skins.length} skin${
             skins.length == 1 ? "" : "s"
-          } in the League of Legends ${skinline.name} skinline!`}
-        />
+          } in the League of Legends ${skinline.name} skinline!`
+        )}
+        {makeImage(asset[skins[0]?.uncenteredSplashPath], skinline.name)}
       </Head>
       <div className={styles.container}>
         <FooterContainer>
@@ -45,7 +48,7 @@ function _Page() {
                 unoptimized
                 layout="fill"
                 objectFit="cover"
-                src={asset(skins[0].uncenteredSplashPath)}
+                src={asset(skins[0]?.uncenteredSplashPath)}
                 alt={skinline.name}
               />
             </div>

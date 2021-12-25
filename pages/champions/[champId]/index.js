@@ -5,6 +5,9 @@ import {
   championSkins,
   useLocalStorageState,
   useSortedSkins,
+  makeTitle,
+  makeImage,
+  makeDescription,
 } from "../../../data/helpers";
 import { store } from "../../../data/store";
 import { Header } from "../../../components/header";
@@ -30,13 +33,13 @@ function _Page() {
   return (
     <>
       <Head>
-        <title>{champion.name} &middot; Skin Explorer</title>
-        <meta
-          name="description"
-          content={`Browse through the ${skins.length} skin${
+        {makeTitle(champion.name)}
+        {makeDescription(
+          `Browse through the ${skins.length} skin${
             skins.length == 1 ? "" : "s"
-          } that ${champion.name} has!`}
-        />
+          } that ${champion.name} has!`
+        )}
+        {makeImage(asset(base.uncenteredSplashPath), champion.name)}
       </Head>
       <div className={styles.container}>
         <FooterContainer>

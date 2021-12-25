@@ -4,7 +4,12 @@ import Head from "next/head";
 import { useProps } from "../data/contexts";
 import styles from "../styles/index.module.scss";
 import Link from "next/link";
-import { asset, classes, useLocalStorageState } from "../data/helpers";
+import {
+  asset,
+  classes,
+  makeTitle,
+  useLocalStorageState,
+} from "../data/helpers";
 import { store } from "../data/store";
 import { Nav } from "../components/nav";
 import { Layout } from "../components";
@@ -58,7 +63,7 @@ export default function Index() {
   return (
     <>
       <Head>
-        <title>Skin Explorer</title>
+        {makeTitle()}
         <meta
           name="description"
           content={`Skin Explorer is an online skin splash art viewer that lets you browse through League of Legends skins from the comfort of your browser. Take a look at these ${champions.length} champions!`}

@@ -5,6 +5,9 @@ import { useProps } from "../../../data/contexts";
 import { Fallback } from "../../../components/fallback";
 import {
   asset,
+  makeDescription,
+  makeImage,
+  makeTitle,
   skinlineSkins,
   useLocalStorageState,
   useSortedSkins,
@@ -51,14 +54,15 @@ function _Page() {
   return (
     <>
       <Head>
-        <title>{universe.name} &middot; Skin Explorer</title>
-        <meta
-          name="description"
-          content={
-            universe.description ||
+        {makeTitle(universe.name)}
+        {makeDescription(
+          universe.description ||
             `Browse through all the skins in the League of Legends ${universe.name} universe!`
-          }
-        />
+        )}
+        {makeImage(
+          asset(skinlines[0].skins[0].uncenteredSplashPath),
+          universe.name
+        )}
       </Head>
       <div className={styles.container}>
         <FooterContainer>

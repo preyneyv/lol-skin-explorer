@@ -6,6 +6,7 @@ import Link from "next/link";
 import { store } from "../../data/store";
 import { Nav } from "../../components/nav";
 import { Layout } from "../../components";
+import { makeDescription, makeTitle } from "../../data/helpers";
 
 function UniversesList() {
   const { universes, skinlines } = useProps();
@@ -59,11 +60,10 @@ export default function Index() {
   return (
     <>
       <Head>
-        <title>Universes &middot; Skin Explorer</title>
-        <meta
-          name="description"
-          content={`Skin Explorer is an online skin splash art viewer that lets you browse through League of Legends skins from the comfort of your browser. Take a look at these ${universes.length} universes!`}
-        />
+        {makeTitle("Universes")}
+        {makeDescription(
+          `Skin Explorer is an online skin splash art viewer that lets you browse through League of Legends skins from the comfort of your browser. Take a look at these ${universes.length} universes!`
+        )}
       </Head>
       <div className={styles.container}>
         <Nav active="universes" />

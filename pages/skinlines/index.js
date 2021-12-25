@@ -6,6 +6,7 @@ import Link from "next/link";
 import { store } from "../../data/store";
 import { Nav } from "../../components/nav";
 import { Layout } from "../../components";
+import { makeTitle, makeDescription } from "../../data/helpers";
 
 function SkinlinesList() {
   const { skinlines } = useProps();
@@ -35,11 +36,10 @@ export default function Index() {
   return (
     <>
       <Head>
-        <title>Skinlines &middot; Skin Explorer</title>
-        <meta
-          name="description"
-          content={`Skin Explorer is an online skin splash art viewer that lets you browse through League of Legends skins from the comfort of your browser. Take a look at these ${skinlines.length} skinlines!`}
-        />
+        {makeTitle("Skinlines")}
+        {makeDescription(
+          `Skin Explorer is an online skin splash art viewer that lets you browse through League of Legends skins from the comfort of your browser. Take a look at these ${skinlines.length} skinlines!`
+        )}
       </Head>
       <div className={styles.container}>
         <Nav active="skinlines" />

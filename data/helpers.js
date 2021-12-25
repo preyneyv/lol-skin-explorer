@@ -1,4 +1,5 @@
-import { CDRAGON } from "./constants";
+import absoluteUrl from "next-absolute-url";
+import { CDRAGON, ROOT } from "./constants";
 import { useProps } from "./contexts";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -107,4 +108,43 @@ export function useEscapeTo(url) {
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
   }, [router, url]);
+}
+
+export function makeTitle(page = null) {
+  let t = "Skin Explorer · League of Legends";
+  if (page) t = [page, t].join(" · ");
+  return (
+    <>
+      <title>{t}</title>;
+      <meta property="og:title" content={t} />
+    </>
+  );
+}
+
+export function makeDescription(desc) {
+  return (
+    <>
+      <meta name="description" content={desc} />
+      <meta property="og:description" content={desc} />
+    </>
+  );
+}
+
+export function makeCanonical(url) {
+  const u = ROOT + url;
+  return (
+    <>
+      <link rel="canonical" href={u} />
+      <meta property="og:url" content={u} />
+    </>
+  );
+}
+
+export function makeImage(url, alt = null) {
+  return (
+    <>
+      <meta property="og:image" content={url} />
+      {alt && <meta property="og:image:alt" content={alt} />}
+    </>
+  );
 }
