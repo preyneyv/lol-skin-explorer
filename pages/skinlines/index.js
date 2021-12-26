@@ -53,7 +53,8 @@ export default function Index() {
 
 Index.getLayout = (page) => <Layout>{page}</Layout>;
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
+export async function getServerSideProps() {
   await store.fetch();
 
   const skinlines = await store.patch.skinlines;
@@ -63,6 +64,5 @@ export async function getStaticProps() {
       skinlines,
       patch: store.patch.fullVersionString,
     },
-    revalidate: 60,
   };
 }

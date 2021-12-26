@@ -19,6 +19,8 @@ class Document extends BaseDocument {
             rel="stylesheet"
           />
           <link rel="manifest" href="/manifest.webmanifest" />
+          <link rel="apple-touch-icon" href="/icons/logo-192.png" />
+
           {process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && (
             <script
               async

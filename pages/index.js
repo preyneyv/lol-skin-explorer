@@ -99,7 +99,7 @@ export default function Index() {
 
 Index.getLayout = (page) => <Layout>{page}</Layout>;
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   await store.fetch();
 
   const champions = await store.patch.champions;
@@ -109,6 +109,5 @@ export async function getStaticProps() {
       champions,
       patch: store.patch.fullVersionString,
     },
-    revalidate: 60,
   };
 }

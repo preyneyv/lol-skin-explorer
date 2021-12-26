@@ -19,7 +19,8 @@ export default function Page() {
   );
 }
 
-export async function getStaticProps(ctx) {
+// export async function getStaticProps(ctx) {
+export async function getServerSideProps(ctx) {
   const { universeId, skinId } = ctx.params;
   await store.fetch();
 
@@ -34,7 +35,6 @@ export async function getStaticProps(ctx) {
   if (!universe)
     return {
       notFound: true,
-      revalidate: 60,
     };
 
   const skins = allSkinlines
@@ -48,7 +48,6 @@ export async function getStaticProps(ctx) {
   if (currentIdx === -1)
     return {
       notFound: true,
-      revalidate: 60,
     };
 
   const { skin, prev, next } = await prepareCollection(skins, currentIdx);
@@ -65,35 +64,35 @@ export async function getStaticProps(ctx) {
   };
 }
 
-export async function getStaticPaths() {
-  let paths = [];
-  if (process.env.NODE_ENV === "production") {
-    await store.fetch();
-    const [universes, skins] = await Promise.all([
-      store.patch.universes,
-      store.patch.skins,
-    ]);
+// export async function getStaticPaths() {
+//   let paths = [];
+//   if (process.env.NODE_ENV === "production") {
+//     await store.fetch();
+//     const [universes, skins] = await Promise.all([
+//       store.patch.universes,
+//       store.patch.skins,
+//     ]);
 
-    paths = Object.values(skins)
-      .map((skin) =>
-        (skin.skinLines ?? [])
-          .map((skinline) => {
-            const u = universes.find((u) => u.skinSets.includes(skinline.id));
-            if (!u) return null;
-            return {
-              params: {
-                universeId: u.id.toString(),
-                skinId: skin.id.toString(),
-              },
-            };
-          })
-          .filter((a) => a)
-      )
-      .flat();
-  }
+//     paths = Object.values(skins)
+//       .map((skin) =>
+//         (skin.skinLines ?? [])
+//           .map((skinline) => {
+//             const u = universes.find((u) => u.skinSets.includes(skinline.id));
+//             if (!u) return null;
+//             return {
+//               params: {
+//                 universeId: u.id.toString(),
+//                 skinId: skin.id.toString(),
+//               },
+//             };
+//           })
+//           .filter((a) => a)
+//       )
+//       .flat();
+//   }
 
-  return {
-    paths,
-    fallback: true,
-  };
-}
+//   return {
+//     paths,
+//     fallback: "blocking",
+//   };
+// }

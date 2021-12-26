@@ -77,7 +77,8 @@ export default function Index() {
 
 Index.getLayout = (page) => <Layout>{page}</Layout>;
 
-export async function getStaticProps() {
+// export async function getStaticProps() {
+export async function getServerSideProps() {
   await store.fetch();
 
   const [universes, skinlines] = await Promise.all([
@@ -91,6 +92,5 @@ export async function getStaticProps() {
       skinlines,
       patch: store.patch.fullVersionString,
     },
-    revalidate: 60,
   };
 }

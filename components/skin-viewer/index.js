@@ -29,21 +29,28 @@ import {
 import { Popup } from "./popup";
 import styles from "./styles.module.scss";
 
-const prefetchSkin = (skin, preload = true) => {
-  const rel = preload ? "preload" : "prefetch";
+const prefetchSkin = (skin, patch) => {
   return skin.splashVideoPath ? (
     <>
-      <link rel="prefetch" as="video" href={asset(skin.splashVideoPath)} />
       <link
         rel="prefetch"
         as="video"
-        href={asset(skin.collectionSplashVideoPath)}
+        href={asset(skin.splashVideoPath, patch)}
+      />
+      <link
+        rel="prefetch"
+        as="video"
+        href={asset(skin.collectionSplashVideoPath, patch)}
       />
     </>
   ) : (
     <>
-      <link rel={rel} as="image" href={asset(skin.splashPath)} />
-      <link rel={rel} as="image" href={asset(skin.uncenteredSplashPath)} />
+      <link rel="prefetch" as="image" href={asset(skin.splashPath, patch)} />
+      <link
+        rel="prefetch"
+        as="image"
+        href={asset(skin.uncenteredSplashPath, patch)}
+      />
     </>
   );
 };
@@ -290,9 +297,10 @@ function _SkinViewer({
         )}
         {makeImage(asset(skin.uncenteredSplashPath), skin.name)}
         {makeCanonical(`/champions/${meta.champion.key}/skins/${skin.id}`)}
-        {prefetchSkin(skin, true)}
-        {prev && prefetchSkin(prev, false)}
-        {next && prefetchSkin(next, false)}
+        {prefetchSkin(skin)}
+        {meta.changes && meta.changes.map((patch) => prefetchSkin(skin, patch))}
+        {prev && prefetchSkin(prev)}
+        {next && prefetchSkin(next)}
         <style>
           {`
           body {

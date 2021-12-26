@@ -336,9 +336,6 @@
   }
 
   @media (pointer: fine) {
-    .popup {
-      transition-delay: 150ms;
-    }
     &:hover {
       .name {
         opacity: 1 !important;
