@@ -29,18 +29,35 @@ import {
 import { Popup } from "./popup";
 import styles from "./styles.module.scss";
 
-const prefetchSkin = (skin, patch) => {
+const _supportsPrefetch = () => {
+  if (typeof window === "undefined") return false;
+  const fakeLink = document.createElement("link");
+  try {
+    if (fakeLink.relList?.supports) {
+      return fakeLink.relList.supports("prefetch");
+    }
+  } catch (err) {
+    return false;
+  }
+};
+
+const pseudoPrefetch = (skin, patch) => {
+  new window.Image().src = asset(skin.splashPath, patch);
+  new window.Image().src = asset(skin.uncenteredSplashPath, patch);
+};
+
+const prefetchLinks = (skin, patch) => {
   return skin.splashVideoPath ? (
     <>
       <link
         rel="prefetch"
-        as="video"
         href={asset(skin.splashVideoPath, patch)}
+        as="video"
       />
       <link
         rel="prefetch"
-        as="video"
         href={asset(skin.collectionSplashVideoPath, patch)}
+        as="video"
       />
     </>
   ) : (
@@ -73,13 +90,14 @@ function _SkinViewer({
   linkTo,
   collectionName,
   collectionIcon,
-  collectionPage,
   prev,
   next,
   skin,
 }) {
   const meta = skin.$skinExplorer;
   const supportsVideo = useMemo(() => canPlayWebM(), []);
+  const supportsPrefetch = useMemo(() => _supportsPrefetch(), []);
+
   const router = useRouter();
   useEscapeTo(backTo);
   const [centered, setCentered] = useLocalStorageState(
@@ -107,7 +125,14 @@ function _SkinViewer({
     setPosition({ top: 0.5, left: 0.5 });
     setPatch("");
     setVelocity({ top: 0, left: 0 });
-  }, [skin]);
+
+    if (!supportsPrefetch) {
+      pseudoPrefetch(skin);
+      meta.changes && meta.changes.map((patch) => pseudoPrefetch(skin, patch));
+      prev && pseudoPrefetch(prev);
+      next && pseudoPrefetch(next);
+    }
+  }, [skin, supportsPrefetch, prev, next, meta]);
 
   useEffect(() => {
     if (Math.abs(velocity.top) < 0.000001 && Math.abs(velocity.left) < 0.000001)
@@ -297,10 +322,11 @@ function _SkinViewer({
         )}
         {makeImage(asset(skin.uncenteredSplashPath), skin.name)}
         {makeCanonical(`/champions/${meta.champion.key}/skins/${skin.id}`)}
-        {prefetchSkin(skin)}
-        {meta.changes && meta.changes.map((patch) => prefetchSkin(skin, patch))}
-        {prev && prefetchSkin(prev)}
-        {next && prefetchSkin(next)}
+        {prefetchLinks(skin)}
+        {meta.changes &&
+          meta.changes.map((patch) => prefetchLinks(skin, patch))}
+        {prev && prefetchLinks(prev)}
+        {next && prefetchLinks(next)}
         <style>
           {`
           body {
