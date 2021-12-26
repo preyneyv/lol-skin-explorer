@@ -7,6 +7,7 @@ import Link from "next/link";
 import {
   asset,
   classes,
+  makeDescription,
   makeTitle,
   useLocalStorageState,
 } from "../data/helpers";
@@ -64,10 +65,9 @@ export default function Index() {
     <>
       <Head>
         {makeTitle()}
-        <meta
-          name="description"
-          content={`Skin Explorer is an online skin splash art viewer that lets you browse through League of Legends skins from the comfort of your browser. Take a look at these ${champions.length} champions!`}
-        />
+        {makeDescription(
+          `Browse through League of Legends skins from the comfort of your browser. Take a look at these ${champions.length} champions!`
+        )}
       </Head>
       <div className={styles.container}>
         <Nav

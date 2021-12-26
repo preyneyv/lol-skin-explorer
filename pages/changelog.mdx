@@ -1,0 +1,11 @@
+import { Layout } from "../components";
+import styles from "../styles/static.module.scss";
+import Changelog from "../CHANGELOG.md";
+
+<Changelog />
+
+export default ({ children }) => (
+  <Layout sbackTo="/">
+    <main className={styles.main}>{children}</main>
+  </Layout>
+);

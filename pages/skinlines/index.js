@@ -38,7 +38,7 @@ export default function Index() {
       <Head>
         {makeTitle("Skinlines")}
         {makeDescription(
-          `Skin Explorer is an online skin splash art viewer that lets you browse through League of Legends skins from the comfort of your browser. Take a look at these ${skinlines.length} skinlines!`
+          `Browse through League of Legends skins from the comfort of your browser. Take a look at these ${skinlines.length} skinlines!`
         )}
       </Head>
       <div className={styles.container}>

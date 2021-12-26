@@ -62,12 +62,12 @@ export const Header = ({ flat, backTo }) => {
                 <a>Keyboard Shortcuts</a>
               </Link>
             </li>
+            <li className={styles.divider} />
             <li>
               <Link href="/changelog" as="/changelog">
                 <a>Changelog</a>
               </Link>
             </li>
-            <li className={styles.divider} />
             <li>
               <Link href="/about" as="/about">
                 <a>About</a>

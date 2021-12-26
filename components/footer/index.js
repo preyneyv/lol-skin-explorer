@@ -38,9 +38,17 @@ export function Footer({ flat }) {
         </p>
       </div>
       <div>
-        <p>
-          <b>Patch {patch} (PBE)</b>
-        </p>
+        {patch && (
+          <p>
+            <a
+              href="https://raw.communitydragon.org/pbe"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <b>Patch {patch}</b>
+            </a>
+          </p>
+        )}
         <p>
           <a
             target="_blank"

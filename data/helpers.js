@@ -110,13 +110,14 @@ export function useEscapeTo(url) {
   }, [router, url]);
 }
 
-export function makeTitle(page = null) {
-  let t = "Skin Explorer · League of Legends";
-  if (page) t = [page, t].join(" · ");
+export function makeTitle(...pages) {
+  let t = [...pages, "League of Legends Skin Explorer"].join(" · ");
+
   return (
     <>
       <title>{t}</title>;
       <meta property="og:title" content={t} />
+      <meta name="twitter:site" content="@SkinExplorerLoL" />
     </>
   );
 }
@@ -143,6 +144,7 @@ export function makeCanonical(url) {
 export function makeImage(url, alt = null) {
   return (
     <>
+      <meta name="twitter:card" content="summary_large_image" />
       <meta property="og:image" content={url} />
       {alt && <meta property="og:image:alt" content={alt} />}
     </>
