@@ -93,7 +93,7 @@ export default function Page() {
   );
 }
 
-export async function getServerSideProps(ctx) {
+export async function getStaticProps(ctx) {
   const { skinlineId } = ctx.params;
   await store.fetch();
 
@@ -118,5 +118,19 @@ export async function getServerSideProps(ctx) {
       skins,
       patch: store.patch.fullVersionString,
     },
+  };
+}
+
+export async function getStaticPaths() {
+  let paths = [];
+  if (process.env.NODE_ENV === "production") {
+    await store.fetch();
+    const skinlines = await store.patch.skinlines;
+    paths = skinlines.map((l) => ({ params: { skinlineId: l.id.toString() } }));
+  }
+
+  return {
+    paths,
+    fallback: true,
   };
 }

@@ -77,8 +77,7 @@ export default function Index() {
 
 Index.getLayout = (page) => <Layout>{page}</Layout>;
 
-// export async function getStaticProps() {
-export async function getServerSideProps() {
+export async function getStaticProps() {
   await store.fetch();
 
   const [universes, skinlines] = await Promise.all([

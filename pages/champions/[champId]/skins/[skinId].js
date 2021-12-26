@@ -1,3 +1,4 @@
+import { splitId } from "../../../../data/helpers";
 import { store } from "../../../../data/store";
 import { championSkins } from "../../../../data/helpers";
 import { SkinViewer } from "../../../../components/skin-viewer";
@@ -19,7 +20,7 @@ export default function Page() {
   );
 }
 
-export async function getServerSideProps(ctx) {
+export async function getStaticProps(ctx) {
   const { champId, skinId } = ctx.params;
   await store.fetch();
 
@@ -54,5 +55,31 @@ export async function getServerSideProps(ctx) {
       next,
       patch: store.patch.fullVersionString,
     },
+  };
+}
+
+export async function getStaticPaths() {
+  let paths = [];
+  if (process.env.NODE_ENV === "production") {
+    await store.fetch();
+    const [champions, skins] = await Promise.all([
+      store.patch.champions,
+      store.patch.skins,
+    ]);
+    const champLookup = champions.reduce(
+      (obj, c) => ({ ...obj, [c.id]: c.key }),
+      {}
+    );
+    paths = Object.values(skins).map((skin) => ({
+      params: {
+        champId: champLookup[splitId(skin.id)[0]],
+        skinId: skin.id.toString(),
+      },
+    }));
+  }
+
+  return {
+    paths,
+    fallback: "blocking",
   };
 }

@@ -19,8 +19,7 @@ export default function Page() {
   );
 }
 
-// export async function getStaticProps(ctx) {
-export async function getServerSideProps(ctx) {
+export async function getStaticProps(ctx) {
   const { universeId, skinId } = ctx.params;
   await store.fetch();
 
@@ -64,35 +63,35 @@ export async function getServerSideProps(ctx) {
   };
 }
 
-// export async function getStaticPaths() {
-//   let paths = [];
-//   if (process.env.NODE_ENV === "production") {
-//     await store.fetch();
-//     const [universes, skins] = await Promise.all([
-//       store.patch.universes,
-//       store.patch.skins,
-//     ]);
+export async function getStaticPaths() {
+  let paths = [];
+  if (process.env.NODE_ENV === "production") {
+    await store.fetch();
+    const [universes, skins] = await Promise.all([
+      store.patch.universes,
+      store.patch.skins,
+    ]);
 
-//     paths = Object.values(skins)
-//       .map((skin) =>
-//         (skin.skinLines ?? [])
-//           .map((skinline) => {
-//             const u = universes.find((u) => u.skinSets.includes(skinline.id));
-//             if (!u) return null;
-//             return {
-//               params: {
-//                 universeId: u.id.toString(),
-//                 skinId: skin.id.toString(),
-//               },
-//             };
-//           })
-//           .filter((a) => a)
-//       )
-//       .flat();
-//   }
+    paths = Object.values(skins)
+      .map((skin) =>
+        (skin.skinLines ?? [])
+          .map((skinline) => {
+            const u = universes.find((u) => u.skinSets.includes(skinline.id));
+            if (!u) return null;
+            return {
+              params: {
+                universeId: u.id.toString(),
+                skinId: skin.id.toString(),
+              },
+            };
+          })
+          .filter((a) => a)
+      )
+      .flat();
+  }
 
-//   return {
-//     paths,
-//     fallback: "blocking",
-//   };
-// }
+  return {
+    paths,
+    fallback: "blocking",
+  };
+}

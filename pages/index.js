@@ -99,7 +99,7 @@ export default function Index() {
 
 Index.getLayout = (page) => <Layout>{page}</Layout>;
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   await store.fetch();
 
   const champions = await store.patch.champions;

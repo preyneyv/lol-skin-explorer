@@ -350,7 +350,7 @@ function _SkinViewer({
         />
         <div className={styles.overlay}>
           <header>
-            <Link href={collectionPage} as={backTo}>
+            <Link href={backTo} as={backTo}>
               <a className={styles.backTo}>
                 <ArrowLeft />
                 <div>

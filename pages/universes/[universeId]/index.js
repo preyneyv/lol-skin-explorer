@@ -124,8 +124,7 @@ export default function Page() {
   );
 }
 
-// export async function getStaticProps(ctx) {
-export async function getServerSideProps(ctx) {
+export async function getStaticProps(ctx) {
   const { universeId } = ctx.params;
   await store.fetch();
 
@@ -156,16 +155,16 @@ export async function getServerSideProps(ctx) {
   };
 }
 
-// export async function getStaticPaths() {
-//   let paths = [];
-//   if (process.env.NODE_ENV === "production") {
-//     await store.fetch();
-//     const universes = await store.patch.universes;
-//     paths = universes.map((u) => ({ params: { universeId: u.id.toString() } }));
-//   }
+export async function getStaticPaths() {
+  let paths = [];
+  if (process.env.NODE_ENV === "production") {
+    await store.fetch();
+    const universes = await store.patch.universes;
+    paths = universes.map((u) => ({ params: { universeId: u.id.toString() } }));
+  }
 
-//   return {
-//     paths,
-//     fallback: "blocking",
-//   };
-// }
+  return {
+    paths,
+    fallback: "blocking",
+  };
+}

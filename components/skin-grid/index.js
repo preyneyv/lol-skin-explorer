@@ -10,7 +10,7 @@ export function SkinGrid({ skins, linkTo, viewerPage }) {
       {skins.map((skin) => {
         const r = rarity(skin);
         return (
-          <Link key={skin.id} href={viewerPage} as={linkTo(skin)}>
+          <Link key={skin.id} href={linkTo(skin)} as={linkTo(skin)}>
             <a>
               <Image
                 className={styles.tile}

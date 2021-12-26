@@ -34,29 +34,22 @@ export const Omnisearch = React.forwardRef(({}, ref) => {
 
   function onSelect(entity) {
     const { type } = entity;
+    let route;
     if (type === "champion") {
-      router.push({
-        pathname: "/champions/[key]",
-        query: { key: entity.key },
-      });
+      route = `/champions/${entity.key}`;
     }
     if (type === "skinline") {
-      router.push({
-        pathname: "/skinlines/[id]",
-        query: { id: entity.id },
-      });
+      route = `/skinlines/${entity.id}`;
     }
     if (type === "universe") {
-      router.push({
-        pathname: "/universes/[id]",
-        query: { id: entity.id },
-      });
+      route = `/universes/${entity.id}`;
     }
     if (type === "skin") {
-      router.push({
-        pathname: "/champions/[key]/skins/[id]",
-        query: { key: entity.key, id: entity.id },
-      });
+      route = `/champions/${entity.key}/skins/${entity.id}`;
+    }
+
+    if (route) {
+      router.push(route, route);
     }
   }
 

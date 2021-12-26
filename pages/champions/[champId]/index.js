@@ -90,7 +90,7 @@ export default function Page() {
   );
 }
 
-export async function getServerSideProps(ctx) {
+export async function getStaticProps(ctx) {
   const { champId } = ctx.params;
   await store.fetch();
 
@@ -114,5 +114,19 @@ export async function getServerSideProps(ctx) {
       skins,
       patch: store.patch.fullVersionString,
     },
+  };
+}
+
+export async function getStaticPaths() {
+  let paths = [];
+  if (process.env.NODE_ENV === "production") {
+    await store.fetch();
+    const champions = await store.patch.champions;
+    paths = champions.map((c) => ({ params: { champId: c.key.toString() } }));
+  }
+
+  return {
+    paths,
+    fallback: "blocking",
   };
 }

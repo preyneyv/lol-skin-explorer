@@ -18,11 +18,11 @@ export default function App({ Component, pageProps }) {
   //     localStorage.lastCachedPatch = patch;
   //   }
   // }, [patch]);
-  useEffect(() => {
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker.register("/offline.sw.js");
-    }
-  });
+  // useEffect(() => {
+  //   if ("serviceWorker" in navigator) {
+  //     navigator.serviceWorker.register("/offline.sw.js");
+  //   }
+  // });
 
   return (
     <>

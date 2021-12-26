@@ -124,7 +124,9 @@
       }
 
       @media (pointer: fine) {
-        opacity: 0.5;
+        &:not(.dropdown) {
+          opacity: 0.5;
+        }
         &:hover {
           opacity: 1;
         }
