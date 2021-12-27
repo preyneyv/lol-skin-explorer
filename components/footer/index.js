@@ -30,9 +30,9 @@ export function Footer({ flat }) {
           .
         </p>
         <p>
-          Skin Explorer was created under Riot Games' "Legal Jibber Jabber"
-          policy using assets owned by Riot Games. Riot Games does not endorse
-          or sponsor this project.
+          Skin Explorer was created under Riot Games&apos; &quot;Legal Jibber
+          Jabber&quot; policy using assets owned by Riot Games. Riot Games does
+          not endorse or sponsor this project.
         </p>
       </div>
       <div>
