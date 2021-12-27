@@ -13,6 +13,7 @@ module.exports = withPWA({
     dest: "public",
     fallbacks: { document: "/offline.html" },
     runtimeCaching: pwaCacheConfig,
+    disable: process.env.NODE_ENV === "development",
   },
   ...withMDX({
     pageExtensions: ["js", "jsx", "md", "mdx"],

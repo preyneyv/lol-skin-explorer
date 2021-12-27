@@ -16,7 +16,7 @@ import {
 } from "../../../data/helpers";
 import { store } from "../../../data/store";
 import styles from "../../../styles/collection.module.scss";
-import { Folder } from "react-feather";
+import { Folder } from "lucide-react";
 
 function _Page() {
   const { skinline, skins } = useProps();

@@ -1,4 +1,4 @@
-import { Globe } from "react-feather";
+import { Globe } from "lucide-react";
 import { SkinViewer } from "../../../../components/skin-viewer";
 import { prepareCollection } from "../../../../components/skin-viewer/helpers";
 import { useProps } from "../../../../data/contexts";

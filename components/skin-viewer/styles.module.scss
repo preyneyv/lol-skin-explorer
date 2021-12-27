@@ -106,7 +106,7 @@
     align-items: center;
     gap: 4px;
 
-    > div {
+    > * {
       display: flex;
       align-items: center;
       padding: 8px;
@@ -287,6 +287,7 @@
     white-space: nowrap;
     top: 0;
     right: 0;
+    box-sizing: border-box;
     transition: opacity 300ms ease;
     opacity: 0.5;
     user-select: none;
@@ -312,7 +313,7 @@
   .popup {
     width: 400px;
     max-width: calc(100vw - 24px);
-    max-height: calc(100vh - 60px);
+    max-height: calc(var(--vh) * 100 - 41px);
     overflow: auto;
     cursor: initial !important;
     position: fixed;
@@ -410,13 +411,17 @@
       top: unset;
       width: 100%;
       justify-content: space-between;
+      padding: 11.5px 8px;
+      height: unset;
+      padding-bottom: calc(11.5px + env(safe-area-inset-bottom, 0));
     }
     .popup {
       top: unset;
-      bottom: 41px;
+      bottom: calc(48px + env(safe-area-inset-bottom, 0));
       max-width: unset;
       width: 100%;
       line-height: 1.45;
+      max-height: calc(var(--vh) * 100 - 48px);
     }
   }
 }
@@ -458,20 +463,61 @@
     margin: 0 0 8px 0;
   }
 
-  .external a[href] {
-    // text-decoration: underline;
+  h3 {
+    margin: 8px -8px -8px;
     display: flex;
+    text-transform: uppercase;
     align-items: center;
-    gap: 2px;
-    opacity: 0.7;
-    transition: 200ms opacity;
-    &:hover {
-      opacity: 1;
+    justify-content: space-between;
+    cursor: pointer;
+    padding: 0.8em 10px;
+
+    font-size: 0.9em;
+    letter-spacing: 0.1em;
+    border-top: 1px solid rgba(121, 163, 207, 0.2);
+
+    > span {
+      display: flex;
+      align-items: center;
+      gap: 0.4em;
+      opacity: 0.7;
+      transition: opacity 200ms;
+
+      > svg {
+        height: 1.4em;
+      }
     }
-    svg {
-      opacity: 0.8;
-      height: 1.2em;
-      transform: translateY(-0.1em);
+
+    > svg {
+      opacity: 0.5;
+      transition: opacity 200ms;
+    }
+
+    &:hover {
+      > span,
+      > svg {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.chromas {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 180px);
+  justify-content: space-evenly;
+  padding-bottom: 0.5em;
+
+  > div {
+    width: 180px;
+    height: 180px;
+    position: relative;
+
+    > div {
+      width: 16px;
+      height: 16px;
+      border-radius: 100%;
+      border: 1px solid white;
     }
   }
 }

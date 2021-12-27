@@ -36,7 +36,7 @@ export async function getServerSideProps(ctx) {
     index("/"),
     index("/skinlines"),
     index("/universes"),
-    fixed("/about"),
+    // fixed("/about"),
     fixed("/changelog"),
   ];
 

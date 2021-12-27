@@ -9,13 +9,14 @@ import { useRouter } from "next/router";
 import {
   ArrowLeft,
   ArrowRight,
+  Download,
   ExternalLink,
   Info,
   Maximize2,
   Minimize2,
   User,
   Users,
-} from "react-feather";
+} from "lucide-react";
 import {
   asset,
   makeCanonical,
@@ -42,8 +43,8 @@ const _supportsPrefetch = () => {
 };
 
 const pseudoPrefetch = (skin, patch) => {
-  new window.Image().src = asset(skin.splashPath, patch);
-  new window.Image().src = asset(skin.uncenteredSplashPath, patch);
+  new window.Image().src = asset(skin.splashPath, patch || "pbe");
+  new window.Image().src = asset(skin.uncenteredSplashPath, patch || "pbe");
 };
 
 const prefetchLinks = (skin, patch) => {
@@ -392,6 +393,14 @@ function _SkinViewer({
               <div onClick={toggleCentered} title="Centered (C)">
                 {centered ? <User /> : <Users />}
               </div>
+              <a
+                href={asset(imgPath, patch || "pbe")}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <ExternalLink />
+              </a>
+
               {meta.changes && (
                 <div className={styles.dropdown}>
                   <select

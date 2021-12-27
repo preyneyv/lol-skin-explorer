@@ -13,6 +13,8 @@ rewrite of the alpha version that was [initially posted to r/leagueoflegends](ht
 
 - Pre-rework splash art, all the way back to patch 7.1!
 - Skin universes to group related skinlines.
-- Supports Add to Homescreen
+- Supports Add to Home Screen (iOS Safari, Android Chrome) and Install (Desktop Chrome).
+- More aggressive caching of resources to keep app snappy.
 - Touch- and mobile-friendly.
-- Server-side rendered and SEO optimized.
+- Statically rendered and SEO optimized.
+- Many QoL enhancements throughout.

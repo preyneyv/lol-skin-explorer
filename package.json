@@ -21,6 +21,7 @@
     "classnames": "^2.3.1",
     "fuse.js": "^6.4.6",
     "ioredis": "^4.28.2",
+    "lucide-react": "^0.16.22",
     "next": "12.0.7",
     "next-absolute-url": "^1.2.2",
     "next-pwa": "^5.4.4",
@@ -28,7 +29,6 @@
     "p-limit": "^4.0.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "react-feather": "^2.0.9",
     "react-swipeable": "^6.2.0",
     "remark-emoji": "^3.0.2",
     "sass": "^1.45.0"

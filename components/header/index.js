@@ -5,7 +5,7 @@ import classNames from "classnames";
 import logo from "../../assets/logo.png";
 import { Omnisearch } from "../omnisearch";
 import { useEscapeTo } from "../../data/helpers";
-import { ArrowLeft, ExternalLink, Menu, Search, X } from "react-feather";
+import { ArrowLeft, ExternalLink, Menu, Search, X } from "lucide-react";
 import { useLayoutEffect, useEffect, useRef, useState } from "react";
 
 export const Header = ({ flat, backTo }) => {
@@ -68,11 +68,11 @@ export const Header = ({ flat, backTo }) => {
                 <a>Changelog</a>
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link href="/about" as="/about">
                 <a>About</a>
               </Link>
-            </li>
+            </li> */}
             {/* <li>
               <Link href="/sponsor" as="/sponsor">
                 <a>Sponsor</a>
@@ -100,6 +100,15 @@ export const Header = ({ flat, backTo }) => {
                 rel="noreferrer"
               >
                 Bug Report <ExternalLink />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/preyneyv/lol-skin-explorer/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                View on GitHub <ExternalLink />
               </a>
             </li>
           </ul>

@@ -111,7 +111,7 @@ export function useEscapeTo(url) {
 }
 
 export function makeTitle(...pages) {
-  let t = [...pages, "League of Legends Skin Explorer"].join(" · ");
+  let t = [...pages, "Skin Explorer", "League of Legends"].join(" · ");
 
   return (
     <>

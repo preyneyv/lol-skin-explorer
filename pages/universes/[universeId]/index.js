@@ -18,7 +18,7 @@ import styles from "../../../styles/collection.module.scss";
 import { Footer, FooterContainer } from "../../../components/footer";
 import { SkinGrid } from "../../../components/skin-grid";
 import Link from "next/link";
-import { Folder, Globe } from "react-feather";
+import { Folder, Globe } from "lucide-react";
 
 function Skinline({ sortByRarity, skinline, linkTo }) {
   const sortedSkins = useSortedSkins(sortByRarity, skinline.skins);

@@ -1,4 +1,4 @@
-import { Folder } from "react-feather";
+import { Folder } from "lucide-react";
 import { SkinViewer } from "../../../../components/skin-viewer";
 import { prepareCollection } from "../../../../components/skin-viewer/helpers";
 import { useProps } from "../../../../data/contexts";

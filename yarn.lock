@@ -3634,6 +3634,11 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+lucide-react@^0.16.22:
+  version "0.16.22"
+  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.16.22.tgz#eb18f68e5ef1ef483fe0b4079e187b81c2d6781d"
+  integrity sha512-xBRTDt8UoM1f35JeCPzeBStDEs1LMvDTJhMw2quRg4Sq4nDPm/rp9pCK864ZMlfPPfhGi8jQSug5NJvEuvWGxw==
+
 magic-string@^0.25.0, magic-string@^0.25.7:
   version "0.25.7"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.7.tgz#3f497d6fd34c669c6798dcb821f2ef31f5445051"
@@ -4319,13 +4324,6 @@ react-dom@17.0.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     scheduler "^0.20.2"
-
-react-feather@^2.0.9:
-  version "2.0.9"
-  resolved "https://registry.yarnpkg.com/react-feather/-/react-feather-2.0.9.tgz#6e42072130d2fa9a09d4476b0e61b0ed17814480"
-  integrity sha512-yMfCGRkZdXwIs23Zw/zIWCJO3m3tlaUvtHiXlW+3FH7cIT6fiK1iJ7RJWugXq7Fso8ZaQyUm92/GOOHXvkiVUw==
-  dependencies:
-    prop-types "^15.7.2"
 
 react-is@17.0.2:
   version "17.0.2"

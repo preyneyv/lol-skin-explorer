@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import { User, Globe, Folder } from "react-feather";
+import { User, Globe, Folder } from "lucide-react";
 import Link from "next/link";
 import styles from "../../styles/index.module.scss";
 

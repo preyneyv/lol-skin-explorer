@@ -4,7 +4,7 @@ import { championSkins } from "../../../../data/helpers";
 import { SkinViewer } from "../../../../components/skin-viewer";
 import { prepareCollection } from "../../../../components/skin-viewer/helpers";
 import { useProps } from "../../../../data/contexts";
-import { User } from "react-feather";
+import { User } from "lucide-react";
 
 export default function Page() {
   const { skin, prev, next, key, name } = useProps();

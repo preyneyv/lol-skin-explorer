@@ -1,7 +1,24 @@
-import { ExternalLink, Folder, Globe, User } from "react-feather";
+import {
+  Box,
+  ChevronDown,
+  ChevronUp,
+  ExternalLink,
+  Folder,
+  Globe,
+  Palette,
+  User,
+} from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
+import { asset } from "../../data/helpers";
 import styles from "./styles.module.scss";
+import { useEffect, useState } from "react";
+
 export function Popup({ skin }) {
+  const [showChromas, setShowChromas] = useState(false);
+  useEffect(() => {
+    setShowChromas(false);
+  }, [skin]);
   const meta = skin.$skinExplorer;
   return (
     <aside className={styles.popup} onTouchStart={(e) => e.stopPropagation()}>
@@ -42,11 +59,52 @@ export function Popup({ skin }) {
       {skin.description && (
         <p dangerouslySetInnerHTML={{ __html: skin.description }} />
       )}
-      <div className={styles.external}>
+      {skin.chromas && (
+        <>
+          <h3 onClick={() => setShowChromas(!showChromas)}>
+            <span>
+              <Palette /> {skin.chromas.length + 1} Chromas
+            </span>
+            {showChromas ? <ChevronUp /> : <ChevronDown />}
+          </h3>
+          {showChromas && (
+            <div className={styles.chromas}>
+              {[skin, ...skin.chromas].map((chroma) => (
+                <div key={chroma.id}>
+                  <a
+                    href={asset(chroma.chromaPath)}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    <Image
+                      unoptimized
+                      src={asset(chroma.chromaPath)}
+                      layout="fill"
+                      alt={skin.name}
+                    />
+                  </a>
+                </div>
+              ))}
+            </div>
+          )}
+        </>
+      )}
+      {/* <div className={styles.external}>
         <a href={meta.teemoGGUrl} target="_blank" rel="noreferrer">
-          View on Teemo.GG <ExternalLink />
+          <Box />
+          View on Teemo.GG
+          <ExternalLink />
         </a>
-      </div>
+      </div> */}
+      <a href={meta.teemoGGUrl} target="_blank" rel="noreferrer">
+        <h3>
+          <span>
+            <Box />
+            View on Teemo.GG
+          </span>
+          <ExternalLink />
+        </h3>
+      </a>
     </aside>
   );
 }
