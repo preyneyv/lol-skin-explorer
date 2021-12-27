@@ -1,0 +1,67 @@
+import Head from "next/head";
+
+import { Layout } from "../components";
+import { makeTitle } from "../data/helpers";
+import styles from "../styles/static.module.scss";
+import Changelog from "../CHANGELOG.md";
+
+# Keybinds & Gestures
+
+<header>
+
+## Indexes
+
+###### [`/`](/) [`/universes`](/universes) [`/skinlines`](/skinlines)
+
+</header>
+
+| Keybinds       |                                                    |
+| -------------- | -------------------------------------------------- |
+| _Any Key_      | Focus Omnisearch                                   |
+| `Left` `Right` | Cycle between champions, universes, and skinlines. |
+
+<header>
+
+## Collections
+
+###### [`/champions/aatrox`](/champions/aatrox)
+
+</header>
+
+| Keybinds  |                  |
+| --------- | ---------------- |
+| _Any Key_ | Focus Omnisearch |
+| `Esc`     | Go Back to Index |
+
+<header>
+
+## Viewer
+
+###### [`/champions/aatrox/skins/266000`](/champions/aatrox/skins/266000)
+
+</header>
+
+| Keybinds       |                                                             |
+| -------------- | ----------------------------------------------------------- |
+| `Esc`          | Go Back to Collection                                       |
+| `Z`            | Toggle Zoom                                                 |
+| `C`            | Toggle Centered (Champ Select) and Uncentered (Full Splash) |
+| `Left` `Right` | Go to previous/next skin in the collection                  |
+| `Up` `Down`    | Cycle between older versions of splash art.                 |
+
+<br />
+
+| Gestures                     |                                             |
+| ---------------------------- | ------------------------------------------- |
+| `Double Tap`                 | Toggle Zoom                                 |
+| ` Swipe Left` `Swipe Right ` | Go to next/previous skin in the collection  |
+| `Swipe Up`                   | Cycle between older versions of splash art. |
+
+export default ({ children }) => (
+  <Layout backTo="/">
+    <>
+      <Head>{makeTitle("Keybinds & Gestures")}</Head>
+    </>
+    <main className={styles.main}>{children}</main>
+  </Layout>
+);

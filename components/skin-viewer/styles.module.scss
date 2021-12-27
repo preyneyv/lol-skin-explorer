@@ -421,7 +421,9 @@
       max-width: unset;
       width: 100%;
       line-height: 1.45;
-      max-height: calc(var(--vh) * 100 - 48px);
+      max-height: calc(
+        var(--vh) * 100 - (48px + env(safe-area-inset-bottom, 0))
+      );
     }
   }
 }

@@ -20,11 +20,12 @@
     letter-spacing: -0.05em;
     color: white;
     margin-bottom: 0.5em;
+    margin-top: 1em;
+    line-height: 1.1;
   }
 
   h2 {
     font-size: 2em;
-    color: white;
     margin: 0;
     font-weight: 500;
 
@@ -52,12 +53,41 @@
     opacity: 1;
     color: rgb(96, 112, 134);
     margin: 0;
+
+    a[href] {
+      text-decoration: none;
+    }
+  }
+
+  code {
+    background: rgba(121, 163, 207, 0.1);
+    white-space: nowrap;
+    padding: 0 3px;
+    font-family: inherit;
+    border-radius: 2px;
+  }
+
+  table {
+    border-collapse: collapse;
+    width: 100%;
+
+    td,
+    th {
+      border: 1px solid rgb(31, 39, 48);
+      padding: 6px 8px;
+      text-align: left;
+    }
+
+    th {
+      background: rgb(18, 23, 29);
+    }
   }
 
   header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin: 1em 0;
   }
 
   hr {
@@ -89,6 +119,7 @@
     header {
       flex-direction: column;
       align-items: flex-start;
+      gap: 0.4em;
     }
 
     h6 {

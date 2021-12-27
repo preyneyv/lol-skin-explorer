@@ -58,8 +58,8 @@ export const Header = ({ flat, backTo }) => {
           <Menu />
           <ul>
             <li>
-              <Link href="/keyboard">
-                <a>Keyboard Shortcuts</a>
+              <Link href="/shortcuts">
+                <a>Keybinds &amp; Gestures</a>
               </Link>
             </li>
             <li className={styles.divider} />
