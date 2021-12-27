@@ -1,0 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Poppins", "Roboto", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* background: linear-gradient(to top right, rgb(40, 38, 48), rgb(12, 8, 12)); */
+  background: linear-gradient(to top, #050505, #111);
+  background-attachment: fixed;
+  color: white;
+  overflow-x: hidden;
+}
+
+h1 {
+  margin: 0;
+}
+
+a[href] {
+  color: inherit;
+}
+
+hr {
+  margin: 36px 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}

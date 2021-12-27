@@ -1,0 +1,19 @@
+.center {
+  width: 600px;
+  max-width: calc(100vw - 32px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.btn {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 12px 18px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
