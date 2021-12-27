@@ -2,7 +2,7 @@
 
 <header>
 
-## [v1.0.0](https://github.com/preyneyv/)
+## [v1.0.0](https://github.com/preyneyv/lol-skin-explorer/tree/v1.0.0)
 
 ###### December 27th, 2021
 
@@ -13,8 +13,10 @@ rewrite of the alpha version that was [initially posted to r/leagueoflegends](ht
 
 - Pre-rework splash art, all the way back to patch 7.1!
 - Skin universes to group related skinlines.
+- You can also see skin chromas now.
+- Touch- and mobile-friendly.
+- Supports rich embeds in apps like Discord, Twitter, etc.
 - Supports Add to Home Screen (iOS Safari, Android Chrome) and Install (Desktop Chrome).
 - More aggressive caching of resources to keep app snappy.
-- Touch- and mobile-friendly.
 - Statically rendered and SEO optimized.
 - Many QoL enhancements throughout.

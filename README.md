@@ -1,34 +1,23 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Skin Explorer Logo](assets/banner.png)
 
-## Getting Started
+# [Skin Explorer](https://skinexplorer.lol)
 
-First, run the development server:
+![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=skin-explorer)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+Ever wanted to look at the splash art for a champion, but didn't feel like opening up your client just to do it? How about casually browsing through a specific skin universe? Well, you can do all that and more with Skin Explorer!
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- Synchronized with the PBE patch cycle! (See skins before they hit live servers.)
+- Skins grouped by champions, skinlines, and universes.
+- Browse through old splash art (all the way back to patch 7.1).
+- Add to Home Screen on Safari (iOS) and Chrome (Android) to get a more immersive experience!
+- Keyboard shortcuts and gestures for fluent navigation.
+- Extremely fast load times.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Special Thanks
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- The team running [CommunityDragon](https://communitydragon.org/) for maintaining such a complete archive of game files. This project wouldn't exist without them.
+- The commentors on [my post on r/leagueoflegends](https://www.reddit.com/r/leagueoflegends/comments/r7c0ir/i_made_skin_explorer_an_online_skin_splash_art/) for lots of feedback, suggestions, and resources.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+> Skin Explorer was created under Riot Games' "Legal Jibber Jabber" policy using assets owned by Riot Games. Riot Games does not endorse or sponsor this project.

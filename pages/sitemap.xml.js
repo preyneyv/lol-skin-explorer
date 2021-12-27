@@ -27,7 +27,7 @@ const fixed = (url) => ({
   loc: abs(url),
   changefreq: "weekly",
   lastmod: new Date().toISOString(),
-  priority: 0.5,
+  priority: 0.3,
 });
 
 export async function getServerSideProps(ctx) {
@@ -36,7 +36,7 @@ export async function getServerSideProps(ctx) {
     index("/"),
     index("/skinlines"),
     index("/universes"),
-    // fixed("/about"),
+    fixed("/shortcuts"),
     fixed("/changelog"),
   ];
 
