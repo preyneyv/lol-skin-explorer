@@ -36,6 +36,7 @@
   color: white;
 }
 
+.parents,
 .subtitle {
   margin: 32px 0 -24px;
   padding-left: 32px;
@@ -45,6 +46,22 @@
   opacity: 0.5;
   font-weight: 300;
   color: rgb(165, 178, 196);
+}
+
+.parents {
+  line-height: 1.1;
+  a {
+    display: flex;
+    align-items: center;
+    gap: 0.3em;
+  }
+  svg {
+    height: 1.2em;
+  }
+  padding-bottom: 18px;
+  margin: 0;
+  gap: 0.3em;
+  align-items: center;
 }
 
 .description {
@@ -97,6 +114,7 @@
 @media screen and (max-width: 1000px) {
   .title,
   .groupTitle,
+  .parents,
   .subtitle {
     padding-left: 24px;
   }
@@ -109,6 +127,7 @@
   .title,
   .groupTitle,
   .subtitle,
+  .parents,
   .controls {
     padding-left: 16px;
   }

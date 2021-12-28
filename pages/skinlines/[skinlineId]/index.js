@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
+import Link from "next/link";
 import { Fallback } from "../../../components/fallback";
 import { Footer, FooterContainer } from "../../../components/footer";
 import { useProps } from "../../../data/contexts";
@@ -16,10 +17,10 @@ import {
 } from "../../../data/helpers";
 import { store } from "../../../data/store";
 import styles from "../../../styles/collection.module.scss";
-import { Folder } from "lucide-react";
+import { Folder, Globe } from "lucide-react";
 
 function _Page() {
-  const { skinline, skins } = useProps();
+  const { skinline, universes, skins } = useProps();
   const [sortBy, setSortBy] = useLocalStorageState(
     "skinline__sortBy",
     "champion"
@@ -59,6 +60,22 @@ function _Page() {
                 Skinline
               </h2>
               <h1 className={styles.title}>{skinline.name}</h1>
+              {!!universes.length && (
+                <div className={styles.parents}>
+                  <Link
+                    key={universes[0].id}
+                    href="/universes/[universeId]"
+                    as={`/universes/${universes[0].id}`}
+                    prefetch={false}
+                  >
+                    <a>
+                      <Globe />
+
+                      <span>Part of the {universes[0].name} universe.</span>
+                    </a>
+                  </Link>
+                </div>
+              )}
               <div className={styles.controls}>
                 <label>
                   <span>Sort By</span>
@@ -97,9 +114,10 @@ export async function getStaticProps(ctx) {
   const { skinlineId } = ctx.params;
   await store.fetch();
 
-  const [champions, skinlines, allSkins] = await Promise.all([
+  const [champions, skinlines, allUniverses, allSkins] = await Promise.all([
     store.patch.champions,
     store.patch.skinlines,
+    store.patch.universes,
     store.patch.skins,
   ]);
 
@@ -111,11 +129,15 @@ export async function getStaticProps(ctx) {
   }
 
   const skins = skinlineSkins(skinline.id, allSkins, champions);
+  const universes = allUniverses.filter((u) =>
+    u.skinSets.includes(skinline.id)
+  );
 
   return {
     props: {
       skinline,
       skins,
+      universes,
       patch: store.patch.fullVersionString,
     },
   };

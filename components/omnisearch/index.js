@@ -24,7 +24,6 @@ export const Omnisearch = React.forwardRef(({}, ref) => {
   const [matches, setMatches] = useState([]);
 
   useEffect(() => {
-    if (!query) return setMatches([]);
     axios
       .get("/api/omnisearch", { params: { query } })
       .then((res) => setMatches(res.data));
@@ -105,13 +104,15 @@ export const Omnisearch = React.forwardRef(({}, ref) => {
               key={i}
             >
               {match.image && (
-                <Image
-                  unoptimized
-                  src={asset(match.image)}
-                  alt={match.name}
-                  width={36}
-                  height={36}
-                />
+                <div className={styles.image}>
+                  <Image
+                    unoptimized
+                    src={asset(match.image)}
+                    alt={match.name}
+                    width={36}
+                    height={36}
+                  />
+                </div>
               )}
               <div>
                 <div>{match.name}</div>

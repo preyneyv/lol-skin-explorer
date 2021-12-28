@@ -444,22 +444,24 @@ function _SkinViewer({
             className={styles.name}
             onClickCapture={(e) => setShowInfoBox(!showInfoBox)}
           >
-            <span>
-              {r && (
-                <Image
-                  src={r[0]}
-                  title={r[1]}
-                  alt={r[1]}
-                  objectFit="contain"
-                  objectPosition="center"
-                  layout="fixed"
-                  width={18}
-                  height={18}
-                />
-              )}
-              {skin.name}
-            </span>
-            <Info />
+            <div>
+              <span>
+                {r && (
+                  <Image
+                    src={r[0]}
+                    title={r[1]}
+                    alt={r[1]}
+                    objectFit="contain"
+                    objectPosition="center"
+                    layout="fixed"
+                    width={18}
+                    height={18}
+                  />
+                )}
+                {skin.name}
+              </span>
+              <Info />
+            </div>
           </div>
           <Popup skin={skin} />
         </div>

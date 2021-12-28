@@ -9,6 +9,7 @@ import {
   classes,
   makeDescription,
   makeTitle,
+  useArrowNavigation,
   useLocalStorageState,
 } from "../data/helpers";
 import { store } from "../data/store";
@@ -59,6 +60,8 @@ export default function Index() {
     localStorage.lastIndex = "/";
   }, []);
 
+  const handlers = useArrowNavigation("/skinlines", "/universes");
+
   const { champions } = useProps();
 
   return (
@@ -69,7 +72,7 @@ export default function Index() {
           `Browse through League of Legends skins from the comfort of your browser. Take a look at these ${champions.length} champions!`
         )}
       </Head>
-      <div className={styles.container}>
+      <div {...handlers} className={styles.container}>
         <Nav
           active="champions"
           filters={

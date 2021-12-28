@@ -1,8 +1,8 @@
-import absoluteUrl from "next-absolute-url";
 import { CDRAGON, ROOT } from "./constants";
 import { useProps } from "./contexts";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useSwipeable } from "react-swipeable";
 
 export function dataRoot(patch = "pbe") {
   return `${CDRAGON}/${patch}/plugins/rcp-be-lol-game-data/global/default`;
@@ -100,7 +100,7 @@ export function useEscapeTo(url) {
     function onKeyDown(e) {
       if (document.activeElement !== document.body) return; // Ignore events when an input is active.
       if (e.code === "Escape") {
-        router.push(url);
+        router.push(url, url);
         e.preventDefault();
       }
     }
@@ -110,8 +110,42 @@ export function useEscapeTo(url) {
   }, [router, url]);
 }
 
+export function useArrowNavigation(left, right) {
+  const handlers = useSwipeable({
+    delta: 50,
+    onSwipedLeft(e) {
+      e.event.preventDefault();
+      router.push(right, right);
+    },
+    onSwipedRight(e) {
+      e.event.preventDefault();
+      router.push(left, left);
+    },
+  });
+  const router = useRouter();
+  useEffect(() => {
+    function onKeyDown(e) {
+      if (document.activeElement !== document.body) return; // Ignore events when an input is active.
+      if (e.key === "ArrowLeft") {
+        router.push(left, left);
+        e.preventDefault();
+      } else if (e.key === "ArrowRight") {
+        router.push(right, right);
+        e.preventDefault();
+      }
+    }
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [router, left, right]);
+  return handlers;
+}
+
 export function makeTitle(...pages) {
-  let t = [...pages, "Skin Explorer", "League of Legends"].join(" · ");
+  let t = [...pages, "Skin Explorer"].join(" · ");
+  if (pages.length === 0) {
+    t = "Skin Explorer · League of Legends";
+  }
 
   return (
     <>

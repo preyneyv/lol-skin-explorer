@@ -52,8 +52,7 @@
 
 .search ul li img {
   height: 36px;
-  width: 36px;
-  background: rgba(121, 163, 207, 0.1);
+  width: 36px !important;
 }
 
 .search ul li div > div {
@@ -66,4 +65,19 @@
 
 .search ul li.selected {
   background: rgba(121, 163, 207, 0.1);
+}
+
+.image {
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  background: rgba(121, 163, 207, 0.1);
+}
+
+@media screen and (max-width: 600px) {
+  .search ul {
+    position: fixed;
+    top: 56px;
+    width: 100%;
+  }
 }

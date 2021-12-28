@@ -2,6 +2,21 @@
 
 <header>
 
+## [v1.0.1](https://github.com/preyneyv/lol-skin-explorer/tree/v1.0.1)
+
+###### December 27th, 2021
+
+</header>
+
+- Bugfix for scaling on viewer popup.
+- Added backlink to universe from skinline.
+- Visual bugfix for omnisearch on mobile.
+- Added swipe to navigate on indexes.
+
+---
+
+<header>
+
 ## [v1.0.0](https://github.com/preyneyv/lol-skin-explorer/tree/v1.0.0)
 
 ###### December 27th, 2021

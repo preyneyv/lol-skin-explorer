@@ -7,8 +7,26 @@ class Document extends BaseDocument {
         <Head>
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8" />
           <meta name="theme-color" content="#0C0F13" />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://raw.communitydragon.org" />
+          <link
+            rel="preconnect"
+            href="https://fonts.googleapis.com"
+            crossOrigin="true"
+          />
+          <link
+            rel="preconnect"
+            href="https://raw.communitydragon.org"
+            crossOrigin="true"
+          />
+          <link
+            rel="preconnect"
+            href="https://vitals.vercel-insights.com"
+            crossOrigin="true"
+          />
+          <link
+            rel="preconnect"
+            href="https://analytics.skinexplorer.lol"
+            crossOrigin="true"
+          />
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"

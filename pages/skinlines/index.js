@@ -6,7 +6,11 @@ import Link from "next/link";
 import { store } from "../../data/store";
 import { Nav } from "../../components/nav";
 import { Layout } from "../../components";
-import { makeTitle, makeDescription } from "../../data/helpers";
+import {
+  makeTitle,
+  makeDescription,
+  useArrowNavigation,
+} from "../../data/helpers";
 
 function SkinlinesList() {
   const { skinlines } = useProps();
@@ -31,6 +35,7 @@ export default function Index() {
   useEffect(() => {
     localStorage.lastIndex = "/skinlines";
   }, []);
+  const handlers = useArrowNavigation("/universes", "/");
   const { skinlines } = useProps();
 
   return (
@@ -41,7 +46,7 @@ export default function Index() {
           `Browse through League of Legends skins from the comfort of your browser. Take a look at these ${skinlines.length} skinlines!`
         )}
       </Head>
-      <div className={styles.container}>
+      <div {...handlers} className={styles.container}>
         <Nav active="skinlines" />
         <main>
           <SkinlinesList />
