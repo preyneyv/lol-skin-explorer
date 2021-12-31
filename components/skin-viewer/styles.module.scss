@@ -296,6 +296,11 @@
     // align-items: center;
     transition: background 300ms ease, opacity 300ms ease;
     pointer-events: auto;
+
+    h1 {
+      all: inherit;
+    }
+
     > div {
       display: flex;
       gap: 8px;

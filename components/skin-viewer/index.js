@@ -1,5 +1,12 @@
 import { Loading } from "../loading";
-import { useCallback, useRef, useEffect, useMemo, useState } from "react";
+import {
+  useCallback,
+  useRef,
+  useEffect,
+  useMemo,
+  useState,
+  Fragment,
+} from "react";
 import classNames from "classnames";
 import { useSwipeable } from "react-swipeable";
 import Head from "next/head";
@@ -325,7 +332,9 @@ function _SkinViewer({
         {makeCanonical(`/champions/${meta.champion.key}/skins/${skin.id}`)}
         {prefetchLinks(skin)}
         {meta.changes &&
-          meta.changes.map((patch) => prefetchLinks(skin, patch))}
+          meta.changes.map((patch) => (
+            <Fragment key={patch}>{prefetchLinks(skin, patch)}</Fragment>
+          ))}
         {prev && prefetchLinks(prev)}
         {next && prefetchLinks(next)}
         <style>
@@ -458,7 +467,7 @@ function _SkinViewer({
                     height={18}
                   />
                 )}
-                {skin.name}
+                <h1>{skin.name}</h1>
               </span>
               <Info />
             </div>

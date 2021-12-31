@@ -2,6 +2,18 @@
 
 <header>
 
+## [v1.0.2](https://github.com/preyneyv/lol-skin-explorer/tree/v1.0.2)
+
+###### December 31th, 2021
+
+</header>
+
+- Added H1 tags to skin viewer to help with SEO indexing.
+
+---
+
+<header>
+
 ## [v1.0.1](https://github.com/preyneyv/lol-skin-explorer/tree/v1.0.1)
 
 ###### December 27th, 2021
