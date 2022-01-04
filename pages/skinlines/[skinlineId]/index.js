@@ -29,6 +29,7 @@ function _Page() {
   const linkTo = (skin) => `/skinlines/${skinline.id}/skins/${skin.id}`;
 
   const sortedSkins = useSortedSkins(sortBy === "rarity", skins);
+  const splash = skins.length > 0 && asset(skins[0].uncenteredSplashPath);
 
   return (
     <>
@@ -39,20 +40,22 @@ function _Page() {
             skins.length == 1 ? "" : "s"
           } in the League of Legends ${skinline.name} skinline!`
         )}
-        {makeImage(asset[skins[0]?.uncenteredSplashPath], skinline.name)}
+        {splash && makeImage(splash, skinline.name)}
       </Head>
       <div className={styles.container}>
         <FooterContainer>
           <div>
-            <div className={styles.background}>
-              <Image
-                unoptimized
-                layout="fill"
-                objectFit="cover"
-                src={asset(skins[0]?.uncenteredSplashPath)}
-                alt={skinline.name}
-              />
-            </div>
+            {splash && (
+              <div className={styles.background}>
+                <Image
+                  unoptimized
+                  layout="fill"
+                  objectFit="cover"
+                  src={splash}
+                  alt={skinline.name}
+                />
+              </div>
+            )}
             <Header backTo="/skinlines" flat />
             <main>
               <h2 className={styles.subtitle}>

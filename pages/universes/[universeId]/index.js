@@ -50,7 +50,10 @@ function _Page() {
   );
 
   const linkTo = (skin) => `/universes/${universe.id}/skins/${skin.id}`;
-
+  const splash =
+    skinlines.length > 0 &&
+    skinlines[0].skins.length > 0 &&
+    asset(skinlines[0].skins[0].uncenteredSplashPath);
   return (
     <>
       <Head>
@@ -59,23 +62,22 @@ function _Page() {
           universe.description ||
             `Browse through all the skins in the League of Legends ${universe.name} universe!`
         )}
-        {makeImage(
-          asset(skinlines[0].skins[0].uncenteredSplashPath),
-          universe.name
-        )}
+        {splash && makeImage(splash, universe.name)}
       </Head>
       <div className={styles.container}>
         <FooterContainer>
           <div>
-            <div className={styles.background}>
-              <Image
-                unoptimized
-                layout="fill"
-                objectFit="cover"
-                src={asset(skinlines[0].skins[0].uncenteredSplashPath)}
-                alt={universe.name}
-              />
-            </div>
+            {splash && (
+              <div className={styles.background}>
+                <Image
+                  unoptimized
+                  layout="fill"
+                  objectFit="cover"
+                  src={splash}
+                  alt={universe.name}
+                />
+              </div>
+            )}
             <Header backTo="/universes" flat />
             <main>
               <h2 className={styles.subtitle}>

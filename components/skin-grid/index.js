@@ -4,7 +4,13 @@ import Link from "next/link";
 import { asset, rarity } from "../../data/helpers";
 import styles from "./styles.module.scss";
 
-export function SkinGrid({ skins, linkTo, viewerPage }) {
+export function SkinGrid({ skins, linkTo }) {
+  if (skins.length === 0)
+    return (
+      <div className={styles.grid} style={{ gridTemplateColumns: "1fr" }}>
+        <span className={styles.error}>No skins (yet)!</span>
+      </div>
+    );
   return (
     <div className={styles.grid}>
       {skins.map((skin) => {
