@@ -1,5 +1,7 @@
 # *
 User-agent: *
+Disallow: /_next/
+Disallow: /api/
 Allow: /
 
 # Host
