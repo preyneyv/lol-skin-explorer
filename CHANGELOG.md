@@ -2,6 +2,21 @@
 
 <header>
 
+## [v1.0.3](https://github.com/preyneyv/lol-skin-explorer/tree/v1.0.3)
+
+###### January 4th, 2022
+
+</header>
+
+- Turns out skinlines can be empty. Weird. Fixed fatal bugs on universe and
+  skinline pages.
+- Added a download button to the skin viewer. (Shortcut: `D`)
+- Fixed Wukong Teemo.GG hyperlink.
+
+---
+
+<header>
+
 ## [v1.0.2](https://github.com/preyneyv/lol-skin-explorer/tree/v1.0.2)
 
 ###### December 31th, 2021

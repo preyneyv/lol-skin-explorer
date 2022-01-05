@@ -166,6 +166,18 @@ function _SkinViewer({
     }
   }, [showUI, setShowUI]);
 
+  const vidPath = supportsVideo
+    ? centered
+      ? skin.splashVideoPath
+      : skin.collectionSplashVideoPath
+    : false;
+  const imgPath = centered ? skin.splashPath : skin.uncenteredSplashPath;
+  const objectFit = fill ? "cover" : "contain";
+  const objectPosition = fill
+    ? `${position.left * 100}% ${position.top * 100}% `
+    : "center center";
+  const r = rarity(skin);
+
   const goPrevious = useCallback(
     (swipe) => {
       if (!prev || exiting) return;
@@ -205,6 +217,26 @@ function _SkinViewer({
     [centered, setCentered]
   );
 
+  /**
+   * Download the current image. We have to do it this way because Chrome
+   * decided that a[href][download] shouldn't work for CORS stuff.
+   */
+  const downloadActive = useCallback(async () => {
+    const image = await fetch(asset(imgPath, patch || "pbe"));
+    const imageBlog = await image.blob();
+    const imageURL = URL.createObjectURL(imageBlog);
+
+    const link = document.createElement("a");
+    link.href = imageURL;
+    link.download = `${skin.name}${
+      patch ? " - Patch " + patch.replaceAll(".", "_") : ""
+    }`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(imageURL);
+  }, [imgPath, patch, skin]);
+
   useEffect(() => {
     function onKeyDown(e) {
       if (e.key === "ArrowLeft") goPrevious(false);
@@ -215,10 +247,19 @@ function _SkinViewer({
         setPatch(meta.changes[meta.changes.indexOf(patch) + 1] || patch);
       if (e.code === "KeyZ") toggleFill();
       if (e.code === "KeyC") toggleCentered();
+      if (e.code === "KeyD") downloadActive();
     }
     document.addEventListener("keydown", onKeyDown);
     return () => document.removeEventListener("keydown", onKeyDown);
-  }, [goNext, goPrevious, toggleFill, toggleCentered, patch, meta.changes]);
+  }, [
+    goNext,
+    goPrevious,
+    toggleFill,
+    toggleCentered,
+    downloadActive,
+    patch,
+    meta.changes,
+  ]);
 
   useEffect(() => {
     function onClick() {
@@ -310,17 +351,6 @@ function _SkinViewer({
     delta: { left: 3, right: 3, up: 50 },
   });
 
-  const vidPath = supportsVideo
-    ? centered
-      ? skin.splashVideoPath
-      : skin.collectionSplashVideoPath
-    : false;
-  const imgPath = centered ? skin.splashPath : skin.uncenteredSplashPath;
-  const objectFit = fill ? "cover" : "contain";
-  const objectPosition = fill
-    ? `${position.left * 100}% ${position.top * 100}% `
-    : "center center";
-  const r = rarity(skin);
   return (
     <>
       <Head>
@@ -402,13 +432,9 @@ function _SkinViewer({
               <div onClick={toggleCentered} title="Centered (C)">
                 {centered ? <User /> : <Users />}
               </div>
-              <a
-                href={asset(imgPath, patch || "pbe")}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <ExternalLink />
-              </a>
+              <div onClick={downloadActive} title="Download (D)">
+                <Download />
+              </div>
 
               {meta.changes && (
                 <div className={styles.dropdown}>

@@ -67,7 +67,7 @@ export function rarity(skin) {
 
 export function teemoGGUrl(skin, champion) {
   const skinId = splitId(skin.id)[1];
-  return `https://teemo.gg/model-viewer?game=league-of-legends&type=champions&object=${champion.key}&skinid=${champion.key}-${skinId}`;
+  return `https://teemo.gg/model-viewer?game=league-of-legends&type=champions&object=${champion.alias.toLowerCase()}&skinid=${champion.alias.toLowerCase()}-${skinId}`;
 }
 
 export function useLocalStorageState(name, initialValue) {

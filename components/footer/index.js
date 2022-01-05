@@ -30,15 +30,29 @@ export function Footer({ flat }) {
           .
         </p>
         <p>
-          Skin Explorer was created under Riot Games&apos; &quot;Legal Jibber
-          Jabber&quot; policy using assets owned by Riot Games. Riot Games does
-          not endorse or sponsor this project.
+          Skin Explorer was created under Riot Games&apos;{" "}
+          <a
+            target="_blank"
+            href="https://www.riotgames.com/en/legal"
+            rel="noreferrer"
+          >
+            &quot;Legal Jibber Jabber&quot;
+          </a>{" "}
+          policy using assets owned by Riot Games. Riot Games does not endorse
+          or sponsor this project.
         </p>
       </div>
       <div>
         {patch && (
           <p>
-            <b>Patch {patch}</b>
+            <a
+              href="https://raw.communitydragon.org/pbe"
+              target="_blank"
+              style={{ textDecoration: "none" }}
+              rel="noreferrer"
+            >
+              <b>Patch {patch}</b>
+            </a>
           </p>
         )}
         <p>
@@ -47,6 +61,7 @@ export function Footer({ flat }) {
             href={`https://github.com/preyneyv/lol-skin-explorer/tree/${
               process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA ?? "main"
             }`}
+            style={{ textDecoration: "none" }}
             rel="noreferrer"
           >
             Skin Explorer v{publicRuntimeConfig?.version}
