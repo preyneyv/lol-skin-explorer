@@ -2,6 +2,18 @@
 
 <header>
 
+## [v1.0.5](https://github.com/preyneyv/lol-skin-explorer/tree/v1.0.5)
+
+###### January 5th, 2022
+
+</header>
+
+- Modified `robots.txt` to disallow internal pages.
+
+---
+
+<header>
+
 ## [v1.0.4](https://github.com/preyneyv/lol-skin-explorer/tree/v1.0.4)
 
 ###### January 5th, 2022
