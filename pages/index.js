@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "../components/image";
 import { useEffect, useMemo } from "react";
 import Head from "next/head";
 import { useProps } from "../data/contexts";
@@ -15,6 +15,7 @@ import {
 import { store } from "../data/store";
 import { Nav } from "../components/nav";
 import { Layout } from "../components";
+import { prepareAdditions } from "../components/new-additions/helpers";
 
 function ChampionsList({ role }) {
   const { champions } = useProps();
@@ -100,7 +101,7 @@ export default function Index() {
   );
 }
 
-Index.getLayout = (page) => <Layout>{page}</Layout>;
+Index.getLayout = (page) => <Layout withNew>{page}</Layout>;
 
 export async function getStaticProps() {
   await store.fetch();
@@ -111,6 +112,7 @@ export async function getStaticProps() {
     props: {
       champions,
       patch: store.patch.fullVersionString,
+      added: await prepareAdditions(),
     },
   };
 }

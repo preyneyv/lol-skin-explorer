@@ -8,7 +8,7 @@ import {
   Palette,
   User,
 } from "lucide-react";
-import Image from "next/image";
+import Image from "../image";
 import Link from "next/link";
 import { asset } from "../../data/helpers";
 import styles from "./styles.module.scss";

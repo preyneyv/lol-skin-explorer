@@ -11,6 +11,7 @@ import {
   makeTitle,
   useArrowNavigation,
 } from "../../data/helpers";
+import { prepareAdditions } from "../../components/new-additions/helpers";
 
 function UniversesList() {
   const { universes, skinlines } = useProps();
@@ -81,7 +82,7 @@ export default function Index() {
   );
 }
 
-Index.getLayout = (page) => <Layout>{page}</Layout>;
+Index.getLayout = (page) => <Layout withNew>{page}</Layout>;
 
 export async function getStaticProps() {
   await store.fetch();
@@ -96,6 +97,7 @@ export async function getStaticProps() {
       universes,
       skinlines,
       patch: store.patch.fullVersionString,
+      added: await prepareAdditions(),
     },
   };
 }

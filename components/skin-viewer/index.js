@@ -11,13 +11,12 @@ import classNames from "classnames";
 import { useSwipeable } from "react-swipeable";
 import Head from "next/head";
 import Link from "next/link";
-import Image from "next/image";
+import Image from "../image";
 import { useRouter } from "next/router";
 import {
   ArrowLeft,
   ArrowRight,
   Download,
-  ExternalLink,
   Info,
   Maximize2,
   Minimize2,

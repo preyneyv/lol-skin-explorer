@@ -1,5 +1,5 @@
 import classNames from "classnames";
-import Image from "next/image";
+import Image from "../image";
 import Link from "next/link";
 import { asset, rarity } from "../../data/helpers";
 import styles from "./styles.module.scss";

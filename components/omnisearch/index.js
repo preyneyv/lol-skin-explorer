@@ -1,5 +1,5 @@
 import React, { useImperativeHandle } from "react";
-import Image from "next/image";
+import Image from "../image";
 import { useRouter } from "next/router";
 import { useRef, useState, useEffect } from "react";
 import { asset } from "../../data/helpers";

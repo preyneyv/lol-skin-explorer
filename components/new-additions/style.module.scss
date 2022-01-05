@@ -1,0 +1,102 @@
+.container {
+  border-bottom: 1px solid rgb(31, 39, 48);
+  color: rgb(165, 178, 196);
+  h3 {
+    margin: 6px 10px 4px;
+    //   display: none;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    font-size: 16px;
+  }
+
+  .gridContainer {
+    overflow: auto;
+    // width: 100vw;
+    padding: 0 10px 10px;
+  }
+
+  .grid {
+    display: grid;
+    grid-auto-columns: 120px;
+    grid-auto-flow: column;
+    gap: 10px;
+    &::after {
+      content: "";
+      width: 1px;
+      margin-left: -1px;
+    }
+  }
+
+  .skin {
+    position: relative;
+    display: block;
+    height: 150px;
+    background: rgba(121, 163, 207, 0.1);
+
+    .tile {
+      transition: transform 200ms;
+    }
+
+    &:hover .tile {
+      transform: scale(1.1);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(8, 13, 19, 0.8), transparent);
+    }
+
+    > div {
+      z-index: 2;
+      font-size: 14px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      box-sizing: border-box;
+      padding: 6px;
+      width: 100%;
+      line-height: 1.25;
+      filter: drop-shadow(0 3px 7px rgba(0, 0, 0, 0.8));
+    }
+  }
+
+  @media (pointer: fine) {
+    .grid {
+      grid-auto-flow: row;
+      grid-auto-columns: unset;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
+      &::after {
+        display: none;
+      }
+
+      .skin {
+        height: 48px;
+        display: grid;
+        align-items: center;
+        grid-template-columns: 48px 1fr;
+
+        &::after {
+          display: none;
+        }
+
+        .imageContainer {
+          background: rgba(121, 163, 207, 0.1);
+          position: relative;
+          height: 100%;
+        }
+
+        > div {
+          padding: 0 10px;
+          position: static;
+        }
+      }
+    }
+  }
+}

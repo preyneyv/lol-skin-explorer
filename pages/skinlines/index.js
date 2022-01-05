@@ -11,6 +11,7 @@ import {
   makeDescription,
   useArrowNavigation,
 } from "../../data/helpers";
+import { prepareAdditions } from "../../components/new-additions/helpers";
 
 function SkinlinesList() {
   const { skinlines } = useProps();
@@ -56,7 +57,7 @@ export default function Index() {
   );
 }
 
-Index.getLayout = (page) => <Layout>{page}</Layout>;
+Index.getLayout = (page) => <Layout withNew>{page}</Layout>;
 
 export async function getStaticProps() {
   await store.fetch();
@@ -67,6 +68,7 @@ export async function getStaticProps() {
     props: {
       skinlines,
       patch: store.patch.fullVersionString,
+      added: await prepareAdditions(),
     },
   };
 }

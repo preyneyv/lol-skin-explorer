@@ -2,6 +2,23 @@
 
 <header>
 
+## [v1.0.4](https://github.com/preyneyv/lol-skin-explorer/tree/v1.0.4)
+
+###### January 5th, 2022
+
+</header>
+
+- Added a "new additions" section on all indexes that shows all the skins in
+  the PBE that aren't on the live patch. Maybe there's a better way to
+  determine these, but I'll revisit it later.
+- Added a placeholder image for non-existent images (as happens often with
+  newly released skins).
+- Minor styling changes.
+
+---
+
+<header>
+
 ## [v1.0.3](https://github.com/preyneyv/lol-skin-explorer/tree/v1.0.3)
 
 ###### January 4th, 2022
