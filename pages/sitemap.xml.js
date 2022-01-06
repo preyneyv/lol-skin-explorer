@@ -57,13 +57,13 @@ export async function getServerSideProps(ctx) {
   skinlines.map((l) => {
     const s = (lineSkins[l.id] = skinlineSkins(l.id, skins, champions));
     fields.push(collection(`/skinlines/${l.id}`));
-    fields.push(...s.map((s) => viewer(`/skinlines/${l.id}/skins/${s.id}`)));
+    // fields.push(...s.map((s) => viewer(`/skinlines/${l.id}/skins/${s.id}`)));
   });
 
   universes.map((u) => {
     const s = u.skinSets.map((l) => lineSkins[l]).flat();
     fields.push(collection(`/universes/${u.id}`));
-    fields.push(...s.map((s) => viewer(`/universes/${u.id}/skins/${s.id}`)));
+    // fields.push(...s.map((s) => viewer(`/universes/${u.id}/skins/${s.id}`)));
   });
 
   return getServerSideSitemap(ctx, fields);
