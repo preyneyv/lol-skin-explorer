@@ -2,6 +2,19 @@
 
 <header>
 
+## [v1.0.6](https://github.com/preyneyv/lol-skin-explorer/tree/v1.0.6)
+
+###### January 5th, 2022
+
+</header>
+
+- Fixed placeholder images not loading sometimes.
+- Fixed spacing on info popup in skin viewer on small screens.
+
+---
+
+<header>
+
 ## [v1.0.5](https://github.com/preyneyv/lol-skin-explorer/tree/v1.0.5)
 
 ###### January 5th, 2022
