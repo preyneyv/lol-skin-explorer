@@ -80,6 +80,7 @@ export function Popup({ skin }) {
                       unoptimized
                       src={asset(chroma.chromaPath)}
                       layout="fill"
+                      objectFit="contain"
                       alt={skin.name}
                     />
                   </a>
@@ -89,13 +90,6 @@ export function Popup({ skin }) {
           )}
         </>
       )}
-      {/* <div className={styles.external}>
-        <a href={meta.teemoGGUrl} target="_blank" rel="noreferrer">
-          <Box />
-          View on Teemo.GG
-          <ExternalLink />
-        </a>
-      </div> */}
       <a href={meta.teemoGGUrl} target="_blank" rel="noreferrer">
         <h3>
           <span>

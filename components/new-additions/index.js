@@ -2,10 +2,9 @@ import { useProps } from "../../data/contexts";
 import Link from "next/link";
 import Image from "../image";
 import styles from "./style.module.scss";
-import { rarity, asset } from "../../data/helpers";
-import classNames from "classnames";
+import { asset } from "../../data/helpers";
 
-export function NewAdditions() {
+export default function NewAdditions() {
   const { added } = useProps();
 
   if (!added.length) {
@@ -16,7 +15,7 @@ export function NewAdditions() {
 
   return (
     <div className={styles.container}>
-      <h3>New Additions</h3>
+      <h3>Recently Added</h3>
       <div className={styles.gridContainer}>
         <div className={styles.grid}>
           {added.map((skin) => {

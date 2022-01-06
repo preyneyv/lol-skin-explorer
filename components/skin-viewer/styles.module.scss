@@ -429,14 +429,14 @@
     }
     .popup {
       top: unset;
-      // bottom: calc(48px + env(safe-area-inset-bottom, 0));
-      bottom: calc(36.5px + env(safe-area-inset-bottom, 0));
+      --bottom: calc(36.5px + max(env(safe-area-inset-bottom, 0), 11.5px));
+      bottom: var(--bottom);
+      // bottom: calc(36.5px + env(safe-area-inset-bottom, 0));
       max-width: unset;
       width: 100%;
       line-height: 1.45;
-      max-height: calc(
-        var(--vh) * 100 - (36.5px + env(safe-area-inset-bottom, 0))
-      );
+      max-height: calc(var(--vh) * 100 - var(--bottom));
+      border-bottom: 1px solid rgba(121, 163, 207, 0.2);
     }
   }
 }

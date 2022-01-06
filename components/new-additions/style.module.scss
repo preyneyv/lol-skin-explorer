@@ -37,8 +37,10 @@
       transition: transform 200ms;
     }
 
-    &:hover .tile {
-      transform: scale(1.1);
+    &:hover {
+      .tile {
+        transform: scale(1.1);
+      }
     }
 
     &::after {
@@ -61,7 +63,8 @@
       box-sizing: border-box;
       padding: 6px;
       width: 100%;
-      line-height: 1.25;
+      line-height: 1.2;
+      overflow: visible;
       filter: drop-shadow(0 3px 7px rgba(0, 0, 0, 0.8));
     }
   }
@@ -81,6 +84,7 @@
         display: grid;
         align-items: center;
         grid-template-columns: 48px 1fr;
+        overflow: hidden;
 
         &::after {
           display: none;
