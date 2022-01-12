@@ -2,6 +2,7 @@
 User-agent: *
 Disallow: /_next/
 Disallow: /api/
+Disallow: /lol-game-data/
 Allow: /
 
 # Host
