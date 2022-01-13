@@ -20,8 +20,6 @@
 
 <header>
 
-<header>
-
 ## [v1.0.6](https://github.com/preyneyv/lol-skin-explorer/tree/v1.0.6)
 
 ###### January 5th, 2022
