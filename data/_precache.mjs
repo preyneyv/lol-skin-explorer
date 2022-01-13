@@ -54,6 +54,7 @@ class Cache {
 async function downloadKey(key, initial, cache, root) {
   const data = await cache.get(key, initial ?? null);
   await fs.writeFile(path.resolve(root, `${key}.json`), JSON.stringify(data));
+  console.log(`[Precache] Cached ${key}!`);
 }
 
 async function main() {

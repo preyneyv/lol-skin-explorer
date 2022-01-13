@@ -9,8 +9,8 @@
   "private": true,
   "scripts": {
     "precache": "node data/_precache.mjs",
-    "dev": "next dev",
-    "build": "next build",
+    "dev": "npm run precache && next dev",
+    "build": "npm run precache && next build",
     "start": "next start",
     "lint": "next lint"
   },
