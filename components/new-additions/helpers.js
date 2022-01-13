@@ -2,11 +2,7 @@ import { store } from "../../data/store";
 import { splitId } from "../../data/helpers";
 
 export async function prepareAdditions() {
-  const [added, skins, champions] = await Promise.all([
-    store.patch.added,
-    store.patch.skins,
-    store.patch.champions,
-  ]);
+  const { added, skins, champions } = store.patch;
 
   return added.skins
     .map((id) => skins[id])

@@ -5,12 +5,8 @@ export async function prepareCollection(collection, idx) {
   const skin = collection[idx];
   const meta = (skin.$skinExplorer = {});
 
-  const [champions, skinlines, universes, changes] = await Promise.all([
-    store.patch.champions,
-    store.patch.skinlines,
-    store.patch.universes,
-    store.skinChanges,
-  ]);
+  const { champions, skinlines, universes } = store.patch;
+  const { changes } = store;
 
   meta.changes = changes[skin.id] ?? false;
   const [cId] = splitId(skin.id);
@@ -31,6 +27,9 @@ export async function prepareCollection(collection, idx) {
   meta.universes;
 
   meta.teemoGGUrl = teemoGGUrl(skin, meta.champion);
+  meta.skinSpotlightsUrl = `https://www.youtube.com/c/SkinSpotlights/search?query=${skin.name.slice(
+    skin.isBase ? 9 : 0
+  )}`;
 
   let prev = null,
     next = null;

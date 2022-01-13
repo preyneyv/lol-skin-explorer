@@ -4,6 +4,31 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSwipeable } from "react-swipeable";
 
+function isTextBox(element) {
+  if (!element) return false;
+  var tagName = element.tagName.toLowerCase();
+  if (tagName === "textarea") return true;
+  if (tagName !== "input") return false;
+  var type = element.getAttribute("type").toLowerCase(),
+    // if any of these input types is not supported by a browser, it will behave as input type text.
+    inputTypes = [
+      "text",
+      "password",
+      "number",
+      "email",
+      "tel",
+      "url",
+      "search",
+      "date",
+      "datetime",
+      "datetime-local",
+      "time",
+      "month",
+      "week",
+    ];
+  return inputTypes.indexOf(type) >= 0;
+}
+
 export function dataRoot(patch = "pbe") {
   return `${CDRAGON}/${patch}/plugins/rcp-be-lol-game-data/global/default`;
 }
@@ -98,7 +123,7 @@ export function useEscapeTo(url) {
   const router = useRouter();
   useEffect(() => {
     function onKeyDown(e) {
-      if (document.activeElement !== document.body) return; // Ignore events when an input is active.
+      if (isTextBox(document.activeElement)) return; // Ignore events when an input is active.
       if (e.code === "Escape") {
         router.push(url, url);
         e.preventDefault();
@@ -125,7 +150,7 @@ export function useArrowNavigation(left, right) {
   const router = useRouter();
   useEffect(() => {
     function onKeyDown(e) {
-      if (document.activeElement !== document.body) return; // Ignore events when an input is active.
+      if (isTextBox(document.activeElement)) return; // Ignore events when an input is active.
       if (e.key === "ArrowLeft") {
         router.push(left, left);
         e.preventDefault();

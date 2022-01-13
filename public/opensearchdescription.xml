@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+<ShortName>Skin Explorer</ShortName>
+<Description>Browse through League of Legends skins from the comfort of your browser!</Description>
+<Image width="16" height="16">https://www.skinexplorer.lol/favicon.ico </Image>
+<InputEncoding>UTF-8</InputEncoding>
+<Url type="text/html" method="get" template="https://www.skinexplorer.lol/opensearch?query={searchTerms}"/>
+<Url type="application/x-suggestions+json" rel="suggestions" template="https://www.skinexplorer.lol/api/opensearch/?query={searchTerms}"/>
+</OpenSearchDescription>

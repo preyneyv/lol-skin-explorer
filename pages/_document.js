@@ -38,7 +38,11 @@ class Document extends BaseDocument {
           />
           <link rel="manifest" href="/manifest.webmanifest" />
           <link rel="apple-touch-icon" href="/icons/logo-192.png" />
-
+          <link
+            type="application/opensearchdescription+xml"
+            rel="search"
+            href="/opensearchdescription.xml"
+          />
           {process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && (
             <script
               async

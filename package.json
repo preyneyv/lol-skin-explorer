@@ -8,6 +8,7 @@
   "version": "1.0.6",
   "private": true,
   "scripts": {
+    "precache": "node data/_precache.mjs",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

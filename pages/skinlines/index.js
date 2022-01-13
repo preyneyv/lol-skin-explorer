@@ -60,9 +60,7 @@ export default function Index() {
 Index.getLayout = (page) => <Layout withNew>{page}</Layout>;
 
 export async function getStaticProps() {
-  await store.fetch();
-
-  const skinlines = await store.patch.skinlines;
+  const { skinlines } = store.patch;
 
   return {
     props: {

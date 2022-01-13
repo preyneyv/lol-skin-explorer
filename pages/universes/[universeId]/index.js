@@ -128,14 +128,13 @@ export default function Page() {
 
 export async function getStaticProps(ctx) {
   const { universeId } = ctx.params;
-  await store.fetch();
 
-  const [universes, champions, allSkinlines, allSkins] = await Promise.all([
-    store.patch.universes,
-    store.patch.champions,
-    store.patch.skinlines,
-    store.patch.skins,
-  ]);
+  const {
+    universes,
+    champions,
+    skinlines: allSkinlines,
+    skins: allSkins,
+  } = store.patch;
 
   const universe = universes.find((u) => u.id.toString() === universeId);
   if (!universe)
@@ -160,8 +159,7 @@ export async function getStaticProps(ctx) {
 export async function getStaticPaths() {
   let paths = [];
   if (process.env.NODE_ENV === "production") {
-    await store.fetch();
-    const universes = await store.patch.universes;
+    const { universes } = store.patch;
     paths = universes.map((u) => ({ params: { universeId: u.id.toString() } }));
   }
 

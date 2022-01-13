@@ -22,12 +22,8 @@ export default function Page() {
 
 export async function getStaticProps(ctx) {
   const { champId, skinId } = ctx.params;
-  await store.fetch();
 
-  const [champions, allSkins] = await Promise.all([
-    store.patch.champions,
-    store.patch.skins,
-  ]);
+  const { champions, skins: allSkins } = store.patch;
 
   const champion = champions.find((c) => c.key === champId);
   if (!champion) {
@@ -61,11 +57,7 @@ export async function getStaticProps(ctx) {
 export async function getStaticPaths() {
   let paths = [];
   if (process.env.NODE_ENV === "production") {
-    await store.fetch();
-    const [champions, skins] = await Promise.all([
-      store.patch.champions,
-      store.patch.skins,
-    ]);
+    const { champions, skins } = store.patch;
     const champLookup = champions.reduce(
       (obj, c) => ({ ...obj, [c.id]: c.key }),
       {}

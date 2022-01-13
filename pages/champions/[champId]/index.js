@@ -92,12 +92,8 @@ export default function Page() {
 
 export async function getStaticProps(ctx) {
   const { champId } = ctx.params;
-  await store.fetch();
 
-  const [champions, allSkins] = await Promise.all([
-    store.patch.champions,
-    store.patch.skins,
-  ]);
+  const { champions, skins: allSkins } = store.patch;
 
   const champion = champions.find((c) => c.key === champId);
   if (!champion) {
@@ -120,8 +116,7 @@ export async function getStaticProps(ctx) {
 export async function getStaticPaths() {
   let paths = [];
   if (process.env.NODE_ENV === "production") {
-    await store.fetch();
-    const champions = await store.patch.champions;
+    const { champions } = store.patch;
     paths = champions.map((c) => ({ params: { champId: c.key.toString() } }));
   }
 

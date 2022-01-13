@@ -31,7 +31,6 @@ const fixed = (url) => ({
 });
 
 export async function getServerSideProps(ctx) {
-  await store.fetch();
   const fields = [
     index("/"),
     index("/skinlines"),
@@ -40,12 +39,7 @@ export async function getServerSideProps(ctx) {
     fixed("/changelog"),
   ];
 
-  const [champions, skinlines, universes, skins] = await Promise.all([
-    store.patch.champions,
-    store.patch.skinlines,
-    store.patch.universes,
-    store.patch.skins,
-  ]);
+  const { champions, skinlines, universes, skins } = store.patch;
 
   champions.map((c) => {
     const s = championSkins(c.id, skins);

@@ -7,6 +7,7 @@ import {
   Globe,
   Palette,
   User,
+  Video,
 } from "lucide-react";
 import Image from "../image";
 import Link from "next/link";
@@ -77,6 +78,7 @@ export function Popup({ skin }) {
                     rel="noreferrer"
                   >
                     <Image
+                      loading="eager"
                       unoptimized
                       src={asset(chroma.chromaPath)}
                       layout="fill"
@@ -90,6 +92,15 @@ export function Popup({ skin }) {
           )}
         </>
       )}
+      <a href={meta.skinSpotlightsUrl} target="_blank" rel="noreferrer">
+        <h3>
+          <span>
+            <Video />
+            View on SkinSpotlights
+          </span>
+          <ExternalLink />
+        </h3>
+      </a>
       <a href={meta.teemoGGUrl} target="_blank" rel="noreferrer">
         <h3>
           <span>

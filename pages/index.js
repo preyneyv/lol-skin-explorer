@@ -104,13 +104,9 @@ export default function Index() {
 Index.getLayout = (page) => <Layout withNew>{page}</Layout>;
 
 export async function getStaticProps() {
-  await store.fetch();
-
-  const champions = await store.patch.champions;
-
   return {
     props: {
-      champions,
+      champions: store.patch.champions,
       patch: store.patch.fullVersionString,
       added: await prepareAdditions(),
     },

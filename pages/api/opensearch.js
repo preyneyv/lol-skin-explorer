@@ -10,5 +10,8 @@ export default async function handler(req, res) {
     results = [];
   }
 
-  res.status(200).send(results);
+  let unique = [];
+  results.map((r) => !unique.includes(r.name) && unique.push(r.name));
+
+  res.status(200).send([req.query.query ?? "", unique]);
 }
