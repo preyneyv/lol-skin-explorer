@@ -2,6 +2,26 @@
 
 <header>
 
+## [v1.1.0](https://github.com/preyneyv/lol-skin-explorer/tree/v1.1.0)
+
+###### January 12th, 2022
+
+</header>
+
+- Skins now have a SkinSpotlights jumplink. Implementation is a bit rudimentary,
+  but it serves the purpose (for now).
+- OpenSearch support! Skin Explorer now registers as a search engine in the
+  browser so you can search without even loading the website.
+- All data is now cached at build time instead of coming from the Redis cache at
+  runtime, including the resources needed for dynamic routes like the Omnisearch
+  API.
+
+---
+
+<header>
+
+<header>
+
 ## [v1.0.6](https://github.com/preyneyv/lol-skin-explorer/tree/v1.0.6)
 
 ###### January 5th, 2022

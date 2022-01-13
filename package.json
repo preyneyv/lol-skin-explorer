@@ -5,7 +5,7 @@
     "email": "pranavnutalapati@gmail.com",
     "name": "Pranav Nutalapati"
   },
-  "version": "1.0.6",
+  "version": "1.1.0",
   "private": true,
   "scripts": {
     "precache": "node data/_precache.mjs",
