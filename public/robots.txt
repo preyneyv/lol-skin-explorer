@@ -10,4 +10,4 @@ Allow: /
 Host: https://www.skinexplorer.lol
 
 # Sitemaps
-Sitemap: https://www.skinexplorer.lol/sitemap.xml
+Sitemap: https://www.skinexplorer.lol/sitemap-2.xml
