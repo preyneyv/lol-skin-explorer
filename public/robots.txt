@@ -1,6 +1,7 @@
 # *
 User-agent: *
 Allow: /_next/static/
+Allow: /_next/image
 Disallow: /_next/
 Disallow: /api/
 Disallow: /lol-game-data/
