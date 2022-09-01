@@ -2,6 +2,18 @@
 
 <header>
 
+## [v1.1.1](https://github.com/preyneyv/lol-skin-explorer/tree/v1.1.1)
+
+###### January 12th, 2022
+
+</header>
+
+- Fixed bug that prevented site from updating due to a universe (Steel Valkyries) with no skinlines in the game files.
+
+---
+
+<header>
+
 ## [v1.1.0](https://github.com/preyneyv/lol-skin-explorer/tree/v1.1.0)
 
 ###### January 12th, 2022
