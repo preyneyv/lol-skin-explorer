@@ -89,7 +89,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      universes,
+      universes: universes.filter((u) => u.skinSets.length),
       skinlines,
       patch: store.patch.fullVersionString,
       added: await prepareAdditions(),
