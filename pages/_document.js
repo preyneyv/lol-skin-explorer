@@ -55,15 +55,19 @@ class Document extends BaseDocument {
                 async
                 src="https://www.googletagmanager.com/gtag/js?id=G-V2ZERGTW3J"
               />
-              <script id="google-analytics" async>
-                {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                
-                gtag('config', 'G-V2ZERGTW3J');
-                `}
-              </script>
+              <script
+                id="google-analytics"
+                async
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    
+                    gtag('config', 'G-V2ZERGTW3J');
+                  `,
+                }}
+              />
             </>
           )}
         </Head>
