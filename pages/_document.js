@@ -1,4 +1,5 @@
 import BaseDocument, { Html, Head, Main, NextScript } from "next/document";
+import Script from "next/script";
 
 class Document extends BaseDocument {
   render() {
@@ -44,12 +45,26 @@ class Document extends BaseDocument {
             href="/opensearchdescription.xml"
           />
           {process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && (
-            <script
-              async
-              defer
-              data-website-id="0b628597-38a2-4c1c-964c-e83027ce1692"
-              src="https://analytics.skinexplorer.lol/umami.js"
-            />
+            <>
+              <Script
+                strategy="afterInteractive"
+                data-website-id="0b628597-38a2-4c1c-964c-e83027ce1692"
+                src="https://analytics.skinexplorer.lol/umami.js"
+              />
+              <Script
+                strategy="afterInteractive"
+                src="https://www.googletagmanager.com/gtag/js?id=G-V2ZERGTW3J"
+              />
+              <Script id="google-analytics" strategy="afterInteractive">
+                {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                
+                gtag('config', 'G-V2ZERGTW3J');
+                `}
+              </Script>
+            </>
           )}
         </Head>
         <body>
