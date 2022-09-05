@@ -1,5 +1,4 @@
 import BaseDocument, { Html, Head, Main, NextScript } from "next/document";
-import Script from "next/script";
 
 class Document extends BaseDocument {
   render() {
@@ -46,16 +45,17 @@ class Document extends BaseDocument {
           />
           {process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && (
             <>
-              <Script
-                strategy="afterInteractive"
+              <script
+                async
+                defer
                 data-website-id="0b628597-38a2-4c1c-964c-e83027ce1692"
                 src="https://analytics.skinexplorer.lol/umami.js"
               />
-              <Script
-                strategy="afterInteractive"
+              <script
+                async
                 src="https://www.googletagmanager.com/gtag/js?id=G-V2ZERGTW3J"
               />
-              <Script id="google-analytics" strategy="afterInteractive">
+              <script id="google-analytics" async>
                 {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
@@ -63,7 +63,7 @@ class Document extends BaseDocument {
                 
                 gtag('config', 'G-V2ZERGTW3J');
                 `}
-              </Script>
+              </script>
             </>
           )}
         </Head>
