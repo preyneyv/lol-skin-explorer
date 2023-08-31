@@ -68,6 +68,11 @@ class Document extends BaseDocument {
                   `,
                 }}
               />
+              <script
+                async
+                src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3297862613403903"
+                crossOrigin="anonymous"
+              ></script>
             </>
           )}
         </Head>
