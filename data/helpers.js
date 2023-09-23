@@ -90,9 +90,10 @@ export function rarity(skin) {
   return [imgUrl, name];
 }
 
-export function teemoGGUrl(skin, champion) {
-  const skinId = splitId(skin.id)[1];
-  return `https://teemo.gg/model-viewer?game=league-of-legends&type=champions&object=${champion.alias.toLowerCase()}&skinid=${champion.alias.toLowerCase()}-${skinId}`;
+export function modelviewerUrl(skin, champion) {
+  return `https://www.modelviewer.lol/en-US/model-viewer?id=${skin.id}`;
+  // const skinId = splitId(skin.id)[1];
+  // return `https://teemo.gg/model-viewer?game=league-of-legends&type=champions&object=${champion.alias.toLowerCase()}&skinid=${champion.alias.toLowerCase()}-${skinId}`;
 }
 
 export function useLocalStorageState(name, initialValue) {

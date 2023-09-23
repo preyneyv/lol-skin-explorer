@@ -101,11 +101,11 @@ export function Popup({ skin }) {
           <ExternalLink />
         </h3>
       </a>
-      <a href={meta.teemoGGUrl} target="_blank" rel="noreferrer">
+      <a href={meta.modelviewerUrl} target="_blank" rel="noreferrer">
         <h3>
           <span>
             <Box />
-            View on Teemo.GG
+            View 3D Model on Khada
           </span>
           <ExternalLink />
         </h3>

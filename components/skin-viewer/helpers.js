@@ -1,4 +1,4 @@
-import { splitId, teemoGGUrl } from "../../data/helpers";
+import { splitId, modelviewerUrl } from "../../data/helpers";
 import { store } from "../../data/store";
 
 export async function prepareCollection(collection, idx) {
@@ -26,7 +26,7 @@ export async function prepareCollection(collection, idx) {
 
   meta.universes;
 
-  meta.teemoGGUrl = teemoGGUrl(skin, meta.champion);
+  meta.modelviewerUrl = modelviewerUrl(skin, meta.champion);
   meta.skinSpotlightsUrl = `https://www.youtube.com/c/SkinSpotlights/search?query=${skin.name.slice(
     skin.isBase ? 9 : 0
   )}`;
