@@ -84,6 +84,7 @@ class Document extends BaseDocument {
         <body>
           <Main />
           <NextScript />
+          <div id="hide-grow-widget"></div>
         </body>
       </Html>
     );
