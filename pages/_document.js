@@ -45,12 +45,12 @@ class Document extends BaseDocument {
           />
           {process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && (
             <>
-              <script
+              {/* <script
                 async
                 defer
                 data-website-id="0b628597-38a2-4c1c-964c-e83027ce1692"
                 src="https://analytics.skinexplorer.lol/umami.js"
-              />
+              /> */}
               <script
                 async
                 src="https://www.googletagmanager.com/gtag/js?id=G-V2ZERGTW3J"

@@ -84,7 +84,7 @@ export const Header = ({ flat, backTo }) => {
                 Discord <ExternalLink />
               </a>
             </li> */}
-            <li>
+            {/* <li>
               <a
                 href="https://analytics.skinexplorer.lol/share/JlbPP3v4/Skin%20Explorer"
                 target="_blank"
@@ -92,7 +92,7 @@ export const Header = ({ flat, backTo }) => {
               >
                 Analytics <ExternalLink />
               </a>
-            </li>
+            </li> */}
             <li>
               <a
                 href="https://github.com/preyneyv/lol-skin-explorer/issues/new/choose"
