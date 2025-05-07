@@ -1,0 +1,22 @@
+import Head from "next/head";
+
+import { Layout } from "../components";
+import { makeTitle } from "../data/helpers"
+import styles from "../styles/static.module.scss";
+
+# Privacy Policy
+
+Skin Explorer does not collect any personal information directly. However, we use Google Analytics to help us understand how visitors use the site. Google Analytics may collect anonymized usage data via cookies. You can learn more about how Google uses this data [here](https://policies.google.com/technologies/partner-sites).
+
+By using Skin Explorer, you consent to this analytics tracking.
+
+If you have any questions, please use [this form](https://forms.gle/vLdqnEg9xCsxP6wYA).
+
+Thanks for using Skin Explorer!
+
+export default ({ children }) => (
+  <Layout backTo="/">
+    <><Head>{makeTitle("Privacy Policy")}</Head></>
+    <main className={styles.main}>{children}</main>
+  </Layout>
+)
