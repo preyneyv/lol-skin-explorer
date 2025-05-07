@@ -68,6 +68,11 @@ export const Header = ({ flat, backTo }) => {
                 <a>Changelog</a>
               </Link>
             </li>
+            <li>
+              <Link href="/privacy-policy" as="/privacy-policy">
+                <a>Privacy Policy</a>
+              </Link>
+            </li>
             {/* <li>
               <Link href="/about" as="/about">
                 <a>About</a>
