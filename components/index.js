@@ -27,13 +27,6 @@ export function LayoutWithAds({ children, flat, backTo, withNew }) {
     <FooterContainer>
       <div>
         <Header {...{ flat, backTo }} />
-        <div className={styles.adTestBanner}>
-          <div>Venatus Ad Test</div>
-          <div>&middot;</div>
-          <a href="#" onClick={() => (window.location.href = "/")}>
-            Exit Test Page
-          </a>
-        </div>
         <div className={styles.adBanner}>
           <VenatusAd placementName="billboard" />
           <VenatusAd placementName="mobile_banner" />
@@ -47,10 +40,19 @@ export function LayoutWithAds({ children, flat, backTo, withNew }) {
           <div></div>
         </div>
       </div>
+      <VenatusAd placementName="video" />
       <VenatusAd placementName="horizontal_sticky" />
       <VenatusAd placementName="mobile_horizontal_sticky" />
-      <VenatusAd placementName="video_slider" />
+
       <Footer {...{ flat }} />
+
+      <div className={styles.adTestBanner}>
+        <div>Venatus Ad Test</div>
+        <div>&middot;</div>
+        <a href="#" onClick={() => (window.location.href = "/")}>
+          Exit
+        </a>
+      </div>
     </FooterContainer>
   );
 }
