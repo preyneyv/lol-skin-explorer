@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect } from "react";
-import { Layout } from "../../../components";
+import { LayoutWithAds } from "../../../components";
 import { Nav } from "../../../components/nav";
 import { prepareAdditions } from "../../../components/new-additions/helpers";
 import { useProps } from "../../../data/contexts";
@@ -82,7 +82,7 @@ export default function Index() {
   );
 }
 
-Index.getLayout = (page) => <Layout withNew>{page}</Layout>;
+Index.getLayout = (page) => <LayoutWithAds withNew>{page}</LayoutWithAds>;
 
 export async function getStaticProps() {
   const { universes, skinlines } = store.patch;

@@ -30,7 +30,9 @@ export function LayoutWithAds({ children, flat, backTo, withNew }) {
         <div className={styles.adTestBanner}>
           <div>Venatus Ad Test</div>
           <div>&middot;</div>
-          <a href="/">Exit Test Page</a>
+          <a href="#" onClick={() => (window.location.href = "/")}>
+            Exit Test Page
+          </a>
         </div>
         <div className={styles.adBanner}>
           <VenatusAd placementName="billboard" />
