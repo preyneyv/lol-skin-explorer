@@ -1,4 +1,4 @@
-import BaseDocument, { Html, Head, Main, NextScript } from "next/document";
+import BaseDocument, { Head, Html, Main, NextScript } from "next/document";
 
 class Document extends BaseDocument {
   render() {
@@ -45,12 +45,6 @@ class Document extends BaseDocument {
           />
           {process.env.NEXT_PUBLIC_VERCEL_ENV === "production" && (
             <>
-              {/* <script
-                async
-                defer
-                data-website-id="0b628597-38a2-4c1c-964c-e83027ce1692"
-                src="https://analytics.skinexplorer.lol/umami.js"
-              /> */}
               <script
                 async
                 src="https://www.googletagmanager.com/gtag/js?id=G-V2ZERGTW3J"
@@ -68,23 +62,17 @@ class Document extends BaseDocument {
                   `,
                 }}
               />
-              <script
+              {/* <script
                 async
                 src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3297862613403903"
                 crossOrigin="anonymous"
-              ></script>
-              <script data-grow-initializer="" dangerouslySetInnerHTML={{
-                __html: `
-                !(function(){window.growMe||((window.growMe=function(e){window.growMe._.push(e);}),(window.growMe._=[]));var e=document.createElement("script");(e.type="text/javascript"),(e.src="https://faves.grow.me/main.js"),(e.defer=!0),e.setAttribute("data-grow-faves-site-id","U2l0ZTplZjc4NGU1NC02OTExLTQ4MGItOTk3NS1jNzFiY2Y3NDY1YTA=");var t=document.getElementsByTagName("script")[0];t.parentNode.insertBefore(e,t);})();
-                `,
-              }} />
+              ></script> */}
             </>
           )}
         </Head>
         <body>
           <Main />
           <NextScript />
-          <div id="hide-grow-widget"></div>
         </body>
       </Html>
     );

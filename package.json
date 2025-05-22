@@ -8,7 +8,7 @@
   "version": "1.1.0",
   "private": true,
   "scripts": {
-    "precache": "node data/_precache.mjs",
+    "precache": "node -r dotenv/config data/_precache.mjs",
     "dev": "npm run precache && next dev",
     "build": "npm run precache && next build",
     "start": "next start",
@@ -25,7 +25,7 @@
     "lucide-react": "^0.16.22",
     "next": "12.0.7",
     "next-absolute-url": "^1.2.2",
-    "next-pwa": "^5.4.4",
+    "next-pwa": "5.4.4",
     "next-sitemap": "^1.6.203",
     "p-limit": "^4.0.0",
     "react": "17.0.2",
@@ -35,6 +35,7 @@
     "sass": "^1.45.0"
   },
   "devDependencies": {
+    "dotenv": "^16.5.0",
     "eslint": "8.5.0",
     "eslint-config-next": "12.0.7"
   }

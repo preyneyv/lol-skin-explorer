@@ -1,0 +1,20 @@
+.adTestBanner {
+  background: rgb(31, 39, 48);
+  padding: 4px;
+  text-align: center;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.adBanner {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid rgb(31, 39, 48);
+  padding: 8px 0;
+}
+
+.adLayout {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+}
