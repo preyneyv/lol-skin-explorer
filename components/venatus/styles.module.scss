@@ -51,6 +51,11 @@
 
 .main {
   border-left: 1px solid rgb(31, 39, 48);
+  min-width: 0;
+
+  @media screen and (max-width: 1024px) {
+    border-left: none;
+  }
 }
 
 .videoContainer {
