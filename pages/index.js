@@ -1,9 +1,11 @@
-import Image from "../components/image";
-import { useEffect, useMemo } from "react";
 import Head from "next/head";
-import { useProps } from "../data/contexts";
-import styles from "../styles/index.module.scss";
 import Link from "next/link";
+import { useEffect, useMemo } from "react";
+import { Layout } from "../components";
+import Image from "../components/image";
+import { Nav } from "../components/nav";
+import { prepareAdditions } from "../components/new-additions/helpers";
+import { useProps } from "../data/contexts";
 import {
   asset,
   classes,
@@ -13,9 +15,7 @@ import {
   useLocalStorageState,
 } from "../data/helpers";
 import { store } from "../data/store";
-import { Nav } from "../components/nav";
-import { Layout } from "../components";
-import { prepareAdditions } from "../components/new-additions/helpers";
+import styles from "../styles/index.module.scss";
 
 function ChampionsList({ role }) {
   const { champions } = useProps();
@@ -94,6 +94,9 @@ export default function Index() {
           }
         />
         <main>
+          <Link href="/venatus-test">
+            <h1>test</h1>
+          </Link>
           <ChampionsList role={champRole} />
         </main>
       </div>

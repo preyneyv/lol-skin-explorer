@@ -1,7 +1,10 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useRef } from "react";
-import { useVenatusTracking } from "../components/venatus";
+import {
+  useDynamicStickyHeight,
+  useVenatusTracking,
+} from "../components/venatus";
 import { PropsProvider } from "../data/contexts";
 import "../styles/globals.scss";
 
@@ -89,6 +92,7 @@ export default function App({ Component, pageProps }) {
   useVenatusRouteInterceptor();
   useDynamicAdScript();
   useVenatusTracking();
+  useDynamicStickyHeight();
 
   const getLayout = Component.getLayout || ((page) => page);
 

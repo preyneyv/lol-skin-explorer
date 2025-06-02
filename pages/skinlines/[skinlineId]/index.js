@@ -1,11 +1,12 @@
+import { Folder, Globe } from "lucide-react";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { Fallback } from "../../../components/fallback";
 import { Footer, FooterContainer } from "../../../components/footer";
-import { useProps } from "../../../data/contexts";
 import { Header } from "../../../components/header";
 import { SkinGrid } from "../../../components/skin-grid";
+import { useProps } from "../../../data/contexts";
 import {
   asset,
   makeDescription,
@@ -17,7 +18,6 @@ import {
 } from "../../../data/helpers";
 import { store } from "../../../data/store";
 import styles from "../../../styles/collection.module.scss";
-import { Folder, Globe } from "lucide-react";
 
 function _Page() {
   const { skinline, universes, skins } = useProps();

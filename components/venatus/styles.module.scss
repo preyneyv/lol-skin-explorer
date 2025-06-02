@@ -1,0 +1,62 @@
+.adTestBanner {
+  background: rgb(31, 39, 48);
+  padding: 4px;
+  text-align: center;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.adBanner {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid rgb(31, 39, 48);
+  padding: 8px 0;
+}
+
+.adLayout {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stickyAdContainer {
+  height: var(--asp-h);
+}
+
+.sidebarAdContainer {
+  position: sticky;
+  z-index: 99;
+  top: 56px;
+  height: calc(100vh - 56px - var(--asp-h));
+  bottom: var(--asp-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  @media screen and (max-width: 1024px) {
+    height: auto;
+    position: static;
+    bottom: unset;
+    top: unset;
+    .mpu {
+      display: none;
+    }
+  }
+}
+
+.main {
+  border-left: 1px solid rgb(31, 39, 48);
+}
+
+.videoContainer {
+  display: flex;
+  justify-content: center;
+  > div {
+    max-width: 400px;
+  }
+}

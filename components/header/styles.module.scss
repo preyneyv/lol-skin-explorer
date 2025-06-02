@@ -31,7 +31,7 @@
 
   &.flat {
     background: rgba(19, 25, 32, 0.9);
-    border-color: transparent;
+    // border-color: transparent;
   }
 
   .omnisearchIcon,
@@ -111,7 +111,7 @@
 
 @supports (backdrop-filter: blur(1px)) {
   .header.flat {
-    border-color: transparent;
+    // border-color: transparent;
     background: rgba(8, 13, 19, 0.5);
     backdrop-filter: blur(24px);
   }

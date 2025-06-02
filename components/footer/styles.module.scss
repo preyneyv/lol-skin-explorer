@@ -27,13 +27,13 @@
 
   &.flat {
     background: rgba(8, 13, 19, 0.9);
-    border-color: transparent;
+    // border-color: transparent;
   }
 }
 
 @supports (backdrop-filter: blur(1px)) {
   .footer.flat {
-    border-color: transparent;
+    // border-color: transparent;
     background: rgba(8, 13, 19, 0.5);
     backdrop-filter: blur(24px);
   }
