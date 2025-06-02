@@ -10,6 +10,11 @@ body {
   background: rgb(12, 15, 19);
   color: white;
   /* touch-action: pan-y; */
+
+  --asp-h: var(--asp-desktop-h);
+  @media screen and (max-width: 1024px) {
+    --asp-h: var(--asp-mobile-h);
+  }
 }
 
 a {

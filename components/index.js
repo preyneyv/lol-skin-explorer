@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { Footer, FooterContainer } from "./footer";
 import { Header } from "./header";
 import styles from "./styles.module.scss";
@@ -25,12 +25,7 @@ export function Layout({ children, flat, backTo, withNew }) {
 export function LayoutWithAds({ children, flat, backTo, withNew }) {
   // useRouteInterceptor();
 
-  const footerRef = useRef(null);
   useEffect(() => {
-    if (!footerRef.current) {
-      return;
-    }
-
     const mutationObserver = new MutationObserver((cb) => {
       const ads = document.querySelectorAll(
         "body > span > span > span > iframe"
@@ -45,16 +40,14 @@ export function LayoutWithAds({ children, flat, backTo, withNew }) {
         }
       });
 
-      footerRef.current.style.setProperty(
-        "--mobile-h",
+      document.body.style.setProperty(
+        "--asp-mobile-h",
         hasMobile ? "50px" : "0px"
       );
-      footerRef.current.style.setProperty(
-        "--desktop-h",
+      document.body.style.setProperty(
+        "--asp-desktop-h",
         hasDesktop ? "90px" : "0px"
       );
-
-      console.log(hasMobile, hasDesktop);
     });
     mutationObserver.observe(document.body, {
       subtree: true,
@@ -63,7 +56,7 @@ export function LayoutWithAds({ children, flat, backTo, withNew }) {
     return () => {
       mutationObserver.disconnect();
     };
-  }, [footerRef]);
+  }, []);
 
   return (
     <FooterContainer>
@@ -72,7 +65,12 @@ export function LayoutWithAds({ children, flat, backTo, withNew }) {
         <div className={styles.adLayout}>
           <div className={styles.sidebar}>
             <div className={styles.sidebarAdContainer}>
-              <VenatusAd placementName="double_mpu" />
+              <div className={styles.mpu}>
+                <VenatusAd placementName="double_mpu" />
+              </div>
+              <div>
+                <VenatusAd placementName="video" />
+              </div>
             </div>
           </div>
           <div className={styles.main}>
@@ -81,6 +79,10 @@ export function LayoutWithAds({ children, flat, backTo, withNew }) {
               <VenatusAd placementName="mobile_banner" />
             </div>
             {withNew && <LazyNewAdditions />}
+            <div className={styles.videoContainer}>
+              <div></div>
+            </div>
+
             {children}
           </div>
           <div></div>
@@ -96,7 +98,7 @@ export function LayoutWithAds({ children, flat, backTo, withNew }) {
           Exit
         </a>
       </div>
-      <div ref={footerRef} className={styles.stickyAdContainer}>
+      <div className={styles.stickyAdContainer}>
         <VenatusAd placementName="mobile_horizontal_sticky" />
         <VenatusAd placementName="horizontal_sticky" />
       </div>
