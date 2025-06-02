@@ -94,9 +94,6 @@ export default function Index() {
           }
         />
         <main>
-          <Link href="/venatus-test">
-            <h1>test</h1>
-          </Link>
           <ChampionsList role={champRole} />
         </main>
       </div>
