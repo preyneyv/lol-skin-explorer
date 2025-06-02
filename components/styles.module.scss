@@ -7,6 +7,7 @@
   justify-content: center;
   gap: 10px;
 }
+
 .adBanner {
   display: flex;
   justify-content: center;
@@ -16,5 +17,38 @@
 
 .adLayout {
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 300px 1fr;
+  @media screen and (max-width: 1024px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sidebar {
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.stickyAdContainer {
+  --desktop-h: 90px;
+  --mobile-h: 50px;
+  height: var(--desktop-h);
+  @media screen and (max-width: 1024px) {
+    height: var(--mobile-h);
+  }
+}
+
+.sidebarAdContainer {
+  position: sticky;
+  top: 56px;
+  display: flex;
+  justify-content: center;
+  @media screen and (max-width: 1024px) {
+    display: none;
+  }
+}
+
+.main {
+  border-left: 1px solid rgb(31, 39, 48);
+  // padding-bottom: 20px;
 }
