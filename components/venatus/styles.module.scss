@@ -59,9 +59,6 @@
 }
 
 .videoContainer {
-  display: flex;
-  justify-content: center;
-  > div {
-    max-width: 400px;
-  }
+  width: 300px;
+  aspect-ratio: 16 / 9;
 }

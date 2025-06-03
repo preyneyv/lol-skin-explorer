@@ -125,7 +125,7 @@ export function SidebarAdLayout({ children }) {
           <div className={styles.mpu}>
             <VenatusAd placementName="double_mpu" />
           </div>
-          <div>
+          <div className={styles.videoContainer}>
             <VenatusAd placementName="video" />
           </div>
         </div>
