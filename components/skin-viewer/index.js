@@ -1,18 +1,4 @@
-import { Loading } from "../loading";
-import {
-  useCallback,
-  useRef,
-  useEffect,
-  useMemo,
-  useState,
-  Fragment,
-} from "react";
 import classNames from "classnames";
-import { useSwipeable } from "react-swipeable";
-import Head from "next/head";
-import Link from "next/link";
-import Image from "../image";
-import { useRouter } from "next/router";
 import {
   ArrowLeft,
   ArrowRight,
@@ -23,6 +9,18 @@ import {
   User,
   Users,
 } from "lucide-react";
+import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import {
+  Fragment,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
+import { useSwipeable } from "react-swipeable";
 import {
   asset,
   makeCanonical,
@@ -33,6 +31,8 @@ import {
   useEscapeTo,
   useLocalStorageState,
 } from "../../data/helpers";
+import Image from "../image";
+import { Loading } from "../loading";
 import { Popup } from "./popup";
 import styles from "./styles.module.scss";
 
@@ -505,6 +505,7 @@ function _SkinViewer({
               muted
               autoPlay
               loop
+              playsInline
               key={vidPath}
               style={{ objectFit: "cover" }}
             >
@@ -531,6 +532,7 @@ function _SkinViewer({
               muted
               autoPlay
               loop
+              playsInline
               key={vidPath}
               style={{ objectFit, objectPosition }}
               onLoadedData={() => setLoaded(true)}
