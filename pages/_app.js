@@ -27,17 +27,14 @@ function loadScript(url, props = {}) {
 }
 
 const NO_AD_PATHS = ["/privacy-policy"];
-const VENATUS_PATHS = ["/venatus-test"];
 function useDynamicAdScript() {
   const lastPathClass = useRef();
 
   const router = useRouter();
   useEffect(() => {
     function loadDynamicAdScript(url) {
-      let pathClass = "google";
+      let pathClass = "venatus";
       if (NO_AD_PATHS.some((path) => url.startsWith(path))) pathClass = "none";
-      if (VENATUS_PATHS.some((path) => url.startsWith(path)))
-        pathClass = "venatus";
 
       if (lastPathClass.current && lastPathClass.current !== pathClass) {
         location.href = url;
@@ -48,13 +45,6 @@ function useDynamicAdScript() {
       if (pathClass === "venatus")
         loadScript(
           "https://hb.vntsm.com/v4/live/vms/sites/skinexplorer.lol/index.js"
-        );
-      else if (pathClass === "google")
-        loadScript(
-          "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3297862613403903",
-          {
-            crossOrigin: "anonymous",
-          }
         );
     }
     loadDynamicAdScript(window.location.pathname);

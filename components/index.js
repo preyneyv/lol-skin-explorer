@@ -13,20 +13,6 @@ export function Layout({ children, flat, backTo, withNew }) {
     <FooterContainer>
       <div>
         <Header {...{ flat, backTo }} />
-        {withNew && <LazyNewAdditions />}
-        {children}
-      </div>
-      <Footer {...{ flat }} />
-    </FooterContainer>
-  );
-}
-
-export function LayoutWithAds({ children, flat, backTo, withNew }) {
-  // useRouteInterceptor();
-  return (
-    <FooterContainer>
-      <div>
-        <Header {...{ flat, backTo }} />
         <SidebarAdLayout>
           {withNew && <LazyNewAdditions />}
           {children}

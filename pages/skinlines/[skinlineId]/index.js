@@ -6,6 +6,7 @@ import { Fallback } from "../../../components/fallback";
 import { Footer, FooterContainer } from "../../../components/footer";
 import { Header } from "../../../components/header";
 import { SkinGrid } from "../../../components/skin-grid";
+import { FooterAds, SidebarAdLayout } from "../../../components/venatus";
 import { useProps } from "../../../data/contexts";
 import {
   asset,
@@ -57,48 +58,51 @@ function _Page() {
               </div>
             )}
             <Header backTo="/skinlines" flat />
-            <main>
-              <h2 className={styles.subtitle}>
-                <Folder />
-                Skinline
-              </h2>
-              <h1 className={styles.title}>{skinline.name}</h1>
-              {!!universes.length && (
-                <div className={styles.parents}>
-                  <Link
-                    key={universes[0].id}
-                    href="/universes/[universeId]"
-                    as={`/universes/${universes[0].id}`}
-                    prefetch={false}
-                  >
-                    <a>
-                      <Globe />
+            <SidebarAdLayout>
+              <main>
+                <h2 className={styles.subtitle}>
+                  <Folder />
+                  Skinline
+                </h2>
+                <h1 className={styles.title}>{skinline.name}</h1>
+                {!!universes.length && (
+                  <div className={styles.parents}>
+                    <Link
+                      key={universes[0].id}
+                      href="/universes/[universeId]"
+                      as={`/universes/${universes[0].id}`}
+                      prefetch={false}
+                    >
+                      <a>
+                        <Globe />
 
-                      <span>Part of the {universes[0].name} universe.</span>
-                    </a>
-                  </Link>
+                        <span>Part of the {universes[0].name} universe.</span>
+                      </a>
+                    </Link>
+                  </div>
+                )}
+                <div className={styles.controls}>
+                  <label>
+                    <span>Sort By</span>
+                    <select
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
+                    >
+                      <option value="champion">Champion</option>
+                      <option value="rarity">Rarity</option>
+                    </select>
+                  </label>
                 </div>
-              )}
-              <div className={styles.controls}>
-                <label>
-                  <span>Sort By</span>
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                  >
-                    <option value="champion">Champion</option>
-                    <option value="rarity">Rarity</option>
-                  </select>
-                </label>
-              </div>
-              <SkinGrid
-                skins={sortedSkins}
-                linkTo={linkTo}
-                viewerPage="/skinlines/[lId]/skins/[sId]"
-              />
-            </main>
+                <SkinGrid
+                  skins={sortedSkins}
+                  linkTo={linkTo}
+                  viewerPage="/skinlines/[lId]/skins/[sId]"
+                />
+              </main>
+            </SidebarAdLayout>
           </div>
           <Footer flat />
+          <FooterAds />
         </FooterContainer>
       </div>
     </>

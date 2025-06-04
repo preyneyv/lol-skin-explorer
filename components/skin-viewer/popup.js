@@ -9,11 +9,11 @@ import {
   User,
   Video,
 } from "lucide-react";
-import Image from "../image";
 import Link from "next/link";
-import { asset } from "../../data/helpers";
-import styles from "./styles.module.scss";
 import { useEffect, useState } from "react";
+import { asset } from "../../data/helpers";
+import Image from "../image";
+import styles from "./styles.module.scss";
 
 export function Popup({ skin }) {
   const [showChromas, setShowChromas] = useState(false);

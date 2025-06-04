@@ -33,6 +33,7 @@ import {
 } from "../../data/helpers";
 import Image from "../image";
 import { Loading } from "../loading";
+import { FooterAds, VenatusAd } from "../venatus";
 import { Popup } from "./popup";
 import styles from "./styles.module.scss";
 
@@ -588,5 +589,27 @@ export function SkinViewer(props) {
     );
   }
 
-  return <_SkinViewer {...props} />;
+  return (
+    <div className={styles.adContainer}>
+      <div className={styles.sidebar}>
+        <div>
+          <VenatusAd placementName="double_mpu" />
+        </div>
+        <div>
+          <VenatusAd placementName="video" />
+        </div>
+      </div>
+      <div className={styles.mainContent}>
+        <div className={styles.adBanner}>
+          <VenatusAd placementName="billboard" />
+          <VenatusAd placementName="mobile_banner" />
+        </div>
+        <div className={styles.viewerContainer}>
+          <_SkinViewer {...props} />
+        </div>
+        {/* <div>hey</div> */}
+        <FooterAds />
+      </div>
+    </div>
+  );
 }

@@ -1,8 +1,8 @@
 import Head from "next/head";
 import Image from "next/image";
+import { Fallback } from "../../../components/fallback";
 import { Header } from "../../../components/header";
 import { useProps } from "../../../data/contexts";
-import { Fallback } from "../../../components/fallback";
 import {
   asset,
   makeDescription,
@@ -14,11 +14,12 @@ import {
 } from "../../../data/helpers";
 import { store } from "../../../data/store";
 
-import styles from "../../../styles/collection.module.scss";
+import { Folder, Globe } from "lucide-react";
+import Link from "next/link";
 import { Footer, FooterContainer } from "../../../components/footer";
 import { SkinGrid } from "../../../components/skin-grid";
-import Link from "next/link";
-import { Folder, Globe } from "lucide-react";
+import { FooterAds, SidebarAdLayout } from "../../../components/venatus";
+import styles from "../../../styles/collection.module.scss";
 
 function Skinline({ sortByRarity, skinline, linkTo }) {
   const sortedSkins = useSortedSkins(sortByRarity, skinline.skins);
@@ -79,39 +80,42 @@ function _Page() {
               </div>
             )}
             <Header backTo="/universes" flat />
-            <main>
-              <h2 className={styles.subtitle}>
-                <Globe />
-                Universe
-              </h2>
-              <h1 className={styles.title}>{universe.name}</h1>
-              {universe.description && (
-                <p className={styles.description}>{universe.description}</p>
-              )}
-              <div className={styles.controls}>
-                <label>
-                  <span>Sort By</span>
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                  >
-                    <option value="champion">Champion</option>
-                    <option value="rarity">Rarity</option>
-                  </select>
-                </label>
-              </div>
+            <SidebarAdLayout>
+              <main>
+                <h2 className={styles.subtitle}>
+                  <Globe />
+                  Universe
+                </h2>
+                <h1 className={styles.title}>{universe.name}</h1>
+                {universe.description && (
+                  <p className={styles.description}>{universe.description}</p>
+                )}
+                <div className={styles.controls}>
+                  <label>
+                    <span>Sort By</span>
+                    <select
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
+                    >
+                      <option value="champion">Champion</option>
+                      <option value="rarity">Rarity</option>
+                    </select>
+                  </label>
+                </div>
 
-              {skinlines.map((l) => (
-                <Skinline
-                  key={l.id}
-                  linkTo={linkTo}
-                  skinline={l}
-                  sortByRarity={sortBy === "rarity"}
-                />
-              ))}
-            </main>
+                {skinlines.map((l) => (
+                  <Skinline
+                    key={l.id}
+                    linkTo={linkTo}
+                    skinline={l}
+                    sortByRarity={sortBy === "rarity"}
+                  />
+                ))}
+              </main>
+            </SidebarAdLayout>
           </div>
           <Footer flat />
+          <FooterAds />
         </FooterContainer>
       </div>
     </>

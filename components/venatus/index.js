@@ -77,8 +77,6 @@ export function useDynamicStickyHeight() {
         }
       });
 
-      console.log("[PROSPER] setStickyHeight", hasMobile, hasDesktop);
-
       document.body.style.setProperty(
         "--asp-mobile-h",
         hasMobile ? "50px" : "0px"

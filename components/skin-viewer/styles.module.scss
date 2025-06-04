@@ -34,11 +34,14 @@
 .viewer {
   touch-action: "pan-y";
   cursor: none;
-  position: fixed;
+  overflow: clip;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
+
+  container-type: size;
 
   &.show {
     cursor: unset;
@@ -54,18 +57,18 @@
 }
 
 .hitbox {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100cqw;
+  height: 100cqh;
   z-index: 1;
 }
 
 .viewer header {
   display: flex;
   // align-items: center;
-  position: fixed;
+  position: absolute;
   z-index: 999;
   user-select: none;
   gap: 12px;
@@ -138,7 +141,7 @@
 .letterBox {
   pointer-events: none;
 
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -157,7 +160,7 @@
 
 .prev,
 .next {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   padding: 8px 4px;
   z-index: 999;
@@ -169,7 +172,7 @@
   transition: opacity 200ms;
 
   div {
-    max-width: calc(50vw - 40px);
+    max-width: calc(50cqw - 40px);
     overflow: hidden;
     line-height: 1.2;
   }
@@ -216,10 +219,16 @@
 }
 
 .overlay {
-  position: fixed;
+  position: absolute;
+  height: 100%;
+  width: 100%;
   z-index: 999;
   opacity: 0.3;
   transition: opacity 300ms ease;
+  pointer-events: none;
+  > * {
+    pointer-events: auto;
+  }
 }
 
 .viewer.show .overlay {
@@ -228,7 +237,7 @@
 
 .viewer main {
   pointer-events: none;
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   z-index: 2;
@@ -282,7 +291,7 @@
   pointer-events: none;
 
   .name {
-    position: fixed;
+    position: absolute;
     z-index: 999;
     white-space: nowrap;
     top: 0;
@@ -321,11 +330,11 @@
 
   .popup {
     width: 400px;
-    max-width: calc(100vw - 24px);
-    max-height: calc(var(--vh) * 100 - 41px);
+    max-width: calc(100cqw - 24px);
+    max-height: calc(1cqh * 100 - 41px);
     overflow: auto;
     cursor: initial !important;
-    position: fixed;
+    position: absolute;
     top: 41px;
     pointer-events: none;
     right: 0;
@@ -425,17 +434,18 @@
       }
 
       height: unset;
-      padding-bottom: calc(env(safe-area-inset-bottom, 0) - 11.5px);
+      // padding-bottom: calc(env(safe-area-inset-bottom, 0) - 11.5px);
     }
     .popup {
       top: unset;
       --bottom: calc(36.5px + max(env(safe-area-inset-bottom, 0), 11.5px));
+      --bottom: calc(36.5px + 11.5px);
       bottom: var(--bottom);
       // bottom: calc(36.5px + env(safe-area-inset-bottom, 0));
       max-width: unset;
       width: 100%;
       line-height: 1.45;
-      max-height: calc(var(--vh) * 100 - var(--bottom));
+      max-height: calc(1cqh * 100 - var(--bottom));
       border-bottom: 1px solid rgba(121, 163, 207, 0.2);
     }
   }
@@ -535,4 +545,57 @@
       border: 1px solid white;
     }
   }
+}
+
+/** Ad Container */
+
+.adContainer {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
+
+.mainContent {
+  display: grid;
+  grid-auto-flow: column;
+  // grid-template-rows: 1fr;
+  grid-template-rows: auto 1fr auto;
+}
+
+.viewerContainer {
+  position: relative;
+  height: 100%;
+}
+
+.adBanner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sidebar {
+  border-right: 1px solid rgba(121, 163, 207, 0.2);
+  padding-bottom: var(--asp-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media screen and (max-width: 1200px) {
+  .sidebar {
+    display: none;
+  }
+  .adContainer {
+    grid-template-columns: 1fr;
+  }
+}
+
+.adBanner {
+  border-bottom: 1px solid rgba(121, 163, 207, 0.2);
 }

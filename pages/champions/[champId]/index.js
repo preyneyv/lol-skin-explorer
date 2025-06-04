@@ -1,21 +1,22 @@
-import Image from "next/image";
 import Head from "next/head";
-import { useProps } from "../../../data/contexts";
-import {
-  championSkins,
-  useLocalStorageState,
-  useSortedSkins,
-  makeTitle,
-  makeImage,
-  makeDescription,
-} from "../../../data/helpers";
-import { store } from "../../../data/store";
-import { Header } from "../../../components/header";
-import { SkinGrid } from "../../../components/skin-grid";
-import { Footer, FooterContainer } from "../../../components/footer";
+import Image from "next/image";
 import { useMemo } from "react";
 import { Fallback } from "../../../components/fallback";
-import { asset } from "../../../data/helpers";
+import { Footer, FooterContainer } from "../../../components/footer";
+import { Header } from "../../../components/header";
+import { SkinGrid } from "../../../components/skin-grid";
+import { FooterAds, SidebarAdLayout } from "../../../components/venatus";
+import { useProps } from "../../../data/contexts";
+import {
+  asset,
+  championSkins,
+  makeDescription,
+  makeImage,
+  makeTitle,
+  useLocalStorageState,
+  useSortedSkins,
+} from "../../../data/helpers";
+import { store } from "../../../data/store";
 import styles from "../../../styles/collection.module.scss";
 
 function _Page() {
@@ -54,28 +55,31 @@ function _Page() {
               />
             </div>
             <Header backTo="/" flat />
-            <main>
-              <h1 className={styles.title}>{champion.name}</h1>
-              <div className={styles.controls}>
-                <label>
-                  <span>Sort By</span>
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                  >
-                    <option value="release">Release</option>
-                    <option value="rarity">Rarity</option>
-                  </select>
-                </label>
-              </div>
-              <SkinGrid
-                skins={sortedSkins}
-                linkTo={linkTo}
-                viewerPage="/champions/[key]/skins/[id]"
-              />
-            </main>
+            <SidebarAdLayout>
+              <main>
+                <h1 className={styles.title}>{champion.name}</h1>
+                <div className={styles.controls}>
+                  <label>
+                    <span>Sort By</span>
+                    <select
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
+                    >
+                      <option value="release">Release</option>
+                      <option value="rarity">Rarity</option>
+                    </select>
+                  </label>
+                </div>
+                <SkinGrid
+                  skins={sortedSkins}
+                  linkTo={linkTo}
+                  viewerPage="/champions/[key]/skins/[id]"
+                />
+              </main>
+            </SidebarAdLayout>
           </div>
           <Footer flat />
+          <FooterAds />
         </FooterContainer>
       </div>
     </>
