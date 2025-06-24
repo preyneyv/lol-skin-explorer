@@ -3,8 +3,7 @@ google.com, pub-3297862613403903, DIRECT, f08c47fec0942fa0
 
 ownerdomain=skinexplorer.lol
 managerdomain=venatus.com
-#V 22.04.2025 VH
-#V
+#V 17.06.2025 VH
 
 
 #----------------------------------------------------------------------------#
@@ -16,11 +15,12 @@ managerdomain=venatus.com
 #     `888'    888    .   888   888  d8(  888    888 .  888   888  o.  )88b  #
 #      `8'     `Y8bod8P' o888o o888o `Y888""8o   "888"  `V88V"V8P' 8""888P'  #
 #                                                                            #
-#       The leading advertising solution for gaming and entertainment        #                                                              
+#       The leading advertising solution for gaming and entertainment        #
 #                                                                            #
 #     To become a publisher or advertise please contact info@venatus.com     #
 #                                                                            #
 #----------------------------------------------------------------------------#
+
 adagio.io, 1090, DIRECT                                                
 rubiconproject.com, 19116, RESELLER, 0bfd66d529a55807              
 pubmatic.com, 159110, RESELLER, 5d62403b186f2ace        
@@ -52,7 +52,6 @@ sharethrough.com, zLsEa05k, RESELLER, d53b998a7bd4ecd2
 aps.amazon.com, 1ad7261b-91ea-4b6f-b9e9-b83522205b75, RESELLER        
 pubmatic.com, 161335, RESELLER, 5d62403b186f2ace                           
 openx.com, 556532676, RESELLER, 6a698e2ec38604c6                             
-mediago.io, 045ac24b888bcf59a09731e7f0f2084f, RESELLER         
 blockthrough.com, 5643766199222272, DIRECT                                 
 criteo.com, B-062405, DIRECT, 9fac4a4a87c2a44f                             
 themediagrid.com, CVQXOH, DIRECT, 35d5010d7789b49d                           
@@ -70,7 +69,16 @@ indexexchange.com, 183921, DIRECT, 50b1c356f2c5c8fc
 indexexchange.com, 193067, DIRECT, 50b1c356f2c5c8fc                       
 indexexchange.com, 194127, DIRECT, 50b1c356f2c5c8fc                          
 indexexchange.com, 205972, RESELLER, 50b1c356f2c5c8fc                       
-Blis.com,33,RESELLER,61453ae19a4b73f4
+infolinks.com, 3187418, direct
+pubmatic.com, 156872, reseller, 5d62403b186f2ace
+xandr.com, 3251, reseller
+indexexchange.com, 191306, reseller
+lijit.com, 268479, reseller, fafdf38b16bf6b2b
+media.net, 8CUY6IX4H, reseller
+openx.com, 543174347, reseller, 6a698e2ec38604c6
+video.unrulymedia.com, 2221906906, reseller
+improvedigital.com, 2016, reseller
+inmobi.com, cdfd74ce1cdd4a67b1c4794c072324ff, DIRECT, 83e75a7ae333ca9d
 conversantmedia.com,40881,RESELLER,03113cd04947736d
 insticator.com,843c9a44-60ea-4342-8ad4-68f894283b3e,DIRECT,b3511ffcafb23a32
 sharethrough.com,Q9IzHdvp,DIRECT,d53b998a7bd4ecd2
@@ -129,7 +137,7 @@ onetag.com, 69f48c2160c8113, RESELLER
 amxrtb.com, 105199691, RESELLER                                            
 openx.com, 537140488, RESELLER, 6a698e2ec38604c6
 video.unrulymedia.com, 335119963, RESELLER                                 
-seedtag.com, 5aa6c80640c9e209009721e0, DIRECT                                 
+seedtag.com, 68011633bc1ec10007f62708, DIRECT
 xandr.com, 4009, DIRECT, f5ab79cb980f11d1                                     
 rubiconproject.com, 17280, DIRECT, 0bfd66d529a55807                          
 smartadserver.com, 3050, DIRECT
@@ -145,17 +153,13 @@ smartadserver.com, 4016, DIRECT
 smartadserver.com, 4074, DIRECT                                       
 sovrn.com, 237754, DIRECT, fafdf38b16bf6b2b                                
 lijit.com, 237754, DIRECT, fafdf38b16bf6b2b                                  
-lijit.com, 506352, DIRECT, fafdf38b16bf6b2b
+lijit.com, 506352, DIRECT, fafdf38b16bf6b2b                             
 teads.tv, 23348, DIRECT, 15a9c44f6d26cbe1
-venatus.com, 1, DIRECT                             
+venatus.com, 1, DIRECT
 triplelift.com, 6059, RESELLER, 6c33edb13117fd86                     
 video.unrulymedia.com, 985572675, DIRECT                                      
 video.unrulymedia.com, 985572675, RESELLER                                 
 sharethrough.com, 6qlnf8SY, RESELLER, d53b998a7bd4ecd2                     
-appnexus.com, 12986, RESELLER, f5ab79cb980f11d1
-improvedigital.com, 1069, RESELLER
-pubmatic.com, 158056, RESELLER
-Weborama.nl, 10714, DIRECT
 adwmg.com, 101261, DIRECT, c9688a22012618e7
 google.com, pub-8622186303703569, DIRECT, f08c47fec0942fa0
 freewheel.tv, 1604590, DIRECT
@@ -168,4 +172,3 @@ criteo.com, B-068503, DIRECT
 appnexus.com, 806, DIRECT, f5ab79cb980f11d1                                  
 appnexus.com,1908,RESELLER,f5ab79cb980f11d1                               
 adinplay.com, FTB, DIRECT
-venatus.com, 681c6fb13d7e65595e4ee679, DIRECT
