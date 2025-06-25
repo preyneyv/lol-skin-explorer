@@ -5,6 +5,7 @@ ownerdomain=skinexplorer.lol
 managerdomain=venatus.com
 #V 17.06.2025 VH
 
+venatus.com, 681c6fb13d7e65595e4ee679, DIRECT
 
 #----------------------------------------------------------------------------#
 #                                                 .                          #
